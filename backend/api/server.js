@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 // const db = require("./db");
 // const routes = require("./routes");
 const morgan = require("morgan");
@@ -6,6 +7,7 @@ const morgan = require("morgan");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 // app.use("/api", routes);
@@ -21,5 +23,5 @@ console.log(SERVER_PORT);
 // });
 
 app.listen(SERVER_PORT, (req, res) => {
-  console.log(`Server running in port: ${SERVER_PORT}`);
+  console.log(`Server running in port ${SERVER_PORT}`);
 });
