@@ -1,41 +1,66 @@
-import { createReducer, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import * as shoppingCartRequest from "../requests/shoppingCartRequest";
+
+
+const shoppingCartState = {
+  loading: false,
+  data: {},
+  error: "",
+};
 
 export const addToShoppingCart = createAsyncThunk(
-  'ADD_TO_CART',
-  (data, thunkAPI) => {
-    const { user } = thunkAPI.getState();
-    return axios.post(`/api/add/objectId=${data.id}`, data).then(res => res);
-  }
+  "ADD_TO_SHOPPINGCART",
+  shoppingCartRequest.addToShoppingCartRequest
 );
 
 export const removeFromShoppingCart = createAsyncThunk(
-  'REMOVE_FROM_CART',
-  (data, thunkAPI) => {
-    const { user } = thunkAPI.getState();
-    return axios
-      .delete(`/api/remove/objectId=${data.id}`, data)
-      .then(res => res.data);
-  }
+  "REMOVE_FROM_SHOPPINGCART",
+  shoppingCartRequest.removeFromShoppingCartRequest
 );
 
 export const getShoppingCart = createAsyncThunk(
-  'GET_SHOPPINGCART',
-  (data, thunkAPI) => {
-    const { user } = thunkAPI.getState();
-    if (user.id) {
-      return axios.get(`/api/shoppingCart/${user.id}`).then(res => res.data);
-    }
-  }
+  "GET_SHOPPINGCART",
+  shoppingCartRequest.getShoppingCartRequest
 );
 
-const shoppingCartReducer = createReducer(
-  {},
-  {
-    [addToShoppingCart.fulfilled]: (state, action) => action.payload,
-    [removeFromShoppingCart.fulfilled]: (state, action) => action.payload,
-    [getShoppingCart.fulfilled]: (state, action) => action.payload,
-  }
-);
+const shoppingCartSlice = createSlice({
+  name: "shoppingCart",
+  initialState: shoppingCartState,
+  extraReducers: {
+    [addToShoppingCart.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [addToShoppingCart.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+    },
+    [addToShoppingCart.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    },
+    [removeFromShoppingCart.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [removeFromShoppingCart.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+    },
+    [removeFromShoppingCart.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    },
+    [getShoppingCart.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getShoppingCart.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+    },
+    [getShoppingCart.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    },
+  },
+});
 
-export default shoppingCartReducer;
+export default shoppingCartSlice.reducer;
