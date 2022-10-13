@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import FakeOrderItems from '../utils/FakeOrderItems.js';
-
-import '../style/OrderHistorial.css';
+import '../components/OrderHistorial/OrderHistorial.css'
 
 const OrderItem = ({ data, id }) => {
   const datas2 = FakeOrderItems;
