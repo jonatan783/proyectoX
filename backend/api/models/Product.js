@@ -1,6 +1,5 @@
-const db = require('../db');
-const { Model, DataTypes } = require('sequelize');
-//const marked = require("marked");
+const db = require("../db");
+const { Model, DataTypes } = require("sequelize");
 
 class Product extends Model {}
 
@@ -24,15 +23,9 @@ Product.init(
     },
     img: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-
     },
   },
-  { sequelize: db, modelName: 'products' }
+  { sequelize: db, modelName: "products" }
 );
-
-
-
-
-
 
 module.exports = Product;
