@@ -7,4 +7,4 @@ const orderIntemController = require("../../controllers/orderItemController")
 router.post('/add', orderIntemController.add)
 router.get('/getAll/:id',orderIntemController.getAll);
 
-module.exports = router ;
+module.exports = router;

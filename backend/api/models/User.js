@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
-const db = require('../db');
-const bcrypt = require('bcrypt');
+const { Model, DataTypes } = require("sequelize");
+const db = require("../db");
+const bcrypt = require("bcrypt");
 
 class User extends Model {
   setHash(password, salt) {
@@ -24,7 +24,7 @@ User.init(
       unique: true,
       validate: {
         isEmail: {
-          msg: 'Must be a valid email address',
+          msg: "Must be a valid email address",
         },
       },
     },
@@ -37,17 +37,17 @@ User.init(
     },
   },
 
-  { sequelize: db, tableName: 'users' }
+  { sequelize: db, tableName: "users" }
 );
 
-User.addHook('beforeCreate', user => {
+User.addHook("beforeCreate", (user) => {
   return bcrypt
     .genSalt(16)
-    .then(salt => {
+    .then((salt) => {
       user.salt = salt;
       return user.setHash(user.password, salt);
     })
-    .then(hash => {
+    .then((hash) => {
       user.password = hash;
     });
 });
