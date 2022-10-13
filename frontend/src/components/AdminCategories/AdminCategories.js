@@ -2,23 +2,21 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Modal, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { getCategoryAll } from "../../requests/requests";
 import "./AdminCategories.css";
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    axios.get(`/api/category/getAll/`).then((res) => {
-      setCategories(res.data);
-    });
-  }, []);
-
   const [auxCategId, setAuxCategId] = useState("");
-
   //del modal
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
+
+  useEffect(() => {
+    getCategoryAll()
+    .then((res) => { setCategories(res.data)});
+  }, []);
 
   const handleDelete = () => {
     console.log(`Categ ID ES`, auxCategId);
@@ -28,16 +26,13 @@ const AdminCategories = () => {
         console.log("eliminado");
       })
       .then(() => {
-        axios.get(`/api/category/getAll/`).then((res) => {
-          setCategories(res.data);
-        });
+        getCategoryAll()
+        .then((res) => { setCategories(res.data) });
       });
     setShow(false);
   };
 
   const handleShow = () => setShow(true);
-
-  //
 
   const handleEdit = (e) => {
     const productId = e.target.id;

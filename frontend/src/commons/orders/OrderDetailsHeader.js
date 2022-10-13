@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
+import { getOrdenDetailById } from '../../requests/requests';
 import '../preOrder/CardOrderDetail.css'
 /* import '../SingleProduct.css'; */
 import '../../components/SingleProduct/SingleProduct.css'
@@ -17,9 +18,8 @@ const OrderDetailsHeader = () => {
   const [order, setOrder] = useState({});
 
   useEffect(() => {
-    axios
-      .get(`/api/orderDetail/getorder/${id}`)
-      .then(res => setOrder(res.data));
+    getOrdenDetailById(id)
+    .then(res => setOrder(res.data));
   }, []);
 
   return order ? (

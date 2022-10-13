@@ -2,7 +2,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
-import axios from 'axios';
 import {     
   AdminCategories,
   AdminOrders,
@@ -25,6 +24,7 @@ import {
 import { persistUser } from './redux/user';
 import { getShoppingCart } from './redux/shoppingCart';
 import { getItemCart } from './redux/itemCart';
+import { getProducts } from './requests/requests';
 
 
 function App() {
@@ -42,7 +42,8 @@ function App() {
 
 
   useEffect(() => {
-    axios.get('/api/product/').then(res => setProducts(res.data));
+    getProducts()
+    .then(res => setProducts(res.data));
   }, []);
 
   return (
