@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
-import '../../style/OrderHistorial.css';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import '../../style/Comments.css';
+import '../../components/OrderHistorial/OrderHistorial.css'
+import '../../components/Comments/Comments.css'
+/* import '../../style/Comments.css'; */
 
 const OrderItems = () => {
   const navigate = useNavigate();

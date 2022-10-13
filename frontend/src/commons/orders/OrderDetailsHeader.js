@@ -2,8 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
-import '../../style/CardOrderDetail.css';
-import '../SingleProduct.css';
+import '../preOrder/CardOrderDetail.css'
+/* import '../SingleProduct.css'; */
+import '../../components/SingleProduct/SingleProduct.css'
 import OrderItems from './OrderItems';
 
 const OrderDetailsHeader = () => {

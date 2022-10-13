@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-
-import '../../style/OrderHistorial.css';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import { persistUser } from '../../state/user';
-import { getShoppingCart } from '../../state/shoppingCart';
-import { getItemCart } from '../../state/itemCart';
+import { persistUser } from '../../redux/user';
+import { getShoppingCart } from '../../redux/shoppingCart';
+import { getItemCart } from '../../redux/itemCart';
+import '../../components/OrderHistorial/OrderHistorial.css'
 
 const CartItems = ({ id }) => {
   const navigate = useNavigate();
