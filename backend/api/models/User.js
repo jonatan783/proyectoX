@@ -2,16 +2,6 @@ const { Model, DataTypes } = require('sequelize');
 const db = require('../db');
 const bcrypt = require('bcrypt');
 
-/* interface UserAttributes{
-    id: number,
-    email: string,
-    password: string,
-    role: 'ADMIN_ROLE' | 'SUPERADMIN_ROLE' | 'USER_ROLE',
-   posteds: Array<number>;
-    created_at: Date,
-    updated_at?: Date 
-}
- */
 class User extends Model {
   setHash(password, salt) {
     return bcrypt.hash(password, salt);

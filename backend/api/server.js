@@ -14,7 +14,7 @@ app.use(morgan("tiny"));
 
 const SERVER_PORT = process.env.PORT || 3002
 
-db.sync({ force: false }).then((data) => {
+db.sync({ force: true }).then((data) => {
   app.listen(SERVER_PORT, (req, res) => {
     console.log("Server Listening on port: " + SERVER_PORT);
   });

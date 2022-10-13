@@ -26,6 +26,10 @@ Product.init(
       type: DataTypes.ARRAY(DataTypes.STRING),
 
     },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   { sequelize: db, modelName: 'products' }
 );

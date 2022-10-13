@@ -1,11 +1,11 @@
-const orderDetailController = require('../controllers/orderDetailController');
+const orderDetailController = require('../../controllers/orderDetailController');
 
 const express = require('express');
 const router = express.Router();
 
 const nodemailer = require('nodemailer');
-const { OrderDetail, CartItem } = require('../models');
-const etherealEmailController = require('../controllers/orderDetailController');
+const { OrderDetail, CartItem } = require('../../models');
+const etherealEmailController = require('../../controllers/orderDetailController');
 
 router.post('/createOrderDetail', orderDetailController.add);
 
