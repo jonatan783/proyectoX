@@ -1,63 +1,66 @@
-import { createReducer, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import * as itemCartRequest from "../requests/itemCartRequest";
+
+
+const itemCardInitialState = {
+  loading: false,
+  data: {},
+  error: "",
+};
 
 export const addOrCreateItemCart = createAsyncThunk(
-  'ADD_OR_CREATE_ITEMCART',
-  (data, thunkAPI) => {
-    const { shoppingCart } = thunkAPI.getState();
-    if (shoppingCart.id) {
-      return axios.post(`/api/itemCart`, data).then(() => {
-        return axios.get(`/api/itemCart/${shoppingCart.id}`).then(res => {
-          const items = res.data;
-          const total = parseInt(
-            items
-              .map(({ quantity, product }) => quantity * product.price)
-              .reduce((total, i) => total + i, 0)
-          );
-          return axios
-            .put(`/api/shoppingCart/total`, { id: shoppingCart.id, total })
-            .then(() => res.data);
-        });
-      });
-    }
-  }
+  "ADD_OR_CREATE_ITEMCART",
+  itemCartRequest.addOrCreateItemCartRequest
 );
+
 export const deleteItemCart = createAsyncThunk(
-  'REMOVE_ITEMCART',
-  (id, thunkAPI) => {
-    const { shoppingCart } = thunkAPI.getState();
-    if (shoppingCart.id) {
-      return axios.delete(`/api/itemCart/remove/${id}`).then(() => {
-        return axios.get(`/api/itemCart/${shoppingCart.id}`).then(res => {
-          const items = res.data;
-          const total = parseInt(
-            items
-              .map(({ quantity, product }) => quantity * product.price)
-              .reduce((total, i) => total + i, 0)
-          );
-          return axios
-            .put(`/api/shoppingCart/total`, { id: shoppingCart.id, total })
-            .then(() => res.data);
-        });
-      });
-    }
-  }
+  "REMOVE_ITEMCART",
+  itemCartRequest.deleteItemCartRequest
 );
 
 export const getItemCart = createAsyncThunk(
-  'GET_ITEMCARTS',
-  (data, thunkAPI) => {
-    const { shoppingCart } = thunkAPI.getState();
-    if (shoppingCart.id) {
-      return axios.get(`/api/itemCart/${shoppingCart.id}`);
-    }
-  }
+  "GET_ITEMCARTS",
+  itemCartRequest.getItemCartRequest
 );
 
-const itemCartReducer = createReducer([], {
-  [addOrCreateItemCart.fulfilled]: (state, action) => action.payload,
-  [getItemCart.fulfilled]: (state, action) => action.payload.data,
-  [deleteItemCart.fulfilled]: (state, action) => action.payload,
+const itemCartSlice = createSlice({
+  name: "itemCard",
+  initialState: itemCardInitialState,
+  extraReducers: {
+    [addOrCreateItemCart.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [addOrCreateItemCart.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+    },
+    [addOrCreateItemCart.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    },
+    [deleteItemCart.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [deleteItemCart.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+    },
+    [deleteItemCart.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    },
+    [getItemCart.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getItemCart.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.loading = false;
+    },
+    [getItemCart.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    },
+  },
 });
 
-export default itemCartReducer;
+export default itemCartSlice.reducer;
