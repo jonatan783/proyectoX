@@ -1,5 +1,7 @@
 const Role = require('../models/Role');
 const User = require('../models/User');
+const jwt = require('jsonwebtoken')
+const bcrypt = require("bcrypt");
 
 exports.getAll = (req, res) => {
   const { id } = req.params;
@@ -53,8 +55,24 @@ exports.me = (req, res) => {
   res.send(req.user);
 };
 
-exports.login = (req, res) => {
-  res.send(req.user);
+exports.login = async (req, res) => {
+  try {
+    const {email, password} = req.body
+    const user = await User.findOne({where: {email}})
+    if(!user) res.status(404).json({msj: "Usuario no encontrado"})
+    else{
+      if(bcrypt.compareSync(password, user.password)) {
+        let token = jwt.sign({user}, 'albondiga', {expiresIn: '7d'})
+        res.json({user, token})
+      }
+      else{
+        res.status(401).json({msj: "Password inválido"})
+      }
+    }
+  }
+  catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 //Admin
