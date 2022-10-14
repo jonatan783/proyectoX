@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const shoppingCartController = require('../../controllers/shoppingCartController');
 
-router.get('/:id', shoppingCartController.get);
-router.put('/total', shoppingCartController.update);
-router.delete('/:id', shoppingCartController.destroy);
+router.post('/:id', shoppingCartController.cartCreate); // Crear carrito (esta ruta no va, el carrito se debe crear y asignar al registrar comprador)
+router.put('/total', shoppingCartController.cartUpdate); // Actualiza el carrito (esto no va)
+router.delete('/:id', shoppingCartController.cartDestroy); // Elimina el carrito (no va)
 
 module.exports = router;

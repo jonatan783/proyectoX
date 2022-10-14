@@ -1,47 +1,29 @@
-const ItemCart = require('../models/CartItem');
-const { Product } = require('../models');
+const ItemCartServices = require('../services/ItemCartServices');
 
-exports.postOrAdd = (req, res) => {
-  const { quantity, productId, ShoppingCartId } = req.body;
-  console.log(
-    'soy el req body que te llegó',
-    quantity,
-    productId,
-    ShoppingCartId
-  );
-  ItemCart.findOrCreate({
-    where: { productId, ShoppingCartId },
-    defaults: { quantity },
-  })
-    .then(itemCart => {
-      return ItemCart.update(
-        { quantity },
-        {
-          where: { id: itemCart[0].id },
-          returning: true,
-          plain: true,
-        }
-      );
-    })
-    .then(data => {
-      res.send(data[1]);
-    });
-};
-
-exports.getAll = (req, res) => {
-  const { id } = req.params;
-
-  ItemCart.findAll({
-    where: { ShoppingCartId: id },
-    include: { model: Product },
-  }).then(data => {
-    res.send(data);
-  });
-};
-
-exports.delete = (req, res) => {
-  const { id } = req.params;
-  ItemCart.destroy({
-    where: { id },
-  }).then(() => res.send(204));
-};
+class ItemCartController {
+  static async postOrAdd(req, res, next) {
+    try {
+      const respuesta = await ItemCartServices.postOrAdd(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async getAll(req, res, next) {
+    try {
+      const items = await ItemCartServices.getAll(req, next);
+      return res.status(200).json(items);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async delete(req, res, next) {
+    try {
+      const items = await ItemCartServices.delete(req, next);
+      return res.status(204).json(items);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+}
+module.exports = ItemCartController;

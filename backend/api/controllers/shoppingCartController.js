@@ -1,25 +1,29 @@
-const ShoppingCart = require('../models/ShoppingCart');
+const ShoppingCartServices = require('../services/ShoppingCartServices');
 
-exports.get = (req, res) => {
-  const { id } = req.params;
-  ShoppingCart.findOrCreate({
-    where: { UserId: id },
-    defaults: {
-      total: 0,
-    },
-  }).then(shoppingCart => res.send(shoppingCart[0]));
-};
-
-exports.update = (req, res) => {
-  const { id, total } = req.body;
-
-  ShoppingCart.update({ total }, { where: { id } }).then(() =>
-    res.sendStatus(200)
-  );
-};
-
-exports.destroy = (req, res) => {
-  const { id } = req.params;
-
-  ShoppingCart.destroy({ where: { id } }).then(() => res.sendStatus(202));
-};
+class ShoppingCartController {
+  static async cartCreate(req, res, next) {
+    try {
+      const respuesta = await ShoppingCartServices.cartCreate(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async cartUpdate(req, res, next) {
+    try {
+      const respuesta = await ShoppingCartServices.cartUpdate(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async cartDestroy(req, res, next) {
+    try {
+      const respuesta = await ShoppingCartServices.cartDestroy(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+}
+module.exports = ShoppingCartController;
