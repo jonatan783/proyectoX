@@ -2,25 +2,26 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
-import {     
-  AdminCategories,
-  AdminOrders,
-  AdminProducts,
-  AdminUsers,
-  CarouselComponent,
-  CartDetails,
-  EditCategForm,
-  EditProductForm,
-  FilterSearch,
-  Footer,
-  Grid,
-  Navbar,
-  NewCategForm,
-  NewProductForm,
-  NotFound,
-  OrderDetails,
-  OrderHistorial, 
-  SingleProduct} from './components';
+import { 
+  AdminCategoriesContainer,
+  AdminOrdersContainer,
+  AdminProductsContainer,
+  AdminUserContainer,
+  CarouselContainer,
+  CartDetailsContainer,
+  EditCategFormContainer,
+  EditProductFormContainer,
+  FilterSearchContainer,
+  FooterContainer,
+  GridContainer,
+  NavbarContainer,
+  NewCategFormContainer,
+  NewProductFormContainer,
+  NotFoundContainer,
+  OrderDetailContainer,
+  OrderHistorialContainer,
+  SingleProductContainer,
+} from './containers';
 import { persistUser } from './redux/user';
 import { getShoppingCart } from './redux/shoppingCart';
 import { getItemCart } from './redux/itemCart';
@@ -48,37 +49,37 @@ function App() {
 
   return (
     <div className='App'>
-        <Navbar setProducts={setProducts}/>
+        <NavbarContainer setProducts={setProducts}/>
         {/* <div className="container"> */}
         <Routes>
         <Route path='/' element={
             <>
-              <CarouselComponent />
-              <div className='container'><Grid products={products}/></div>
+              <CarouselContainer />
+              <div className='container'><GridContainer products={products}/></div>
             </>
           }
         />
-        <Route path='/products/popular' element={<FilterSearch products={products}/>} />
-        <Route path='/orders/history' element={<OrderHistorial />} />
-        <Route path='/CartDetails' element={<CartDetails />} />
-        <Route path='/orderDetails/:id' element={<OrderDetails />} />
-        <Route path='/product/:id' element={<SingleProduct />} />
+        <Route path='/products/popular' element={<FilterSearchContainer products={products}/>} />
+        <Route path='/orders/history' element={<OrderHistorialContainer />} />
+        <Route path='/CartDetails' element={<CartDetailsContainer />} />
+        <Route path='/orderDetails/:id' element={<OrderDetailContainer />} />
+        <Route path='/product/:id' element={<SingleProductContainer />} />
         {user.roleId === 2 ? (
           <>
-            <Route path='/admin/users' element={<AdminUsers />} />
-            <Route path='/admin/orders' element={<AdminOrders />} />
-            <Route path='/admin/products' element={<AdminProducts />} />
-            <Route path='/admin/products/new-product' element={<NewProductForm />}/>
-            <Route path='/admin/products/edit/:id' element={<EditProductForm />}/>
-            <Route path='/admin/categories' element={<AdminCategories/>}/>
-            <Route path='/admin/categories/new-category' element={<NewCategForm />}/>
-            <Route path='/admin/categories/edit/:id' element={<EditCategForm />}/>
+            <Route path='/admin/users' element={<AdminUserContainer />} />
+            <Route path='/admin/orders' element={<AdminOrdersContainer />} />
+            <Route path='/admin/products' element={<AdminProductsContainer />} />
+            <Route path='/admin/products/new-product' element={<NewProductFormContainer />}/>
+            <Route path='/admin/products/edit/:id' element={<EditProductFormContainer />}/>
+            <Route path='/admin/categories' element={<AdminCategoriesContainer/>}/>
+            <Route path='/admin/categories/new-category' element={<NewCategFormContainer />}/>
+            <Route path='/admin/categories/edit/:id' element={<EditCategFormContainer />}/>
           </>
         ) : null}
-        <Route path='/*' element={<NotFound />} />
+        <Route path='/*' element={<NotFoundContainer />} />
         </Routes>
         {/* </div> */}
-        <Footer />
+        <FooterContainer />
     </div>
   );
 }

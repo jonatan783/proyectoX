@@ -1,47 +1,49 @@
-import AdminCategories from "./AdminCategories/AdminCategories";
-import AdminOrders from "./AdminOrders/AdminOrders";
-import AdminProducts from "./AdminProducts/AdminProducts";
-import AdminUsers from "./AdminUsers/AdminUsers";
-import CarouselComponent from "./Carousel/Carousel";
-import CartDetails from "./CartDetails/CartDetails";
-import Comments from "./Comments/Comments";
-import EditCategForm from "./EditCategForm/EditCategForm";
-import EditProductForm from "./EditProductForm/EditProductForm";
-import FilterSearch from "./FilterSearch/FilterSearch";
-import Footer from "./Footer/Footer";
-import Grid from "./Grid/Grid";
-import Login from "./Login/Login";
-import Navbar from "./Navbar/Navbar";
-import NewCategForm from "./NewCategForm/NewCategForm";
-import NewProductForm from "./NewProductForm/NewProductForm";
-import NotFound from "./NotFound/NotFound";
-import OrderDetails from "./OrderDetail/OrderDetail";
-import OrderHistorial from "./OrderHistorial/OrderHistorial";
-import { Sidebar } from "./Sidebar/Sidebar";
-import SingleProduct from "./SingleProduct/SingleProduct";
-import Valoration from "./Valoration/Valoration";
+import AdminCategoriesComponent from "./AdminCategories/AdminCategoriesComponent";
+import AdminOrdersComponent from "./AdminOrders/AdminOrdersComponent";
+import AdminProductsComponent from "./AdminProducts/AdminProductsComponent";
+import AdminUsersComponent from "./AdminUsers/AdminUsersComponent";
+import CarouselComponent from "./Carousel/CarouselComponent";
+import CartComponent from "./Cart/CartComponent";
+import CartDetailsComponent from "./CartDetails/CartDetailsComponent";
+import CommentsComponent from "./Comments/CommentsComponent";
+import EditCategFormComponent from "./EditCategForm/EditCategFormComponent";
+import EditProductFormComponent from "./EditProductForm/EditProductFormComponent";
+import FilterSearchComponent from "./FilterSearch/FilterSearchComponent";
+import FooterComponent from "./Footer/FooterComponent";
+import GridComponent from "./Grid/GridComponent";
+import LoginComponent from "./Login/LoginComponent";
+import NavbarComponent from "./Navbar/NavbarComponent";
+import NewCategFormComponent from "./NewCategForm/NewCategFormComponent";
+import NewProductFormComponent from "./NewProductForm/NewProductFormComponent";
+import NotFoundComponent from "./NotFound/NotFoundComponent";
+import OrderDetailsComponent from "./OrderDetail/OrderDetailComponent";
+import OrderHistorialComponent from "./OrderHistorial/OrderHistorialComponent";
+import SidebarComponent from "./Sidebar/SidebarComponent";
+import SingleProductComponent from "./SingleProduct/SingleProductComponent";
+import ValorationComponent from "./Valoration/ValorationComponent";
 
 export {
-    AdminCategories,
-    AdminOrders,
-    AdminProducts,
-    AdminUsers,
+    AdminCategoriesComponent,
+    AdminOrdersComponent,
+    AdminProductsComponent,
+    AdminUsersComponent,
+    CartComponent,
     CarouselComponent,
-    CartDetails,
-    Comments,
-    EditCategForm,
-    EditProductForm,
-    FilterSearch,
-    Footer,
-    Grid,
-    Login,
-    Navbar,
-    NewCategForm,
-    NewProductForm,
-    NotFound,
-    OrderDetails,
-    OrderHistorial,
-    Sidebar,
-    SingleProduct,
-    Valoration,
+    CartDetailsComponent,
+    CommentsComponent,
+    EditCategFormComponent,
+    EditProductFormComponent,
+    FilterSearchComponent,
+    FooterComponent,
+    GridComponent,
+    LoginComponent,
+    NavbarComponent,
+    NewCategFormComponent,
+    NewProductFormComponent,
+    NotFoundComponent,
+    OrderDetailsComponent,
+    OrderHistorialComponent,
+    SidebarComponent,
+    SingleProductComponent,
+    ValorationComponent,
 }
