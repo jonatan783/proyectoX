@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const {OrderItem}= require("../models")
 const orderIntemController = require("../../controllers/orderItemController")
 
 
-router.post('/add', orderIntemController.add)
-router.get('/getAll/:id',orderIntemController.getAll);
+router.post('/add', orderIntemController.ItemAdd)
+router.get('/getAll/:id',orderIntemController.ItemGetAll);
 
 module.exports = router;

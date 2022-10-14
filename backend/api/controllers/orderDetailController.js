@@ -1,39 +1,37 @@
-const OrderDetail = require('../models/OrderDetail');
+const OrderDetailServices = require('../services/OrderDetailServices');
 
-exports.add = (req, res) => {
-  const { UserId, total } = req.body;
-  console.log('MIREQ.BODY', req.body);
-  OrderDetail.create({ UserId, total, status: 'pending' }).then(
-    newOrderDetail => {
-      res.send(newOrderDetail);
+class OrderDetailController {
+  static async newOrden(req, res, next) {
+    try {
+      const order = await UserServices.newOrden(req, next);
+      return res.status(200).json(order);
+    } catch (err) {
+      res.status(500).json(err);
     }
-  );
-};
-
-exports.update = (req, res) => {
-  const { id } = req.params;
-  OrderDetail.update(req.body, {
-    where: {
-      id,
-    },
-    returning: true,
-    plain: true,
-  }).then(result => {
-    const user = result[1];
-    res.status(201).json({
-      user,
-    });
-  });
-};
-
-exports.getAll = (req, res) => {
-  const { UserId } = req.params;
-  OrderDetail.findAll({ where: { UserId } }).then(orders => res.send(orders));
-};
-
-exports.getOne = (req, res) => {
-  const { id } = req.params;
-
-  console.log('soy el id', id);
-  OrderDetail.findOne({ where: { id } }).then(order => res.send(order));
-};
+  }
+  static async OrderUpdate(req, res, next) {
+    try {
+      const respuesta = await UserServices.OrderUpdate(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async orderGetAll(req, res, next) {
+    try {
+      const respuesta = await UserServices.orderGetAll(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async orderGetOne(req, res, next) {
+    try {
+      const respuesta = await UserServices.orderGetOne(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+}
+module.exports = OrderDetailController;
