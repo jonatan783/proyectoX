@@ -1,16 +1,21 @@
-const { Product } = require('../models');
-const OrderItem = require('../models/OrderItem');
+const OrderItemServices = require('../services/OrderItemServices');
 
-exports.add = (req, res) => {
-  const { price, quantity, productId, orderdetailId } = req.body;
-  OrderItem.create({ price, quantity, productId, orderdetailId }).then(
-    newOrderItem => res.send(newOrderItem)
-  );
-};
-exports.getAll = (req, res) => {
-  const { id } = req.params;
-  OrderItem.findAll({
-    where: { orderdetailId: id },
-    include: { model: Product },
-  }).then(data => res.send(data));
-};
+class OrderItemController {
+  static async ItemAdd(req, res, next) {
+    try {
+      const respuesta = await OrderItemServices.ItemAdd(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async ItemGetAll(req, res, next) {
+    try {
+      const items = await OrderItemServices.ItemGetAll(req, next);
+      return res.status(200).json(items);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+}
+module.exports = OrderItemController;

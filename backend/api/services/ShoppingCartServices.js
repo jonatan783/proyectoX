@@ -1,5 +1,4 @@
 const { ShoppingCart } = require("../models");
-const { Op } = require("sequelize");
 
 class ShoppingCarteServices {
   static async cartCreate(req, next) {
