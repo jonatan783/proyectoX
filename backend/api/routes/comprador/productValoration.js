@@ -4,7 +4,7 @@ const valorationController = require('../../controllers/valorationController')
 
 
 
-router.post('/add/:productId',valorationController.add);
+router.post('/add/:productId',valorationController.valorationAdd);
 router.get('/getAll/:productId',valorationController.getAll);
 
 module.exports = router
