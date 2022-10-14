@@ -1,54 +1,76 @@
-const Address = require('./Address');
-const CartItem = require('./CartItem');
-const Category = require('./Category');
-const OrderDetail = require('./OrderDetail');
-const OrderItem = require('./OrderItem');
-const PaymentDetail = require('./PaymentDetail');
-const Product = require('./Product');
-const ShoppingCart = require('./ShoppingCart');
-const User = require('./User');
-const Role = require('./Role');
-const ProductComment = require('./ProductComment');
-const ProductValoration = require('./ProductValoration');
+const User = require("./User");
+const Address = require("./Address");
+const Role = require("./Role");
+const ShoppingCart = require("./ShoppingCart");
+const OrderDetail = require("./OrderDetail");
+const CartItem = require("./CartItem");
+const OrderItem = require("./OrderItem");
+const Product = require("./Product");
+const Category = require("./Category");
+const ProductComment = require("./ProductComment");
+const ProductValoration = require("./ProductValoration");
+const PaymentDetail = require("./PaymentDetail");
 
+User.hasMany(Address, {
+  foreignKey: "user_id",
+});
+Address.belongsTo(User);
 
-ProductComment.belongsTo(Product);
-Product.hasMany(ProductComment)
-
-
-ProductValoration.belongsTo(Product);
-Product.hasMany(ProductValoration);
-
-
-ShoppingCart.belongsTo(User);
-User.hasOne(ShoppingCart);
-
-CartItem.belongsTo(ShoppingCart);
-ShoppingCart.hasMany(CartItem);
-
-CartItem.belongsTo(Product);
-Product.hasMany(CartItem);
-
+Role.hasOne(User, {
+  foreignKey: "role_id",
+});
 User.belongsTo(Role);
 
-Address.belongsTo(User);
-User.hasMany(Address);
+User.hasOne(ShoppingCart, {
+  foreignKey: "user_id",
+});
+ShoppingCart.belongsTo(User);
 
-OrderItem.belongsTo(Product);
-Product.hasMany(OrderItem);
-
-OrderItem.belongsTo(OrderDetail);
-OrderDetail.hasMany(OrderItem);
-
+User.hasMany(OrderDetail, {
+  foreignKey: "user_id",
+});
 OrderDetail.belongsTo(User);
-User.hasMany(OrderDetail);
 
+ShoppingCart.hasMany(CartItem, {
+  foreignKey: "cart_id",
+});
+CartItem.belongsTo(ShoppingCart);
+
+OrderDetail.hasMany(OrderItem, {
+  foreignKey: "order_id",
+});
+OrderItem.belongsTo(OrderDetail);
+
+Product.hasMany(CartItem, {
+  foreignKey: "product_id",
+});
+CartItem.belongsTo(Product);
+
+Product.hasMany(OrderItem, {
+  foreignKey: "product_id",
+});
+OrderItem.belongsTo(Product);
+
+Product.belongsToMany(Category, {
+  as: "categorias",
+  through: "product_category",
+});
+Category.belongsToMany(Product, {
+  as: "productos",
+  through: "product_category",
+});
+
+Product.hasMany(ProductComment, {
+  foreignKey: "product_id",
+});
+ProductComment.belongsTo(Product);
+
+Product.hasMany(ProductValoration, {
+  foreignKey: "product_id",
+});
+ProductValoration.belongsTo(Product);
 
 PaymentDetail.belongsTo(OrderDetail);
-
-Product.belongsToMany(Category, {as: 'categorias', through: 'product_category'})
-Category.belongsToMany(Product, {as: 'productos', through: 'product_category'})
-
 
 module.exports = {
   User,
@@ -62,5 +84,5 @@ module.exports = {
   ShoppingCart,
   ProductComment,
   ProductValoration,
-  Role
+  Role,
 };

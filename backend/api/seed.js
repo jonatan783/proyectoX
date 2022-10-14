@@ -1,7 +1,7 @@
-const fakeData = require("./Product.json");
-const db = require("./db");
-const { Product } = require("./models");
-const { Role } = require("./models");
+const fakeData = require("../Product.json");
+const db = require("./index");
+const { Product } = require("../models");
+const { Role } = require("../models");
 
 const setupSeed = () => {
   const fake = [];

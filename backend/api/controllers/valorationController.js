@@ -1,18 +1,21 @@
-const ProductValoration= require("../models/ProductValoration");
+const ValorationServices = require('../services/ValorationServices');
 
-
-exports.add=(req, res) => {
-  const {productId} = req.params
-    const {userId,valoration} = req.body
-    // console.log("USER",userId)
-    // console.log("PRODUCTO ",productId)
-    ProductValoration.create({userId,valoration,productId})
-    .then(newValoration => res.send(newValoration)); 
-  };
-
-exports.getAll=(req, res) => {
-    const {productId} =req.params
-    ProductValoration.findAll({where:{productId}})
-    .then(result => res.send(result));
+class ValorationController {
+  static async valorationAdd(req, res, next) {
+    try {
+      const valoration = await ValorationServices.valorationAdd(req, next);
+      return res.status(200).json(valoration);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async getAll(req, res, next) {
+    try {
+      const valorations = await ValorationServices.getAll(req, next);
+      return res.status(200).json(valorations);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
-
+module.exports = ValorationController;

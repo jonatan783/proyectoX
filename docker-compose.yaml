@@ -1,27 +1,22 @@
 services:
-  db:
-    image: postgres:10
-    environment:
-      POSTGRES_DB: "grow"
-      POSTGRES_USER: "sativa"
-      POSTGRES_PASSWORD: "sativa"
-    ports:
-      - "5432"
+  #db:
+  #  image: postgres:10
+  #  environment:
+  #    POSTGRES_DB: "grow"
+  #    POSTGRES_USER: "sativa"
+  #    POSTGRES_PASSWORD: "sativa"
+  #  ports:
+  #    - "5432"
   central_api:
     build: ./backend
-    environment:
-      PORT: 3001
-      BASE_URL: "http://localhost"
-      DB_NAME: "grow"
-      PSQL_USER: "sativa"
-      PSQL_PASS: "sativa"
-      DB_HOST: db
     ports:
       - "3001:3001"
     volumes:
       - "./backend/api:/src"
-    depends_on:
-      - db
+    env_file:
+      - "./backend/api/.env"
+    #depends_on:
+    #  - db
   client:
     build: ./frontend
     ports:

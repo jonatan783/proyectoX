@@ -1,20 +1,35 @@
-const { Model, DataTypes} = require('sequelize'); 
+const { Model, DataTypes } = require("sequelize");
 const db = require("../db");
-
 
 class Address extends Model {}
 
 Address.init(
-    {
-        complete_address:{
-            type: DataTypes.STRING,
-            allowNull: false,
-        }
+  {
+    calle: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    {
-        sequelize:db,
-        modelName: 'address',
-    }); 
+    altura: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    localidad: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    provincia: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    codigo_postal: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize: db,
+    modelName: "address",
+  }
+);
 
-
-    module.exports = Address;
+module.exports = Address;

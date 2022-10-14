@@ -1,5 +1,5 @@
-const db = require('../db');
-const { Model, DataTypes } = require('sequelize');
+const db = require("../db");
+const { Model, DataTypes } = require("sequelize");
 //const marked = require("marked");
 
 class Role extends Model {}
@@ -10,11 +10,10 @@ Role.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-   
   },
   {
     sequelize: db,
-    modelName: 'roles',
+    modelName: "roles",
   }
 );
 
