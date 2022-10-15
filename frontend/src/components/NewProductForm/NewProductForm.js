@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import useInput from "../../hooks/useInput";
+import { getCategoryAll, postCategoryAddRelation } from '../../requests/categoryRequest'
+import { postProductAdd } from '../../requests/productRequest'
 
 const NewProductForm = () => {
   const navigate = useNavigate();
@@ -10,8 +11,7 @@ const NewProductForm = () => {
   const [checkedState, setCheckedState] = useState({});
 
   useEffect(() => {
-    axios
-      .get("/api/category/getAll")
+    getCategoryAll()
       .then(({ data }) => {
         setAllCategories(data);
         return data;
@@ -26,11 +26,8 @@ const NewProductForm = () => {
       });
   }, []);
 
-  const categorias = ["Lámparas", "Carpas", "Fertilizantes", "Sustratos"];
-
   const name = useInput("");
   const price = useInput(0);
-  // const category = useInput([])
   const stock = useInput(0);
   const imagePath1 = useInput("");
   const imagePath2 = useInput("");
@@ -52,9 +49,8 @@ const NewProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("/api/product/add", {
-        name: name.value,
+    postProductAdd({
+      name: name.value,
         description: description.value,
         price: price.value,
         stock: stock.value,
@@ -64,13 +60,13 @@ const NewProductForm = () => {
           imagePath3.value,
           imagePath4.value,
         ],
-      })
+    })
       .then((res) => {
         const productId = res.data[0].id;
-        axios.post("/api/category/addmanyRelations", {
+        postCategoryAddRelation({
           productId,
           objCategoryId: checkedState,
-        });
+        })
       })
       .then(() => navigate("/admin/products"));
   };

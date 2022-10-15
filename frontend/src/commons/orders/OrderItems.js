@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { setOrder, getOrderAll, } from '../../requests/requests';
+import { setOrder, getOrderAll, } from '../../requests/orderRequest';
 import '../../components/OrderHistorial/OrderHistorial.css'
 import '../../components/Comments/Comments.css'
 /* import '../../style/Comments.css'; */
@@ -28,10 +26,10 @@ const OrderItems = () => {
   useEffect(() => {
     console.log('soy el id del useEffect', id);
     getOrderAll(id)
-    /* axios.get(`/api/orderItem/getAll/${id}`) */
-    .then(res => {
-      setOrderItems(res.data);
-    });
+      /* axios.get(`/api/orderItem/getAll/${id}`) */
+      .then(res => {
+        setOrderItems(res.data);
+      });
   }, []);
 
   console.log('soy tu orderItemsssss', orderItems);

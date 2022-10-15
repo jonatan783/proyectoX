@@ -1,8 +1,7 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { Modal, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { getCategoryAll } from "../../requests/requests";
+import { getCategoryAll, deleteCategoryById } from "../../requests/categoryRequest";
 import "./AdminCategories.css";
 
 const AdminCategories = () => {
@@ -15,19 +14,17 @@ const AdminCategories = () => {
 
   useEffect(() => {
     getCategoryAll()
-    .then((res) => { setCategories(res.data)});
+      .then((res) => { setCategories(res.data) });
   }, []);
 
   const handleDelete = () => {
-    console.log(`Categ ID ES`, auxCategId);
-    axios
-      .delete(`/api/category/${auxCategId}`)
+    deleteCategoryById(auxCategId)
       .then(() => {
         console.log("eliminado");
       })
       .then(() => {
         getCategoryAll()
-        .then((res) => { setCategories(res.data) });
+          .then((res) => { setCategories(res.data) });
       });
     setShow(false);
   };
@@ -45,7 +42,7 @@ const AdminCategories = () => {
         <button className="btn btn-success" style={{ marginBottom: "40px" }}>
           Crear categoría
         </button>
-      </Link>   
+      </Link>
       <Table bordered hover>
         <thead>
           <tr>

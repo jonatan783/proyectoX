@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import axios from 'axios';
 import { addOrCreateItemCart } from '../../redux/itemCart'
 import { useDispatch, useSelector } from 'react-redux';
 /* import Comments from '../components/Comments'; */
@@ -8,6 +7,7 @@ import { Valoration, Comments } from '../../components'
 import './SingleProduct.css';
 import '../Sidebar/Sidebar.css'
 import '../Valoration/Valoration.css'
+import { getProductById } from '../../requests/productRequest'
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -37,9 +37,8 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
-    axios.get(`/api/product/${id}`).then(res => {
-      setProduct(res.data);
-    });
+    getProductById(id)
+    .then(res => setProduct(res.data))
   }, [id]);
   useEffect(() => {});
 

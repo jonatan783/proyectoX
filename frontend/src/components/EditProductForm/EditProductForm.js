@@ -1,16 +1,15 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { getProductById, putProductById } from '../../requests/productRequest'
+import { getCategoryByIdAndProduct, getCategoryAll, putCategoryUpDate } from "../../requests/categoryRequest"
 
 const EditProductForm = () => {
   const navigate = useNavigate();
-
   const { id } = useParams();
-  // const imagePath1 = useInput("");
-  // const imagePath2 = useInput("");
-  // const imagePath3 = useInput("");
-  // const imagePath4 = useInput("");
+
+  const [checkedState, setCheckedState] = useState({});
+  const [allCategories, setAllCategories] = useState([]);
   const [product, setProduct] = useState({
     id: "",
     name: "",
@@ -20,8 +19,6 @@ const EditProductForm = () => {
     img: ["", "", "", ""],
   });
 
-  const [checkedState, setCheckedState] = useState({});
-
   const handlePathChange = (e) => {
     const otroObj = Object.assign({}, product);
     otroObj.img[parseInt(e.target.id[e.target.id.length - 1])] = e.target.value;
@@ -29,50 +26,44 @@ const EditProductForm = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`/api/product/${id}`)
+    getProductById(id)
       .then((res) => {
         setProduct(res.data);
       })
       .then(() => {
-        return axios.get(`/api/category/productcategories/${id}`);
+        return getCategoryByIdAndProduct(id);
       })
       .then(({ data }) => {
-        // setProductCategories(data);
-        axios.get("/api/category/getAll").then((res) => {
-          let everyCategory = res.data;
-          let otroObj = {};
-          // console.log(`todas las categorias`, everyCategory);
-          // console.log(`product category`, data);
-          everyCategory.forEach((categObj) => {
-            otroObj[categObj.id] = false;
-            data.forEach((el) => {
-              if (el.id == categObj.id) otroObj[el.id] = true;
+        getCategoryAll()
+          .then((res) => {
+            let everyCategory = res.data;
+            let otroObj = {};
+            everyCategory.forEach((categObj) => {
+              otroObj[categObj.id] = false;
+              data.forEach((el) => {
+                if (el.id == categObj.id) otroObj[el.id] = true;
+              });
             });
+            setCheckedState(otroObj);
           });
-          // console.log(`el arrego magico es`, otroObj);
-          setCheckedState(otroObj);
-        });
       });
   }, [id]);
 
   useEffect(() => {
-    axios.get("/api/category/getAll").then(({ data }) => {
-      setAllCategories(data);
-    });
+    getCategoryAll()
+      .then(({ data }) => {
+        setAllCategories(data);
+      });
   }, []);
-
-  const [allCategories, setAllCategories] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .put(`/api/product/${product.id}`, product)
+    putProductById(product)
       .then(() => {
-        return axios.put(`/api/category/updateRelation`, {
+        return putCategoryUpDate ({
           productId: product.id,
           objCategoryId: checkedState,
-        });
+        })
       })
       .then(() => {
         navigate("/admin/products");
@@ -81,15 +72,11 @@ const EditProductForm = () => {
 
   const handleOnChangeCheck = (categ) => {
     const updatedCheckedState = { ...checkedState };
-    console.log(`updatedcheckstate es`, updatedCheckedState);
-    console.log(`categ es`, categ);
 
     for (const property in updatedCheckedState) {
-      console.log(`property es`, property);
       if (property == categ)
         updatedCheckedState[categ] = !updatedCheckedState[categ];
     }
-    console.log(`updatedcheckstate es`, updatedCheckedState);
 
     setCheckedState(updatedCheckedState);
   };
@@ -179,7 +166,7 @@ const EditProductForm = () => {
                 <button className="btn btn-light">Editar categorías</button>
               </Link>
               <Link to="/admin/categories/new-category">
-              <button className="btn btn-dark">Nueva categoría</button>
+                <button className="btn btn-dark">Nueva categoría</button>
               </Link>
             </div>
           </div>

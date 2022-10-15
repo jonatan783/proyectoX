@@ -1,7 +1,7 @@
-import axios from "axios";
+import React from 'react';
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
 import useInput from "../../hooks/useInput";
+import { postCategoryAdd } from '../../requests/categoryRequest'
 
 const NewCategForm = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const NewCategForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   axios.post("/api/category/new", { name: name.value, description: description.value })
+    postCategoryAdd({ name: name.value, description: description.value })
       .then(() => navigate("/admin/categories"));
   };
 

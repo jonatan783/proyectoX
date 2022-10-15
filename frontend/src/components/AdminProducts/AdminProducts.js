@@ -1,53 +1,36 @@
 import useInput from "../../hooks/useInput";
 import { Table, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./AdminProducts.css";
+import { getProductByName, deleteProductById } from '../../requests/productRequest'
 
 const AdminProducts = () => {
   const searchValue = useInput("");
   const [results, SetResults] = useState([]);
-
   const [auxProductId, setAuxProductId] = useState("");
+  const [show, setShow] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchValue.value !== "") {
-      axios
-        .get(`/api/product/name/${searchValue.value}`)
+      getProductByName(searchValue.value)
         .then((res) => SetResults(res.data));
     }
   };
-
-  //prueba de modal
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-
+  
   const handleDelete = () => {
-    console.log(`PRODUCT ID ES`, auxProductId);
-    axios
-      .delete(`/api/product/${auxProductId}`)
-      .then(() => {
-        console.log("eliminado");
-      })
-      .then(() => {
-        axios
-          .get(`/api/product/name/${searchValue.value}`)
-          .then((res) => SetResults(res.data));
-      });
+    deleteProductById(auxProductId)
+    .then(() => { console.log("eliminado")})
+    .then(() => {
+      getProductByName(searchValue.value)
+      .then((res) => SetResults(res.data));
+    });
     setShow(false);
   };
-
+  
+  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  //
-
-  const handleEdit = (e) => {
-    const productId = e.target.id;
-  };
 
   return (
     <div className="container usersTitleDiv">
@@ -139,7 +122,7 @@ const AdminProducts = () => {
                       <button
                         className="btn btn-primary"
                         // id={result.id}
-                        onClick={() => {}}
+                        onClick={() => { }}
                       >
                         Editar
                       </button>

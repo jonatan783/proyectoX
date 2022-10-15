@@ -1,26 +1,21 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Link } from "react-router-dom";
-import useInput from "../../hooks/useInput";
+import { getCategoryById, putCategoryById } from '../../requests/categoryRequest'
 
 const EditCategForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const name = useInput("");
-  const description = useInput("");
-
   const [category, setCategory] = useState({ name: "", description: "" });
 
   useEffect(() => {
-    axios.get(`/api/category/${id}`).then((res) => setCategory(res.data));
+    getCategoryById(id)
+      .then((res) => setCategory(res.data));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .put(`/api/category/${id}`, category)
+    putCategoryById(id, category)
       .then(() => navigate("/admin/categories"));
   };
 

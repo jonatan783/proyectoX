@@ -3,18 +3,19 @@ import { Link } from "react-router-dom";
 import { Login, Sidebar } from '../'
 import { useSelector } from "react-redux";
 import useInput from "../../hooks/useInput";
-import axios from "axios";
+import { getProductByName } from '../../requests/productRequest';
 import "./Navbar.css";
 
 const Navbar = ({ setProducts }) => {
+  
   const user = useSelector((state) => state.user);
   const searchValue = useInput();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchValue.value !== "") {
-      axios
-        .get(`/api/product/name/${searchValue.value}`)
-        .then((res) => setProducts(res.data));
+      getProductByName(searchValue.value)
+        .then(res => setProducts(res.data));
     }
   };
 

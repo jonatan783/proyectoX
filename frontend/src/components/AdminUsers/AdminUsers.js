@@ -1,59 +1,42 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import useInput from '../../hooks/useInput';
-import { useNavigate } from 'react-router';
 import './AdminUsers.css';
+import { getAllUserRequest, promoteUserRequest, removeUserRequest } from '../../requests/userRequest'
 
 //FALTA: - Considerar que un admin no puede autorrevocarse un permiso.
 
 const AdminUsers = () => {
-  const navigate = useNavigate();
-
-  const searchValue = useInput('');
 
   const user = useSelector(state => state.user);
 
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/user/getAll/${user.roleId}`).then(res => {
-      setUsers(res.data);
-    });
+    getAllUserRequest(user.roleId)
+      .then(res => setUsers(res.data))
   }, []);
+
   const handlePromote = id => {
-    axios.put(`/api/user/admin/adminPromote`, { id }).then(() => {
-      axios.get(`/api/user/getAll/${user.roleId}`).then(res => {
-        setUsers(res.data);
-      });
-    });
+    promoteUserRequest(id)
+      .then(() => {
+        getAllUserRequest(user.roleId)
+          .then(res => setUsers(res.data));
+      })
   };
+
   const handleRemove = id => {
-    axios.put(`/api/user/admin/adminRemove`, { id }).then(() => {
-      axios.get(`/api/user/getAll/${user.roleId}`).then(res => {
-        setUsers(res.data);
+    removeUserRequest(id)
+      .then(() => {
+        getAllUserRequest(user.roleId)
+          .then(res => setUsers(res.data));
       });
-    });
   };
 
   return (
     <div className='container usersTitleDiv'>
       <h1 style={{ paddingBottom: '40px' }}>Users</h1>
-      {/* <div className='searchFormDiv'>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <label htmlFor="searchUsersInput">Buscador de usuarios </label>
-          <input
-            type="text"
-            name="users"
-            id="searchUsersInput"
-            className="searchFormInput"
-            placeholder="Busca un usuario"
-            {...searchValue}
-          />
-          <button className="btn btn-primary searchFormBtn">Buscar</button>
-        </form>
-      </div> */}
+
       <Table bordered hover>
         <thead>
           <tr>

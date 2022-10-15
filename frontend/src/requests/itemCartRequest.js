@@ -24,7 +24,6 @@ export const addOrCreateItemCartRequest = async (data, thunkAPI) => {
   };
 };
 
-
 export const deleteItemCartRequest = async (id, thunkAPI) => {
   const { shoppingCart } = thunkAPI.getState()
 
@@ -51,7 +50,6 @@ export const getItemCartRequest = async (data, thunkAPI) => {
   const { shoppingCart } = thunkAPI.getState()
 
   try {
-
     const getItemCard = await axios.get(`/api/itemCart/${shoppingCart.id}`)
     return getItemCard
   } catch (error) {
