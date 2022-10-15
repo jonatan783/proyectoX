@@ -54,6 +54,5 @@ services:
     volumes:
       - "./frontend/public:/app/public"
       - "./frontend/src:/app/src"
-
 networks:
   directus:
