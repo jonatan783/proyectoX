@@ -9,11 +9,10 @@ export const addToShoppingCartRequest = async (data) => {
     }
 }
 
-export const removeFromShoppingCartRequest = async (data, thunkAPI) => {
-    const { user } = thunkAPI.getState();
+export const removeFromShoppingCartRequest = async (data) => {
     try {
-        //verificar el http delete => body=data
-        const removeShoppingCart = await axios.get(`/api/shoppingCart/${user.id}`)
+       
+        const removeShoppingCart = await axios.delete(`/api/remove/objectId=${data.id}`, data)
         return removeShoppingCart.data
     } catch (error) {
         throw error

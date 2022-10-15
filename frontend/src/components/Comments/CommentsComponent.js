@@ -1,38 +1,40 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import './Comments.css';
+import { getCommentById, postCommentAdd } from '../../requests/commentRequest';
 
 const CommentsComponent = ({ lengthComment }) => {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
   const comment = useInput('');
   const user = useSelector(state => state.user);
+
   useEffect(() => {
-    axios.get(`/api/productComment/${id}`).then(res => {
-      if (res.data) setComments(res);
-    });
+    getCommentById(id)
+      .then(res => {
+        if (res.data) setComments(res);
+      });
   }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (user.id) {
-      axios
-        .post(`/api/productComment/add`, {
-          userName: user.name,
-          userId: user.id,
-          comment: comment.value,
-          productId: id,
-        })
+      postCommentAdd({
+        userName: user.name,
+        userId: user.id,
+        comment: comment.value,
+        productId: id,
+      })
         .then(() => {
           document.querySelector('.formComments').value = '';
           comment.onChange(e);
-          axios.get(`/api/productComment/${id}`).then(res => {
-            lengthComment(res.data.length);
-            setComments(res);
-          });
+          getCommentById(id)
+            .then(res => {
+              lengthComment(res.data.length);
+              setComments(res);
+            });
         });
     }
   };

@@ -1,13 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
-
 import useInput from '../../hooks/useInput';
 import {
   sendLoginRequest,
   sendSignUpRequest,
   sendLogoutRequest,
 } from '../../redux/user';
-import {getShoppingCart} from '../../redux/shoppingCart'
 import "./Login.css"
 
 const LoginComponent = () => {

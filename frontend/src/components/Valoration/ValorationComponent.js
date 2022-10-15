@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import axios from "axios";
 import "./Valoration.css";
+import { getValorationById, postValorationAdd } from '../../requests/valorationRequest'
 
 const ValorationComponent = ({ valoration }) => {
   const user = useSelector((state) => state.user);
@@ -51,42 +51,37 @@ const ValorationComponent = ({ valoration }) => {
   };
 
   useEffect(() => {
-    axios
-      .get(`/api/productValoration/getAll/${id}`)
-
+    getValorationById(id)
       .then((res) => {
-        console.log("respuesta de valoracion---->", res);
 
         if (res.data.length > 0) {
-            let valoracion = 0;
-            res.data.map(item=> valoracion += item.valoration) ;
-            const prom = valoracion/res.data.length ;
-            console.log("soy tu prom",valoracion) ;
-            valoration(prom.toFixed(1));
-        } 
+          let valoracion = 0;
+          res.data.map(item => valoracion += item.valoration);
+          const prom = valoracion / res.data.length;
+          console.log("soy tu prom", valoracion);
+          valoration(prom.toFixed(1));
+        }
       });
-  }, []);
-  const click = (valoration) => {
-    axios
-      .post(`/api/productValoration/add/${id}`, {
-        valoration,
-        userId: user.id,
-      })
-      .then(() =>{
-        return axios
-          .get(`/api/productValoration/getAll/${id}`)
 
+  }, []);
+
+  const click = (valoration) => {
+    postValorationAdd(id, {
+      valoration,
+      userId: user.id,
+    })
+      .then(() => {
+        return getValorationById(id)
           .then((res) => {
-            if (res.data){
-                let valoracion = 0;
-                res.data.map(item=> valoracion += item.valoration) ;
-                const prom = valoracion/res.data.length ;
-                console.log("soy tu prom",valoracion) ;
-               return  valoration(prom.toFixed(1));
-            } 
+            if (res.data) {
+              let valoracion = 0;
+              res.data.map(item => valoracion += item.valoration);
+              const prom = valoracion / res.data.length;
+              console.log("soy tu prom", valoracion);
+              return valoration(prom.toFixed(1));
+            }
           })
-        })
-      .catch((err) => console.log(err));
+      })
   };
 
   return (

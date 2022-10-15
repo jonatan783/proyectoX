@@ -40,3 +40,34 @@ export const persistUserRequest = async () => {
     }
 }
 
+//por fuera de desux-loger
+
+export const getAllUserRequest = async (id) => {
+    try {
+        const getAllUser = await axios.get(`/api/user/getAll/${id}`)
+        return getAllUser
+
+    } catch (error) {
+        throw error
+    }
+}
+
+export const promoteUserRequest = async (id) => {
+    try {
+        const promoteUser = await axios.put(`/api/user/admin/adminPromote`, id )
+        return promoteUser
+
+    } catch (error) {
+        throw error
+    }
+}
+
+export const removeUserRequest = async (id) => {
+    try {
+        const removeUser = await axios.put(`/api/user/admin/adminRemove`, id )
+        return removeUser
+
+    } catch (error) {
+        throw error
+    }
+}

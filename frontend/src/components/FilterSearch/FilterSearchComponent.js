@@ -1,8 +1,9 @@
+// ver que existen dos useEffect observando el cambio []
+import { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import { GridContainer } from "../../containers";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
+import { getProductAll, getProductCategory } from '../../requests/productRequest'
+import { getCategoryAll } from '../../requests/categoryRequest'
 import "./FilterSearch.css";
 
 const FilterSearchComponent = ({  }) => {
@@ -11,30 +12,25 @@ const FilterSearchComponent = ({  }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    axios
-      .get("/api/category/getAll")
+    getCategoryAll()
       .then(({ data }) => {
         setAllCategories(data);
-        console.log(`categories es`, data);
         return data;
       })
- 
+
+  }, []);
+
+  useEffect(() => {
+    getProductAll()
+    .then(res => setProducts(res.data));
   }, []);
 
   const handleOnChangeCheck = (e) => {
- 
-    console.log(`event taget value es`, e.target.value)
     let categId = e.target.value
-    
-    axios.get(`/api/product/category/${categId}`).then(res=>setProducts(res.data))
-
+    getProductCategory(categId)
+      .then(res => setProducts(res.data))
     setCheckedState(e.target.value)
-    console.log(checkedState)
   };
-
-  useEffect(() => {
-    axios.get('/api/product/').then(res => setProducts(res.data));
-  }, []);
 
   return (
     <div className="filterContainer1">
@@ -43,23 +39,23 @@ const FilterSearchComponent = ({  }) => {
           <Accordion.Item eventKey="0">
             <Accordion.Header>Category</Accordion.Header>
             <Accordion.Body>
-            <form>
-              {allCategories.map((category) => {
-                return (
-                  <div>
-                    <input
-                      type="radio"
-                      name={category.name}
-                      value={category.id}
-                      checked={checkedState==category.id}
-                      id={category.name}
-                      // checked={checkedState[category.id]}
-                      onChange={handleOnChangeCheck}
-                    />
-                    <label style={{ marginLeft: "6px" }}>{category.name}</label>
-                  </div>
-                );
-              })}
+              <form>
+                {allCategories.map((category) => {
+                  return (
+                    <div>
+                      <input
+                        type="radio"
+                        name={category.name}
+                        value={category.id}
+                        checked={checkedState == category.id}
+                        id={category.name}
+                        // checked={checkedState[category.id]}
+                        onChange={handleOnChangeCheck}
+                      />
+                      <label style={{ marginLeft: "6px" }}>{category.name}</label>
+                    </div>
+                  );
+                })}
               </form>
             </Accordion.Body>
           </Accordion.Item>
