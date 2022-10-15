@@ -14,7 +14,7 @@ app.use("/api", routes);
 
 const SERVER_PORT = process.env.PORT || 3002
 
-db.sync({force: true}).then((data) => {
+db.sync({alter: true}).then((data) => {
   app.listen(SERVER_PORT, (req, res) => {
     console.log("Server Listening on port: " + SERVER_PORT);
   });
