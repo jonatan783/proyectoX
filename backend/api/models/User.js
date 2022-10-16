@@ -35,6 +35,9 @@ User.init(
     salt: {
       type: DataTypes.STRING,
     },
+    status: {
+      type: DataTypes.BOOLEAN,
+    }
   },
 
   { sequelize: db, tableName: "users" }
