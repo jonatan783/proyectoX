@@ -1,5 +1,5 @@
 /* import FakeOrders from '../utils/FakeOrders.js'; */
-import CartDetailsHeader from '../PreOrder/CartDetailsHeaderComponent'
+import { CartDetailsHeaderContainer } from '../../containers';
 import {useSelector } from 'react-redux';
 /* import '../OrderDetail/OrderHistorial.css' */
 
@@ -8,7 +8,7 @@ const CartDetailsComponent = () => {
 
   return shoppingCart.id ? (
     <div className='orderContainer4'>
-      <CartDetailsHeader />
+      <CartDetailsHeaderContainer />
     </div>
   ) : null;
 };

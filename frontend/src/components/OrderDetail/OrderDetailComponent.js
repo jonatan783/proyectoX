@@ -1,4 +1,4 @@
-import OrderDetailsHeader from '../Orders/OrderDetailsHeaderComponent';
+import { OrderDetailsHeaderContainer } from '../../containers';
 import '../OrderHistorial/OrderHistorial.css'
 
 
@@ -6,7 +6,7 @@ const OrderDetailsComponent = () => {
 
   return (
     <div className='orderContainer4'>
-      <OrderDetailsHeader />
+      <OrderDetailsHeaderContainer />
     </div>
   );
 };

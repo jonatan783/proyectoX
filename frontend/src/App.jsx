@@ -46,7 +46,7 @@ function App() {
   useEffect(() => {
     getProducts()
     .then(res => {
-      console.log(res.data)
+      console.log('hola ---> ', res.data)
       setProducts(res.data)});
   }, []);
 
@@ -54,14 +54,14 @@ function App() {
     <div className='App'>
         {/* <NavbarContainer setProducts={setProducts}/> */}
         {/* <div className="container"> */}
-        {/* <Routes> */}
-        {/* <Route path='/' element={
+        <Routes>
+        <Route path='/' element={
             <>
               <CarouselContainer />
               <div className='container'><GridContainer products={products}/></div>
             </>
           }
-        /> */}
+        />
         {/* <Route path='/products/popular' element={<FilterSearchContainer products={products}/>} />
         <Route path='/orders/history' element={<OrderHistorialContainer />} />
         <Route path='/CartDetails' element={<CartDetailsContainer />} />
@@ -80,7 +80,7 @@ function App() {
           </>
         ) : null} */}
         {/* <Route path='/*' element={<NotFoundContainer />} /> */}
-        {/* </Routes> */}
+        </Routes>
         {/* </div> */}
         <FooterContainer />
     </div>

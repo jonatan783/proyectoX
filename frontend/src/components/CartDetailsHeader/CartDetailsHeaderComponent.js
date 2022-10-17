@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
-import CartItems from './CartItemsComponent';
+// import CartItems from './CartItemsComponent';
+import { CartItemsContainer } from '../../containers';
 import '../../components/SingleProduct/SingleProduct.css'
 import './CardOrderDetail.css';
 
@@ -17,7 +18,7 @@ const CartDetailsHeaderComponent = () => {
       </div>
 
       <div className='orderContainer2'>
-        <CartItems />
+        <CartItemsContainer />
       </div>
     </div>
   ) : null;

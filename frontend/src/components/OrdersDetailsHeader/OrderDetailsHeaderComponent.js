@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { getOrdenDetailById } from '../../requests/orderRequest';
-import '../PreOrder/CardOrderDetail.css'
-/* import '../SingleProduct.css'; */
+import { OrderItemsContainer } from '../../containers';
+import '../CartDetailsHeader/CardOrderDetail.css'
 import '../../components/SingleProduct/SingleProduct.css'
-import OrderItems from './OrderItemsComponent';
+/* import '../SingleProduct.css'; */
 
 const OrderDetailsHeaderComponent = () => {
   
@@ -31,7 +31,7 @@ const OrderDetailsHeaderComponent = () => {
         </div>
       </div>
       <div className='orderContainer2'>
-        <OrderItems/>
+        <OrderItemsContainer/>
       </div>
     </div>
   ) : (
