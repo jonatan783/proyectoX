@@ -1,28 +1,28 @@
-const User = require("../db/models");
-const Role = require("../db/models");
+const {user, role} = require("../db/models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 class UserServices {
   static async register(req, next) {
-    const { name, lastname, email, password, roleId } = req.body;
+    const { name, lastname, email, password, rolId } = req.body;
     try {
-      await User.create({
+      await user.create({
         name,
         lastname,
         email,
         password,
-        roleId,
+        rolId,
       });
       return "usuario creado";
     } catch (err) {
+      console.log("error de servicio", err)
       throw err;
     }
   }
   static async login(req, next) {
     const { email, password } = req.body;
     try {
-      const user = await User.findOne({
+      const user = await user.findOne({
         where: {
           email,
         },
@@ -44,7 +44,7 @@ class UserServices {
   static async userUpdate(req, next) {
     const { id } = req.params;
     try {
-      const user = await User.update(req.body, {
+      const user = await user.update(req.body, {
         where: {
           id,
         },

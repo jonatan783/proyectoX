@@ -1,10 +1,10 @@
-const { Product, ProductComment, Category } = require("../db/models");
+const { product, productcomment, category } = require("../db/models");
 const { Op } = require("sequelize");
 
 class ProductServices {
   static async getAll(req, next) {
     try {
-      const productos = await Product.findAll();
+      const productos = await product.findAll();
       return productos;
     } catch (err) {
       throw err;
@@ -12,7 +12,7 @@ class ProductServices {
   }
   static async getById(req, next) {
     try {
-      const producto = await Product.findOne({
+      const producto = await product.findOne({
         where: {
           id: req.params.id,
         },
@@ -21,7 +21,7 @@ class ProductServices {
         },
         include: [
           {
-            model: ProductComment,
+            model: productcomment,
           },
         ],
       });
@@ -31,17 +31,23 @@ class ProductServices {
     }
   }
   static async addProduct(req, next) {
-    //revisar la asociacion con categoria
-    const { name, description, category, price, stock, img } = req.body;
+    const { name, description, categorias, price, stock, img } = req.body;
     try {
-      const producto = await Product.create({
+      const producto = await product.create({
         name,
         description,
-        category,
         price,
         stock,
         img,
       });
+      categorias.map(async categoryName => {
+        const categoria = await category.findOne({
+          where:{
+            name: categoryName
+          }
+        })
+        producto.addCategory(categoria)
+      })
       return "Creado";
     } catch (err) {
       throw err;
@@ -49,7 +55,7 @@ class ProductServices {
   }
   static async updateProduct(req, next) {
     try {
-      await Product.update(req.body, {
+      await product.update(req.body, {
         where: {
           id: req.params.id,
         },
@@ -61,7 +67,7 @@ class ProductServices {
   }
   static async deleteProduct(req, next) {
     try {
-      await Product.destroy({
+      await product.destroy({
         where: {
           id: req.params.id,
         },
@@ -73,19 +79,26 @@ class ProductServices {
   }
   static async getByCategory(req, next) {
     //revisar la asociacion con producto
+    const { id } = req.params
     try {
-      const categoria = await Category.findByPk(id, {
-        include: { model: Product, as: "productos" },
+      const { products } = await category.findByPk(id, {
+        include: [{ 
+          model: product,
+          attributes: {
+            exclude: ['createdAt', 'updatedAt']
+          }
+        }],
       });
-      return categoria;
+      return products;
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }
   static async getByName(req, next) {
     const {name} = req.params;
     try {
-      const productos = await Product.findAll({
+      const productos = await product.findAll({
         where: {
           name: {
             [Op.iLike]: `%${name}%`,
