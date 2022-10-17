@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-
-import '../../style/OrderHistorial.css';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import '../../style/Comments.css';
+import { setOrder, getOrderAll, } from '../../requests/orderRequest';
+import '../../components/OrderHistorial/OrderHistorial.css'
+import '../../components/Comments/Comments.css'
+/* import '../../style/Comments.css'; */
 
 const OrderItems = () => {
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ const OrderItems = () => {
   const user = useSelector(state => state.user);
 
   const handleBuy = () => {
-    axios.post(`/api/orderDetail/sendEmail`, { email: user.email });
-
+    /* axios.post(`/api/orderDetail/sendEmail`, { email: user.email }); */
+    setOrder(user.email)
     navigate('/');
   };
 
@@ -25,9 +25,11 @@ const OrderItems = () => {
 
   useEffect(() => {
     console.log('soy el id del useEffect', id);
-    axios.get(`/api/orderItem/getAll/${id}`).then(res => {
-      setOrderItems(res.data);
-    });
+    getOrderAll(id)
+      /* axios.get(`/api/orderItem/getAll/${id}`) */
+      .then(res => {
+        setOrderItems(res.data);
+      });
   }, []);
 
   console.log('soy tu orderItemsssss', orderItems);
