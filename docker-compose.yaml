@@ -1,27 +1,52 @@
 services:
-  db:
-    image: postgres:10
-    environment:
-      POSTGRES_DB: "grow"
-      POSTGRES_USER: "sativa"
-      POSTGRES_PASSWORD: "sativa"
+  #db:
+  #  image: postgres:10
+  #  environment:
+  #    POSTGRES_DB: "grow"
+  #    POSTGRES_USER: "sativa"
+  #    POSTGRES_PASSWORD: "sativa"
+  #  ports:
+  #    - "5432"
+  cache:
+    container_name: cache
+    image: redis:6
+    networks:
+      - directus
+
+  directus:
+    container_name: directus
+    image: directus/directus:latest
     ports:
-      - "5432"
+      - 8055:8055
+    volumes:
+      # By default, uploads are stored in /directus/uploads
+      # Always make sure your volumes matches the storage root when using
+      # local driver
+      - ./uploads:/directus/uploads
+      # Make sure to also mount the volume when using SQLite
+      # - ./database:/directus/database
+      # If you want to load extensions from the host
+      # - ./extensions:/directus/extensions
+    networks:
+      - directus
+    depends_on:
+      - cache
+    env_file:
+      - "./backend/api/.env"
+
+      # Make sure to set this in production
+      # (see https://docs.directus.io/self-hosted/config-options#general)
+      # PUBLIC_URL: 'https://directus.example.com'
   central_api:
     build: ./backend
-    environment:
-      PORT: 3001
-      BASE_URL: "http://localhost"
-      DB_NAME: "grow"
-      PSQL_USER: "sativa"
-      PSQL_PASS: "sativa"
-      DB_HOST: db
     ports:
       - "3001:3001"
     volumes:
       - "./backend/api:/src"
-    depends_on:
-      - db
+    env_file:
+      - "./backend/api/.env"
+    #depends_on:
+    #  - db
   client:
     build: ./frontend
     ports:
@@ -29,3 +54,5 @@ services:
     volumes:
       - "./frontend/public:/app/public"
       - "./frontend/src:/app/src"
+networks:
+  directus:

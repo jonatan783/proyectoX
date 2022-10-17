@@ -1,31 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const user = require("./users");
-const product = require("./product");
+const admin = require("./admin/index");
+const auth = require('./auth/index');
+const compartidas = require('./compartidas/index');
+const comprador = require('./comprador/index');
+// const superAdmin = require('./superAdmin/index');
+const vendedor = require("./vendedor/index");
 
-const orderDetail = require("./orderDetail");
-const orderItem = require("./orderItem");
-
-const shoppingCart = require("./shoppingCart");
-const itemCart = require("./itemCart");
-
-const productComment = require("./productComment");
-const productValoration = require("./productValoration");
-
-const category = require("./category");
-
-router.use("/user", user);
-router.use("/product", product);
-
-router.use("/orderDetail", orderDetail);
-router.use("/orderItem", orderItem);
-
-router.use("/shoppingCart", shoppingCart);
-
-router.use("/productComment", productComment);
-
-router.use("/itemCart", itemCart);
-router.use("/category", category);
-router.use("/productValoration", productValoration);
+router.use("/admin", admin);
+router.use("/auth", auth);
+router.use("/var", compartidas);
+router.use("/comprador", comprador);
+// router.use("/superAdmin", superAdmin);
+router.use("/vendedor", vendedor);
 
 module.exports = router;
