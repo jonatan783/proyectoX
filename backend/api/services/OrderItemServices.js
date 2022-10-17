@@ -1,4 +1,4 @@
-const { OrderItem, Product } = require("../models");
+const { OrderItem, Product } = require("../db/models");
 
 class OrderItemServices {
   static async ItemAdd(req, next) {
