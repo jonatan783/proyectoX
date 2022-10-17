@@ -1,11 +1,11 @@
-const { Product, Category } = require("../db/models");
+const { product, category } = require("../db/models");
 const { Op } = require("sequelize");
 
 class CategoryServices {
   static async newCategory(req, next) {
     const { name, description } = req.body;
     try {
-      await Category.findOrCreate({
+      await category.findOrCreate({
         where: {
           name
         },
@@ -15,12 +15,13 @@ class CategoryServices {
       });
       return "Categoría creada";
     } catch (err) {
+      console.log(err)
       throw err;
     }
   }
   static async getAll(req, next) {
     try {
-      const categorias = await Category.findAll();
+      const categorias = await category.findAll();
       return categorias;
     } catch (err) {
       throw err;
@@ -29,7 +30,7 @@ class CategoryServices {
   static async getCatById(req, next) {
     const { id } = req.params
     try {
-      const categoria = await Category.findOne({
+      const categoria = await category.findOne({
         where: {
           id: id
         }
@@ -42,7 +43,7 @@ class CategoryServices {
   static async updateCatById(req, next) {
     const { id } = req.params;
     try {
-      await Category.update(req.body, {
+      await category.update(req.body, {
         where: {
           id
         }
@@ -55,7 +56,7 @@ class CategoryServices {
   static async deleteCategory(req, next) {
     const { id } = req.params
     try {
-      await Category.destroy({
+      await category.destroy({
         where: {
           id: id
         }

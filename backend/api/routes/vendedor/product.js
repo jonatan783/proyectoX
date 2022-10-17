@@ -4,7 +4,7 @@ const productController = require("../../controllers/productController");
 
 router.get("/", productController.getAll); // Busca todos los productos
 router.get("/:id", productController.getById); // Busca producto por id
-router.post("/add", productController.addProduct); // Añade producto (revisar asociación)
+router.post("/add", productController.addProduct); // Añade producto (revisar asociación-Revisado y terminado OK!)
 router.put("/:id", productController.updateProduct); //Actualizar producto
 router.delete("/:id", productController.deleteProduct); //Eliminar producto
 router.get("/category/:id", productController.getByCategory); // Filtrar por categoria (revisar asociación)
