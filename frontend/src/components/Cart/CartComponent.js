@@ -52,7 +52,7 @@ const CartComponent = () => {
             <h>subtotal</h>
           </div>
           <>
-            {items.map(({ id, quantity, product, ShoppingCartId }, i) => {
+            {items?.map(({ id, quantity, product, ShoppingCartId }, i) => {
               return (
                 <div key={id} className='containerCart'>
                   <div className='itemImg'>

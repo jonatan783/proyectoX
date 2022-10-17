@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-import FakeOrderItems from '../utils/FakeOrderItems.js';
-import '../components/OrderHistorial/OrderHistorial.css'
+import fakeOrderItem from '../../jsonData/FakeOrderItems';
+import '../OrderHistorial/OrderHistorial.css'
 
-const OrderItem = ({ data, id }) => {
-  const datas2 = FakeOrderItems;
+const OrderItemHistoryComponent = ({ data, id }) => {
+  const datas2 = fakeOrderItem;
   return (
     <div className=''>
       <Table bordered hover>
@@ -57,4 +57,4 @@ const OrderItem = ({ data, id }) => {
   );
 };
 
-export default OrderItem;
+export default OrderItemHistoryComponent;

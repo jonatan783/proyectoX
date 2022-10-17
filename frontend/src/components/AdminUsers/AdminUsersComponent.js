@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import './AdminUsers.css';
+import { useNavigate } from 'react-router';
 import { getAllUserRequest, promoteUserRequest, removeUserRequest } from '../../requests/userRequest'
+import useInput from '../../hooks/useInput';
+import './AdminUsers.css';
 
 //FALTA: - Considerar que un admin no puede autorrevocarse un permiso.
 

@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import CartItems from './CartItems';
+import CartItems from './CartItemsComponent';
 import '../../components/SingleProduct/SingleProduct.css'
 import './CardOrderDetail.css';
 
-const CartDetailsHeader = () => {
+const CartDetailsHeaderComponent = () => {
   const shoppingCart = useSelector(state => state.shoppingCart);
 
   return shoppingCart.id ? (
@@ -23,4 +23,4 @@ const CartDetailsHeader = () => {
   ) : null;
 };
 
-export default CartDetailsHeader;
+export default CartDetailsHeaderComponent;

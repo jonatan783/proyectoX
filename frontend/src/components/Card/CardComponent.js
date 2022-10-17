@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import '../components/Grid/Grid.css'
+import '../Grid/Grid.css'
 
-const Card = ({ data }) => {
+const CardComponent = ({ data }) => {
   return (
     <div className='card'>
       <div className='card-body'>
@@ -38,4 +38,4 @@ const Card = ({ data }) => {
   );
 };
 
-export default Card;
+export default CardComponent;

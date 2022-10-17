@@ -30,41 +30,44 @@ import { getProducts } from './requests/requests';
 
 function App() {
   const [products, setProducts] = useState([]);
-  const user = useSelector(state => state.user);
-  const dispatch = useDispatch();
+  console.log(products)
+  // const user = useSelector(state => state.user);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(persistUser());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(persistUser());
+  // }, []);
 
-  useEffect(() => {
-    dispatch(getShoppingCart()).then(() => dispatch(getItemCart()));
-  }, [user.id]);
+  // useEffect(() => {
+  //   dispatch(getShoppingCart()).then(() => dispatch(getItemCart()));
+  // }, [user.id]);
 
 
   useEffect(() => {
     getProducts()
-    .then(res => setProducts(res.data));
+    .then(res => {
+      console.log(res.data)
+      setProducts(res.data)});
   }, []);
 
   return (
     <div className='App'>
-        <NavbarContainer setProducts={setProducts}/>
+        {/* <NavbarContainer setProducts={setProducts}/> */}
         {/* <div className="container"> */}
-        <Routes>
-        <Route path='/' element={
+        {/* <Routes> */}
+        {/* <Route path='/' element={
             <>
               <CarouselContainer />
               <div className='container'><GridContainer products={products}/></div>
             </>
           }
-        />
-        <Route path='/products/popular' element={<FilterSearchContainer products={products}/>} />
+        /> */}
+        {/* <Route path='/products/popular' element={<FilterSearchContainer products={products}/>} />
         <Route path='/orders/history' element={<OrderHistorialContainer />} />
         <Route path='/CartDetails' element={<CartDetailsContainer />} />
         <Route path='/orderDetails/:id' element={<OrderDetailContainer />} />
-        <Route path='/product/:id' element={<SingleProductContainer />} />
-        {user.roleId === 2 ? (
+        <Route path='/product/:id' element={<SingleProductContainer />} /> */}
+        {/* {user.roleId === 2 ? (
           <>
             <Route path='/admin/users' element={<AdminUserContainer />} />
             <Route path='/admin/orders' element={<AdminOrdersContainer />} />
@@ -75,9 +78,9 @@ function App() {
             <Route path='/admin/categories/new-category' element={<NewCategFormContainer />}/>
             <Route path='/admin/categories/edit/:id' element={<EditCategFormContainer />}/>
           </>
-        ) : null}
-        <Route path='/*' element={<NotFoundContainer />} />
-        </Routes>
+        ) : null} */}
+        {/* <Route path='/*' element={<NotFoundContainer />} /> */}
+        {/* </Routes> */}
         {/* </div> */}
         <FooterContainer />
     </div>

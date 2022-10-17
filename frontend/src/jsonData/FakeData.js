@@ -1,6 +1,6 @@
 //date format MM.dd.yyyy HH:mm
 
-const FakeData = [
+const fakeData = [
   {
     id: 1,
     name: "SUSTRATO GROWMIX TERRAFERTIL",
@@ -203,4 +203,4 @@ const FakeData = [
   },
 ];
 
-export default FakeData;
+export default fakeData;

@@ -1,10 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
-import {
-  sendLoginRequest,
-  sendSignUpRequest,
-  sendLogoutRequest,
-} from '../../redux/user';
+import { sendLoginRequest, sendSignUpRequest, sendLogoutRequest, } from '../../redux/user';
+import { useNavigate } from 'react-router';
 import "./Login.css"
 
 const LoginComponent = () => {

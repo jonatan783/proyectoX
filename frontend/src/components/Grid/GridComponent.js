@@ -1,4 +1,4 @@
-import Card from '../../commons/Card'
+import Card from '../Card/CardComponent'
 
 const GridComponent = ({products}) => {
  

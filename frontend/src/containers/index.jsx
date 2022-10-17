@@ -21,6 +21,7 @@ import OrderHistorialContainer from "./OrderHistorialContainer";
 import SidebarContainer from "./SidebarContainer";
 import SingleProductContainer from "./SingleProductContainer";
 import ValorationContainer from "./ValorationContainer";
+import OrderItemHistoryContainer from './OrderItemHistoryContainer'
 
 export {
     AdminCategoriesContainer,
@@ -46,4 +47,5 @@ export {
     SidebarContainer,
     SingleProductContainer,
     ValorationContainer,
+    OrderItemHistoryContainer,
 }

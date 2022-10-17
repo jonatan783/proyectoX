@@ -5,6 +5,7 @@ class ProductServices {
   static async getAll(req, next) {
     try {
       const productos = await Product.findAll();
+      console.log('productos ---> ', productos)
       return productos;
     } catch (err) {
       throw err;

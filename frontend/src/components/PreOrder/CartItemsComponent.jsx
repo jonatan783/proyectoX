@@ -10,7 +10,7 @@ import { getItemCart } from '../../redux/itemCart';
 import { createOrderDetail, deleteItemCartById, deleteShoppingCartById } from '../../requests/requests';
 import '../../components/OrderHistorial/OrderHistorial.css'
 
-const CartItems = ({ id }) => {
+const CartItemsComponent = ({ id }) => {
   const shoppingCart = useSelector(state => state.shoppingCart);
   const cartItems = useSelector(state => state.itemCarts);
   const user = useSelector(state => state.user);
@@ -87,4 +87,4 @@ const CartItems = ({ id }) => {
     </div>
   ) : null;
 };
-export default CartItems;
+export default CartItemsComponent;

@@ -8,7 +8,7 @@ import '../../components/OrderHistorial/OrderHistorial.css'
 import '../../components/Comments/Comments.css'
 /* import '../../style/Comments.css'; */
 
-const OrderItems = () => {
+const OrderItemsComponent = () => {
   const navigate = useNavigate();
 
   const user = useSelector(state => state.user);
@@ -69,4 +69,4 @@ const OrderItems = () => {
   ) : null;
 };
 
-export default OrderItems;
+export default OrderItemsComponent;

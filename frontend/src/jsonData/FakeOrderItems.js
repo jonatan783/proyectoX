@@ -1,5 +1,5 @@
 
-const FakeOrderItem = [
+const fakeOrderItem = [
     {
       id: 1,
       name: "SUSTRATO GROWMIX TERRAFERTIL",
@@ -72,5 +72,5 @@ const FakeOrderItem = [
     },
   ];
   
-  export default FakeOrderItem;
+  export default fakeOrderItem;
   

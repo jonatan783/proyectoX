@@ -1,4 +1,4 @@
-import OrderDetailsHeader from '../../commons/orders/OrderDetailsHeader';
+import OrderDetailsHeader from '../Orders/OrderDetailsHeaderComponent';
 import '../OrderHistorial/OrderHistorial.css'
 
 

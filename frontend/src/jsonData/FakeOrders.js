@@ -1,4 +1,4 @@
-const FakeOrders = [
+const fakeOrders = [
     {
       order_id: 1,
       user_id: "",
@@ -19,5 +19,5 @@ const FakeOrders = [
     },
   ];
   
-  export default FakeOrders;
+  export default fakeOrders;
   

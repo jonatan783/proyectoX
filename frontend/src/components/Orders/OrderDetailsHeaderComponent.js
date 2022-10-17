@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { getOrdenDetailById } from '../../requests/orderRequest';
-import '../preOrder/CardOrderDetail.css'
+import '../PreOrder/CardOrderDetail.css'
 /* import '../SingleProduct.css'; */
 import '../../components/SingleProduct/SingleProduct.css'
-import OrderItems from './OrderItems';
+import OrderItems from './OrderItemsComponent';
 
-const OrderDetailsHeader = () => {
+const OrderDetailsHeaderComponent = () => {
   
   const { id } = useParams();
 
@@ -39,4 +39,4 @@ const OrderDetailsHeader = () => {
   );
 };
 
-export default OrderDetailsHeader;
+export default OrderDetailsHeaderComponent;

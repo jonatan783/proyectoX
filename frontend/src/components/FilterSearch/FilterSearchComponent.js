@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Accordion } from "react-bootstrap";
 import { GridContainer } from "../../containers";
-import { getProductAll, getProductCategory } from '../../requests/productRequest'
+import { getProductAll, addProduct } from "../../requests/productRequest";
 import { getCategoryAll } from '../../requests/categoryRequest'
 import "./FilterSearch.css";
 
@@ -27,7 +27,7 @@ const FilterSearchComponent = ({  }) => {
 
   const handleOnChangeCheck = (e) => {
     let categId = e.target.value
-    getProductCategory(categId)
+    addProduct(categId)
       .then(res => setProducts(res.data))
     setCheckedState(e.target.value)
   };
