@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const db = require("./db");
+// const db = require("./models/index");
+const { sequelize } = require('./db/models/index')
 const routes = require("./routes");
 const morgan = require("morgan");
 require('dotenv').config();
@@ -14,7 +15,7 @@ app.use("/api", routes);
 
 const SERVER_PORT = process.env.API_PORT || 3002
 
-db.sync({alter: true}).then((data) => {
+sequelize.sync({force: false}).then((data) => {
   app.listen(SERVER_PORT, (req, res) => {
     console.log("Server Listening on port: " + SERVER_PORT);
   });
