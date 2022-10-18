@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import '../../style/CardOrderDetail.css';
-import '../SingleProduct.css';
 import CartItems from './CartItems';
+import '../../components/SingleProduct/SingleProduct.css'
+import './CardOrderDetail.css';
 
 const CartDetailsHeader = () => {
   const shoppingCart = useSelector(state => state.shoppingCart);
