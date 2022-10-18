@@ -10,9 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.address, {as: 'domicilio', foreignKey: 'userId'});
       User.belongsTo(models.role ,{as: 'rol', foreignKey: 'rolId'});
-      User.hasOne(models.shoppingcart), {as: 'carrito', foreignKey: 'userId'};
       User.hasMany(models.orderdetail), {as: 'orden', foreignKey: 'userId'};
-      
+      User.hasMany(models.cartitem,{as: 'Carrito', foreignKey: 'userId'});
     }
   }
   User.init(
@@ -44,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       status: {
         type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
     },
     {
