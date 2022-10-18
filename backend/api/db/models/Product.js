@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate(models) {
       // define association here
-      Product.hasMany(models.cartitem, {as: 'Productos', foreignKey: 'productId'});
+      Product.hasMany(models.cartitem, {foreignKey: 'productId'});
       Product.hasMany(models.orderitem, {foreignKey: 'productId'});
       Product.hasMany(models.productcomment, {as: 'comentarios', foreignKey: 'productId'});
       Product.hasMany(models.productvaloration, {as: 'valorations', foreignKey: 'productId'});
