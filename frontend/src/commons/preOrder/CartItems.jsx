@@ -1,27 +1,32 @@
 import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
-
-import '../../style/OrderHistorial.css';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import { persistUser } from '../../state/user';
-import { getShoppingCart } from '../../state/shoppingCart';
-import { getItemCart } from '../../state/itemCart';
+import { persistUser } from '../../redux/user';
+import { getShoppingCart } from '../../redux/shoppingCart';
+import { getItemCart } from '../../redux/itemCart';
+import { createOrderDetail, deleteItemCartById, deleteShoppingCartById } from '../../requests/requests';
+import '../../components/OrderHistorial/OrderHistorial.css'
 
 const CartItems = ({ id }) => {
+  const shoppingCart = useSelector(state => state.shoppingCart);
+  const cartItems = useSelector(state => state.itemCarts);
+  const user = useSelector(state => state.user);
+
+  console.log(cartItems);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const user = useSelector(state => state.user);
 
   const handleOnBuy = () => {
-    axios
+   /*  axios
       .post(`/api/orderDetail/createOrderDetail`, {
         UserId: user.id,
         total: shoppingCart.total,
-      })
+      }) */
+      createOrderDetail(user.id, shoppingCart.total)
       .then(order => {
         Promise.all(
           cartItems.map(item => {
@@ -35,22 +40,19 @@ const CartItems = ({ id }) => {
         );
         Promise.all(
           cartItems.map(item => {
-            axios.delete(`/api/itemCart/remove/${item.id}`);
+          /*   axios.delete(`/api/itemCart/remove/${item.id}`); */
+            deleteItemCartById(item.id)
           })
         )
           .then(() => {
-            axios.delete(`/api/shoppingCart/${shoppingCart.id}`);
+           /*  axios.delete(`/api/shoppingCart/${shoppingCart.id}`); */
+           deleteShoppingCartById(shoppingCart.id)
           })
           .then(() => dispatch(getShoppingCart()))
           .then(() => dispatch(getItemCart()));
         navigate(`/orderDetails/${order.data.id}`);
       });
   };
-
-  const shoppingCart = useSelector(state => state.shoppingCart);
-  const cartItems = useSelector(state => state.itemCarts);
-
-  console.log(cartItems);
 
   return cartItems ? (
     <div className=''>
