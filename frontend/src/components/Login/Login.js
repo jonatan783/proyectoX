@@ -106,8 +106,8 @@ const Login = () => {
                   </label>
                   <input
                     type='text'
-                    minlength='2'
-                    maxlength='30'
+                    minLength='2'
+                    maxLength='30'
                     className='form-control'
                     id='recipient-name'
                     required
@@ -122,8 +122,8 @@ const Login = () => {
                     type='text'
                     className='form-control'
                     id='recipient-name'
-                    minlength='2'
-                    maxlength='30'
+                    minLength='2'
+                    maxLength='30'
                     required
                     {...last_name}
                   />
@@ -243,9 +243,9 @@ const Login = () => {
         </div>
       </div>
 
-      <a className='iconNavbar' data-bs-toggle='dropdown'>
+      <div className='iconNavbar' data-bs-toggle='dropdown'>
         <ion-icon name='person-outline'></ion-icon>
-      </a>
+      </div>
       <div className='dropdown-menu dropdown-menu-lg-end'>
         {!user.id ? (
           <div>

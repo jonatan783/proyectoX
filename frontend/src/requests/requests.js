@@ -1,9 +1,5 @@
 /* import axios from "axios";
 
-export function getProducts() {
-    return axios.get('/api/product/')
-}
-
 export function createOrderDetail(user, shoppingCart) {
     return axios.post(`/api/orderDetail/createOrderDetail`, {
         UserId: user,

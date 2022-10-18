@@ -1,8 +1,8 @@
 // import logo from './logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router';
-import {     
+import { Route, Routes } from 'react-router';
+import {
   AdminCategories,
   AdminOrders,
   AdminProducts,
@@ -19,12 +19,13 @@ import {
   NewProductForm,
   NotFound,
   OrderDetails,
-  OrderHistorial, 
-  SingleProduct} from './components';
-import { persistUser } from './redux/user';
+  OrderHistorial,
+  SingleProduct
+} from './components';
+//import { persistUser } from './redux/user';
 import { getShoppingCart } from './redux/shoppingCart';
 import { getItemCart } from './redux/itemCart';
-import { getProducts } from './requests/requests';
+import { getProductAll } from './requests/productRequest';
 
 
 function App() {
@@ -33,32 +34,35 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(persistUser());
+   // dispatch(persistUser());
   }, []);
 
-  useEffect(() => {
-    dispatch(getShoppingCart()).then(() => dispatch(getItemCart()));
+  useEffect(() => {//proyectoX, agregado del if por errores de itemcart
+    if (user.id) {
+      dispatch(getShoppingCart(user.id))
+        .then(() => dispatch(getItemCart()));
+    }
   }, [user.id]);
 
 
   useEffect(() => {
-    getProducts()
-    .then(res => setProducts(res.data));
+    getProductAll()
+      .then(res => setProducts(res.data));
   }, []);
 
   return (
     <div className='App'>
-        <Navbar setProducts={setProducts}/>
-        {/* <div className="container"> */}
-        <Routes>
+      <Navbar setProducts={setProducts} />
+      {/* <div className="container"> */}
+      <Routes>
         <Route path='/' element={
-            <>
-              <CarouselComponent />
-              <div className='container'><Grid products={products}/></div>
-            </>
-          }
+          <>
+            <CarouselComponent />
+            <div className='container'><Grid products={products} /></div>
+          </>
+        }
         />
-        <Route path='/products/popular' element={<FilterSearch products={products}/>} />
+        <Route path='/products/popular' element={<FilterSearch products={products} />} />
         <Route path='/orders/history' element={<OrderHistorial />} />
         <Route path='/CartDetails' element={<CartDetails />} />
         <Route path='/orderDetails/:id' element={<OrderDetails />} />
@@ -68,17 +72,17 @@ function App() {
             <Route path='/admin/users' element={<AdminUsers />} />
             <Route path='/admin/orders' element={<AdminOrders />} />
             <Route path='/admin/products' element={<AdminProducts />} />
-            <Route path='/admin/products/new-product' element={<NewProductForm />}/>
-            <Route path='/admin/products/edit/:id' element={<EditProductForm />}/>
-            <Route path='/admin/categories' element={<AdminCategories/>}/>
-            <Route path='/admin/categories/new-category' element={<NewCategForm />}/>
-            <Route path='/admin/categories/edit/:id' element={<EditCategForm />}/>
+            <Route path='/admin/products/new-product' element={<NewProductForm />} />
+            <Route path='/admin/products/edit/:id' element={<EditProductForm />} />
+            <Route path='/admin/categories' element={<AdminCategories />} />
+            <Route path='/admin/categories/new-category' element={<NewCategForm />} />
+            <Route path='/admin/categories/edit/:id' element={<EditCategForm />} />
           </>
         ) : null}
         <Route path='/*' element={<NotFound />} />
-        </Routes>
-        {/* </div> */}
-        <Footer />
+      </Routes>
+      {/* </div> */}
+      <Footer />
     </div>
   );
 }

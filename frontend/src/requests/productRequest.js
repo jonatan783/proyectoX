@@ -45,7 +45,7 @@ export const getProductAll = async () => {
     }
 }
 
-export const addProduct = async (id) => {
+export const getProductCategory = async (id) => {
     try {
         const getProductCategory = await axios.get(`/api/product/category/${id}`)
         return getProductCategory

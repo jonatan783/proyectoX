@@ -15,7 +15,7 @@ app.use("/api", routes);
 
 const SERVER_PORT = process.env.API_PORT || 3002
 
-sequelize.sync({force: false}).then((data) => {
+sequelize.sync({ force: false }).then((data) => {
   app.listen(SERVER_PORT, (req, res) => {
     console.log("Server Listening on port: " + SERVER_PORT);
   });
