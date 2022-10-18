@@ -1,52 +1,59 @@
-const { CartItem, Product } = require("../models");
+const { cartitem, product } = require("../db/models");
 const { Op } = require("sequelize");
 
 class ShoppingCarteServices {
   static async postOrAdd(req, next) {
-    const { quantity, productId, ShoppingCartId } = req.body;
+    const { quantity, productId, userId } = req.body;
     try {
-      CartItem.findOrCreate({
-        where: { productId, ShoppingCartId },
-        defaults: { quantity },
-      }).then((itemCart) => {
-        return CartItem.update(
-          { quantity },
-          {
-            where: { id: itemCart[0].id },
-            returning: true,
-            plain: true,
-          }
-        );
+      const { stock } = await product.findOne({
+        where: {
+          id: productId,
+        },
       });
+      if (stock < quantity) throw new Error("Sin stock sufiente");
+      const [row, created] = await cartitem.findOrCreate({
+        where: { productId, userId },
+        defaults: { quantity },
+      });
+      if (!created) throw new Error("Producto existente en el carrito");
       return "Agregado";
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }
   static async getAll(req, next) {
+    let total = 0;
     const { id } = req.params;
     try {
-      const items = await CartItem.findAll({
+      const items = await cartitem.findAll({
         where: {
-          ShoppingCartId: id,
+          userId: id,
         },
+        attributes: ["id", "quantity"],
         include: {
-          model: Product,
+          model: product,
+          attributes: { exclude: ["createdAt", "updatedAt"] },
         },
       });
-      return items;
+      items.map((item) => {
+        total = total + item.quantity * item.product.price;
+      });
+      return { total: total, carrito: items };
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }
   static async delete(req, next) {
     const { id } = req.params;
     try {
-      await CartItem.destroy({
+      await cartitem.destroy({
         where: { id },
       });
-      return 'Eliminado';
+      return "Eliminado";
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }

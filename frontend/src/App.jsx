@@ -25,34 +25,34 @@ import {
 import { persistUser } from './redux/user';
 import { getShoppingCart } from './redux/shoppingCart';
 import { getItemCart } from './redux/itemCart';
-import { getProducts } from './requests/requests';
+import { getProductAll } from './requests/productRequest';
 
 
 function App() {
   const [products, setProducts] = useState([]);
-  console.log(products)
-  // const user = useSelector(state => state.user);
-  // const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(persistUser());
-  // }, []);
+  useEffect(() => {
+   // dispatch(persistUser());
+  }, []);
 
-  // useEffect(() => {
-  //   dispatch(getShoppingCart()).then(() => dispatch(getItemCart()));
-  // }, [user.id]);
+  useEffect(() => {//proyectoX, agregado del if por errores de itemcart
+    if (user.id) {
+      dispatch(getShoppingCart(user.id))
+        .then(() => dispatch(getItemCart()));
+    }
+  }, [user.id]);
 
 
   useEffect(() => {
-    getProducts()
-    .then(res => {
-      console.log('hola ---> ', res.data)
-      setProducts(res.data)});
+    getProductAll()
+      .then(res => setProducts(res.data));
   }, []);
 
   return (
     <div className='App'>
-        {/* <NavbarContainer setProducts={setProducts}/> */}
+        <NavbarContainer setProducts={setProducts}/>
         {/* <div className="container"> */}
         <Routes>
         <Route path='/' element={
@@ -62,12 +62,12 @@ function App() {
             </>
           }
         />
-        {/* <Route path='/products/popular' element={<FilterSearchContainer products={products}/>} />
+        <Route path='/products/popular' element={<FilterSearchContainer products={products}/>} />
         <Route path='/orders/history' element={<OrderHistorialContainer />} />
         <Route path='/CartDetails' element={<CartDetailsContainer />} />
         <Route path='/orderDetails/:id' element={<OrderDetailContainer />} />
-        <Route path='/product/:id' element={<SingleProductContainer />} /> */}
-        {/* {user.roleId === 2 ? (
+        <Route path='/product/:id' element={<SingleProductContainer />} />
+        {user.roleId === 2 ? (
           <>
             <Route path='/admin/users' element={<AdminUserContainer />} />
             <Route path='/admin/orders' element={<AdminOrdersContainer />} />
@@ -78,8 +78,8 @@ function App() {
             <Route path='/admin/categories/new-category' element={<NewCategFormContainer />}/>
             <Route path='/admin/categories/edit/:id' element={<EditCategFormContainer />}/>
           </>
-        ) : null} */}
-        {/* <Route path='/*' element={<NotFoundContainer />} /> */}
+        ) : null}
+        <Route path='/*' element={<NotFoundContainer />} />
         </Routes>
         {/* </div> */}
         <FooterContainer />

@@ -9,9 +9,12 @@ const CartComponent = () => {
   const dispatch = useDispatch();
   const [items, setItems] = useState([]);
 
-  const cartItems = useSelector(state => state.itemCarts);
+  const cartItems = useSelector(state => state.itemCarts.data);
 
-  useEffect(() => setItems(cartItems), [cartItems]);
+  useEffect(() => {
+    console.log(cartItems, 'background: #222; color: #bada55');
+    setItems(cartItems)
+  } , [cartItems]);
 
 
   const suma = (product, quantity, ShoppingCartId) => {
@@ -48,8 +51,8 @@ const CartComponent = () => {
       <div className='containerSidebar'>
         <div>
           <div className='titleCart'>
-            <h>producto</h>
-            <h>subtotal</h>
+            <span>producto</span>
+            <span>subtotal</span>
           </div>
           <>
             {items?.map(({ id, quantity, product, ShoppingCartId }, i) => {
@@ -89,9 +92,9 @@ const CartComponent = () => {
                     </div>
                     <div className='subtotal'>
                       <li className='dataItem'>${product.price * quantity}</li>
-                      <a className='trashIcon' onClick={() => handleDelete(id)}>
+                      <div className='trashIcon' onClick={() => handleDelete(id)}>
                         <ion-icon name='trash-outline'></ion-icon>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -101,13 +104,13 @@ const CartComponent = () => {
         </div>
         <div>
           <div className='containerTotal'>
-            <h className='titleTotal'>Total a pagar</h>
-            <h className='titleTotal'>
+            <span className='titleTotal'>Total a pagar</span>
+            <span className='titleTotal'>
               $
               {items
                 .map(({ quantity, product }) => quantity * product.price)
                 .reduce((total, i) => total + i, 0)}
-            </h>
+            </span>
           </div>
           <div className='subPrice'>
             <div>

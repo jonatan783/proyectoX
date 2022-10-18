@@ -4,7 +4,7 @@ import * as itemCartRequest from "../requests/itemCartRequest";
 
 const itemCardInitialState = {
   loading: false,
-  data: {},
+  data: [],
   error: "",
 };
 

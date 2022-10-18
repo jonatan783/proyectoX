@@ -57,9 +57,9 @@ const NavbarComponent = ({ setProducts }) => {
                   >
                     <li>
                       <Link to={`/products/popular`}>
-                        <a className="dropdown-item" href="#">
+                        <div className="dropdown-item" href="#">
                           Productos Populares
-                        </a>
+                        </div>
                       </Link>
                     </li>
                     <li>
@@ -130,7 +130,7 @@ const NavbarComponent = ({ setProducts }) => {
                   <li className="nav-item dropdown">
                     <a
                       className="nav-link dropdown-toggle"
-                      href="#"
+                      href="#!"
                       id="adminDropdown"
                       role="button"
                       data-bs-toggle="dropdown"
@@ -182,9 +182,9 @@ const NavbarComponent = ({ setProducts }) => {
                 aria-label="Search"
                 {...searchValue}
               />
-              <a className="iconNavbar" type="submit">
+              <div className="iconNavbar" type="submit">
                 <ion-icon name="search-outline"></ion-icon>
-              </a>
+              </div>
             </form>
           </div>
           {user.id ? (

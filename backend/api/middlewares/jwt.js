@@ -17,4 +17,3 @@ const checkJWT = (req, res, next) => {
 };
 
 module.exports = checkJWT;
-

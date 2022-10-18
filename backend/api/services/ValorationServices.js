@@ -1,4 +1,4 @@
-const { ProductValoration } = require("../models");
+const { ProductValoration } = require("../db/models");
 const { Op } = require("sequelize");
 
 class ValorationServices {

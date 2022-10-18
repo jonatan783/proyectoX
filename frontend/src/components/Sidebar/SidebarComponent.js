@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-
 import Cart from '../Cart/CartComponent';
 
 const SidebarComponent = () => {
   return (
     <div>
-      <a
+      <div
         className='iconNavbar'
         type='button'
         data-bs-toggle='offcanvas'
@@ -13,10 +12,10 @@ const SidebarComponent = () => {
         aria-controls='offcanvasRight'
       >
         <ion-icon name='cart-outline'></ion-icon>
-      </a>
+      </div>
       <div
         className='offcanvas offcanvas-end cont'
-        tabindex='-1'
+        tabIndex='-1'
         id='offcanvasRight'
         aria-labelledby='offcanvasRightLabel'
       >
