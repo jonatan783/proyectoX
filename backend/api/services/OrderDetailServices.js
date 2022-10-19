@@ -1,14 +1,13 @@
-const { orderdetail, cartitem, product } = require("../db/models");
+const { orderdetail, cartitem, product, orderitem } = require("../db/models");
 
 class OrderDetailServices {
   static async newOrden(req, next) {
     const { userId } = req.body;
     let arrayIdVendedor = [];
-    let arrayDeOrdenes = [];
     let objIdVendedor = {};
     try {
       const carrito = await cartitem.findAll({
-        atributes: ["id", "quantity"],
+        atributes: ["id", "quantity", "productId"],
         where: {
           userId,
         },
@@ -17,14 +16,16 @@ class OrderDetailServices {
         },
       });
       carrito.map(async (cartItem) => {
-        console.log(typeof(Number(cartItem.product.price)))
         if (!arrayIdVendedor.includes(cartItem.product.vendedorId)) {
           arrayIdVendedor.push(cartItem.product.vendedorId);
         }
-        if(objIdVendedor[cartItem.product.vendedorId] === undefined){
-          objIdVendedor[cartItem.product.vendedorId] = Number(cartItem.product.price)*Number(cartItem.quantity)
-        }else{
-          objIdVendedor[cartItem.product.vendedorId] = objIdVendedor[cartItem.product.vendedorId]+(Number(cartItem.product.price)*Number(cartItem.quantity))
+        if (objIdVendedor[cartItem.product.vendedorId] === undefined) {
+          objIdVendedor[cartItem.product.vendedorId] =
+            Number(cartItem.product.price) * Number(cartItem.quantity);
+        } else {
+          objIdVendedor[cartItem.product.vendedorId] =
+            objIdVendedor[cartItem.product.vendedorId] +
+            Number(cartItem.product.price) * Number(cartItem.quantity);
         }
       });
       await Promise.all(
@@ -33,13 +34,25 @@ class OrderDetailServices {
             userId,
             vendedorId,
             status: "pending",
-            total: objIdVendedor[vendedorId]
+            total: objIdVendedor[vendedorId],
           });
-          arrayDeOrdenes.push(order);
+          carrito.map(async (item) => {
+            if (order.vendedorId === item.product.vendedorId) {
+              orderitem.create({
+                quantity: item.quantity,
+                productId: item.productId,
+                orderDetailId: order.id,
+              });
+            }
+          });
         })
       );
-      //falta agregar items a ordenes y eliminar items del carrito
-      return arrayDeOrdenes;
+      await cartitem.destroy({
+        where: {
+          userId,
+        },
+      });
+      return "Procesado con éxito";
     } catch (err) {
       console.log(err);
       throw err;
