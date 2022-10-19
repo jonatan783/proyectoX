@@ -5,7 +5,7 @@ const orderDetailController = require('../../controllers/orderDetailController')
 
 router.post('/createOrderDetail', orderDetailController.newOrden); // Agregar orden de compra
 router.put('/modifyStatus/:id', orderDetailController.OrderUpdate); // Actualizar Orden de compra
-router.get('/historial/:UserId', orderDetailController.orderGetAll); // Historial de ordenes
+router.get('/historial/:userId/:rol', orderDetailController.orderGetAll); // Historial de ordenes
 router.get('/getorder/:id', orderDetailController.orderGetOne); // Buscar orden por Id
 
 module.exports = router;

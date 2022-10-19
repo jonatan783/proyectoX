@@ -1,4 +1,4 @@
-const { cartitem, product } = require("../db/models");
+const { cartitem, product, user } = require("../db/models");
 const { Op } = require("sequelize");
 
 class ShoppingCarteServices {
