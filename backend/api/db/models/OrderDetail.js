@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   class OrderDetail extends Model {
     static associate(models) {
       // define association here
-      OrderDetail.belongsTo(models.user, {as: 'orden', foreignKey: 'userId'});
+      OrderDetail.belongsTo(models.user, {as: 'comprador', foreignKey: 'userId'});
+      OrderDetail.belongsTo(models.user, {as: 'vendedor', foreignKey: 'vendedorId'});
       OrderDetail.hasMany(models.orderitem,{foreignKey: 'orderDetailId'});
     }
   }
@@ -13,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       total: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+        defaultValue: 0,
       },
       status: {
         type: DataTypes.STRING,
