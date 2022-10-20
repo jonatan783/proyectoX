@@ -1,25 +1,25 @@
-const { ProductValoration } = require("../db/models");
-const { Op } = require("sequelize");
+const { productvaloration } = require("../db/models");
 
 class ValorationServices {
   static async valorationAdd(req, next) {
     const { productId } = req.params;
     const { userId, valoration } = req.body;
     try {
-      const newValoration = await ProductValoration.create({
+      const newValoration = await productvaloration.create({
         userId,
         valoration,
         productId,
       });
-      return newValoration;
+      return 'Valoración registrada';
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }
   static async getAll(req, next) {
     const { productId } = req.params;
     try {
-      const valorations = await ProductValoration.findAll({
+      const valorations = await productvaloration.findAll({
         where: {
           productId,
         },

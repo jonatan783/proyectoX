@@ -1,4 +1,5 @@
 const { orderdetail, cartitem, product, orderitem } = require("../db/models");
+const { infoByMail } = require("../utils/infoByMail");
 
 class OrderDetailServices {
   static async newOrden(req, next) {
@@ -52,6 +53,7 @@ class OrderDetailServices {
           userId,
         },
       });
+      // infoByMail(mensaje,email1,email2);
       return "Procesado con éxito";
     } catch (err) {
       console.log(err);
@@ -93,6 +95,14 @@ class OrderDetailServices {
       const order = await orderdetail.findOne({
         where: {
           id,
+        },
+        include: {
+          atributes: ["quantity"],
+          model: orderitem,
+          include: {
+            atributes: ["name", "description", "price"],
+            model: product,
+          },
         },
       });
       return order;

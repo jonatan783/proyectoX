@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.orderdetail), {as: 'comprador', foreignKey: 'userId'};
       User.hasMany(models.orderdetail), {as: 'vendedor', foreignKey: 'vendedorId'};
       User.hasMany(models.cartitem,{as: 'Carrito', foreignKey: 'userId'});
+      User.hasMany(models.productcomment, {foreignKey: 'userId'});
+      User.hasMany(models.productvaloration, {foreignKey: 'userId'});
     }
   }
   User.init(
