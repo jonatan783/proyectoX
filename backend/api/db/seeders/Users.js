@@ -11,7 +11,8 @@ module.exports = {
         password:
           "$2b$16$jun2/N4pMyTw6uD020Cri.TFVuzwAWTdnDElOC3D/ZNAbThZJgnDy", //casa4141
         salt: "$2b$16$jun2/N4pMyTw6uD020Cri.",
-        rolId: 5,
+        rolId: 1,
+        status: true,
         createdAt: new Date(),
         updatedAt: new Date()
         
@@ -23,7 +24,8 @@ module.exports = {
         password:
           "$2b$16$jun2/N4pMyTw6uD020Cri.TFVuzwAWTdnDElOC3D/ZNAbThZJgnDy", //casa4141
         salt: "$2b$16$jun2/N4pMyTw6uD020Cri.",
-        rolId: 6,
+        rolId: 2,
+        status: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -34,7 +36,8 @@ module.exports = {
         password:
           "$2b$16$jun2/N4pMyTw6uD020Cri.TFVuzwAWTdnDElOC3D/ZNAbThZJgnDy", //casa4141
         salt: "$2b$16$jun2/N4pMyTw6uD020Cri.",
-        rolId: 7,
+        rolId: 3,
+        status: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -45,7 +48,8 @@ module.exports = {
         password:
           "$2b$16$jun2/N4pMyTw6uD020Cri.TFVuzwAWTdnDElOC3D/ZNAbThZJgnDy", //casa4141
         salt: "$2b$16$jun2/N4pMyTw6uD020Cri.",
-        rolId: 8,
+        rolId: 4,
+        status: true,
         createdAt: new Date(),
         updatedAt: new Date()
       },
