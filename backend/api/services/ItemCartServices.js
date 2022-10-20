@@ -33,7 +33,10 @@ class ShoppingCarteServices {
         attributes: ["id", "quantity"],
         include: {
           model: product,
-          attributes: { exclude: ["createdAt", "updatedAt"] },
+          where:{
+            deletedAt: null,
+          },
+          attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
         },
       });
       items.map((item) => {
