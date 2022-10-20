@@ -31,6 +31,7 @@ class OrderDetailServices {
       });
       await Promise.all(
         arrayIdVendedor.map(async (vendedorId) => {
+          console.log('id vendedor', vendedorId);
           const order = await orderdetail.create({
             userId,
             vendedorId,

@@ -21,6 +21,16 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         defaultValue: "Pending",
       },
+      vendedorValorado: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,
+      },
+      compradorValorado: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,
+      }
     },
     {
       sequelize,

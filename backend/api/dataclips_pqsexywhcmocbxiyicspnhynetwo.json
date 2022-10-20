@@ -1,1 +1,0 @@
-{"title":"Users","values":[],"fields":["createdAt","updatedAt","categoryId","productId"],"types":[1184,1184,23,23],"type_names":["timestamp with time zone","timestamp with time zone","integer","integer"],"started_at":"2022-10-17 20:15:31 +0000","finished_at":"2022-10-17 20:15:32 +0000","checksum":"d751713988987e9331980363e24189ce"}
