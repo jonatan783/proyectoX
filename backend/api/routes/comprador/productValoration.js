@@ -6,9 +6,3 @@ router.post('/add/:productId',valorationController.valorationAdd); // Agregar pu
 router.get('/getAll/:productId',valorationController.getAll); // Ver puntuación
 
 module.exports = router
-
-
-
-
-
-
