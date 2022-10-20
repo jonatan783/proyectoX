@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const ValorationController = require('../../controllers/valorationController');
 
-router.get('/:id', ValorationController.getAllUserValoration);
+router.get('/:userId', ValorationController.getAllUserValoration);
 router.post('/add', ValorationController.newUserValoration); // Calificar usuario * se pasa por body:
 // -id de orden de compra
 // -userId (id del usuario a calificar, puede ser comprador o vendedor)
