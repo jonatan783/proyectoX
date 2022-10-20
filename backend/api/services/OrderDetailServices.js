@@ -44,6 +44,7 @@ class OrderDetailServices {
                 quantity: item.quantity,
                 productId: item.productId,
                 orderDetailId: order.id,
+                price: item.product.price
               });
             }
           });
@@ -98,10 +99,11 @@ class OrderDetailServices {
           id,
         },
         include: {
-          atributes: ["quantity"],
+          atributes: ["quantity", "price"],
           model: orderitem,
           include: {
-            atributes: ["name", "description", "price"],
+            paranoid: false,
+            atributes: ["name", "description"],
             model: product,
           },
         },
