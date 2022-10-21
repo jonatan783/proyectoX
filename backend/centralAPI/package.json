@@ -2,11 +2,11 @@
   "name": "api",
   "version": "1.0.0",
   "description": "api principal del proyecto",
-  "main": "server.js",
+  "main": "api/server.js",
   "scripts": {
     "test": "test",
-    "start": "node server.js",
-    "dev": "concurrently \"npx sequelize-cli db:migrate\" \"nodemon server.js\""
+    "start": "node api/server.js",
+    "dev": "concurrently \"npx sequelize-cli db:migrate\" \"nodemon api/server.js\""
   },
   "author": "",
   "license": "ISC",
