@@ -54,5 +54,8 @@ services:
     volumes:
       - "./frontend/public:/app/public"
       - "./frontend/src:/app/src"
+    env_file:
+    - "./frontend/.env"
+    - "./frontend/.env.local"
 networks:
   directus:
