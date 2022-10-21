@@ -11,8 +11,9 @@ export const sendSignUpRequest = async (data) => {
 }
 
 export const sendLoginRequest = async (data) => {
+    console.log('data ---> ', data)
     try {
-        const loginUser = await axios.post('/api/user/register', data)
+        const loginUser = await axios.post('/api/user/login', data)
         return loginUser.data
 
     } catch (error) {

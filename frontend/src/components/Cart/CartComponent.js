@@ -12,7 +12,7 @@ const CartComponent = () => {
   const cartItems = useSelector(state => state.itemCarts.data);
 
   useEffect(() => {
-    console.log(cartItems, 'background: #222; color: #bada55');
+    /* console.log(cartItems, 'background: #222; color: #bada55'); */
     setItems(cartItems)
   } , [cartItems]);
 

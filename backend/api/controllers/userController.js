@@ -11,7 +11,7 @@ class UserController {
   }
   static async login(req, res, next) {
     try {
-      const token = await UserServices.login(req, res, next);
+      const token = await UserServices.login(req, next);
       return res.status(200).json(token);
     } catch (err) {
       res.status(500).json(err);

@@ -21,6 +21,7 @@ import {
   OrderDetailContainer,
   OrderHistorialContainer,
   SingleProductContainer,
+  FormModalContainer
 } from './containers';
 import { persistUser } from './redux/user';
 import { getShoppingCart } from './redux/shoppingCart';
@@ -88,3 +89,6 @@ function App() {
 }
 
 export default App;
+
+
+
