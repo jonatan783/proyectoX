@@ -15,3 +15,13 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById("root")
 );
+
+
+
+
+// chmod 777 /var/run/docker.sock
+/* docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+
+docker rmi $(docker images -a -q) */

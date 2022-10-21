@@ -19,28 +19,32 @@ class UserServices {
       throw err;
     }
   }
+
   static async login(req, next) {
     const { email, password } = req.body;
     try {
-      const user = await user.findOne({
+      const user1 = await user.findOne({
         where: {
           email,
         },
-        attributes: ["id", "name", "lastName", "email"],
+      attributes: ["id", "name", "lastname", "email", "password"],
       });
-      if (!user) throw "Usuario no encontrado";
+      if (!user1) throw "Usuario no encontrado";
       else {
-        if (bcrypt.compareSync(password, user.password)) {
-          let token = jwt.sign({ user }, "albondiga", { expiresIn: "7d" });
+        if (bcrypt.compareSync(password, user1.password)) {
+          const userId = user1.id
+          let token = jwt.sign( {userId}, "albondiga", { expiresIn: "7d" });
           return token;
         } else {
           throw "Password inválido";
         }
       }
     } catch (err) {
+      console.log(err)
       throw err;
     }
   }
+
   static async userUpdate(req, next) {
     const { id } = req.params;
     try {
