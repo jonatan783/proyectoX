@@ -3,7 +3,8 @@ const ProductServices = require('../services/ProductServices');
 class ProductController {
   static async getAll(req, res, next) {
     try {
-      const productos = await ProductServices.getAll(req, next);
+      const productos = await
+    ProductServices.getAll(req, next);
       return res.status(200).json(productos);
     } catch (err) {
       res.status(500).json(err);

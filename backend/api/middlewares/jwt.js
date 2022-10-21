@@ -1,19 +1,49 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const moment = require('moment');
 
-const checkJWT = (req, res, next) => {
-  if (!req.headers.authorization) return res.status(403).send("No posee los permisos necesarios para el contenido");
-
-  const token = req.headers.authorization.split(" ")[1];
-
-  const data = jwt.verify(token, "albondiga");
-
-  if (data) {
-    req.user = data;
-    next();
-  } 
-  else {
-    return res.status(401).send("No tienen acceso aquí");
+function isAuth(req, res, next) {
+  const secret = process.env.JWT_PASS;
+  if (!req.headers.authorization) {
+    return res.status(401).send({ message: "No tienes autorización" });
   }
-};
+  const token = req.headers.authorization.split(" ")[1];
+  jwt.verify(token, secret, (err, user) => {
+    if (err) return res.sendStatus(401);
+    if (user.exp <= moment().unix()) {
+      return res.status(401).send({ message: "Sesión expirada" });
+    }
+    req.user = user;
+    next();
+  });
+}
 
-module.exports = checkJWT;
+function isAdmin(req, res, next) {
+  const secret = process.env.JWT_PASS;
+  if (!req.headers.authorization) {
+    return res.status(401).send({ message: "No tienes autorización" });
+  }
+  const token = req.headers.authorization.split(" ")[1];
+  jwt.verify(token, secret, (err, user) => {
+    if (err) return res.sendStatus(401);
+    if (user.usuario.data !== 2) return res.sendStatus(401);
+    req.user = user;
+    next();
+  });
+}
+
+function isSuperAdmin(req, res, next) {
+  const secret = process.env.JWT_PASS;
+  if (!req.headers.authorization) {
+    return res.status(401).send({ message: "No tienes autorización" });
+  }
+  const token = req.headers.authorization.split(" ")[1];
+  jwt.verify(token, secret, (err, user) => {
+    if (err) return res.sendStatus(401);
+    if (user.usuario.data !== 1) return res.sendStatus(401);
+    req.user = user;
+    next();
+  });
+}
+
+module.exports = {isAuth, isAdmin, isSuperAdmin};
