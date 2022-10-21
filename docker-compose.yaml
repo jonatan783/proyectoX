@@ -32,19 +32,19 @@ services:
     depends_on:
       - cache
     env_file:
-      - "./backend/api/.env"
+      - "./backend/centralAPI/.env"
 
       # Make sure to set this in production
       # (see https://docs.directus.io/self-hosted/config-options#general)
       # PUBLIC_URL: 'https://directus.example.com'
   central_api:
-    build: ./backend
+    build: ./backend/centralAPI
     ports:
       - "3001:3001"
     volumes:
-      - "./backend/api:/src"
+      - "./backend/centralAPI/api:/src/api"
     env_file:
-      - "./backend/api/.env"
+      - "./backend/centralAPI/.env"
     #depends_on:
     #  - db
   client:
