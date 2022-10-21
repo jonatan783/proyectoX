@@ -17,5 +17,21 @@ class ValorationController {
       res.status(500).json(err);
     }
   }
+    static async getAllUserValoration(req, res, next) {
+    try {
+      const valorations = await ValorationServices.getAllUserValoration(req, next);
+      return res.status(200).json(valorations);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async newUserValoration(req, res, next) {
+    try {
+      const valorations = await ValorationServices.newUserValoration(req, next);
+      return res.status(200).json(valorations);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 module.exports = ValorationController;

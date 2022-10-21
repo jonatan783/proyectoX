@@ -10,9 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.address, {as: 'domicilio', foreignKey: 'userId'});
+      User.hasMany(models.product, {foreignKey: 'vendedorId'})
       User.belongsTo(models.role ,{as: 'rol', foreignKey: 'rolId'});
-      User.hasMany(models.orderdetail), {as: 'orden', foreignKey: 'userId'};
+      User.hasMany(models.orderdetail), {as: 'comprador', foreignKey: 'userId'};
+      User.hasMany(models.orderdetail), {as: 'vendedor', foreignKey: 'vendedorId'};
       User.hasMany(models.cartitem,{as: 'Carrito', foreignKey: 'userId'});
+      User.hasMany(models.productcomment, {foreignKey: 'userId'});
+      User.hasMany(models.productvaloration, {foreignKey: 'userId'});
+      User.hasMany(models.uservaloration, {foreignKey: 'userId'});
     }
   }
   User.init(
@@ -49,6 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+      paranoid: true,
       modelName: "user",
     },
   );

@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   OrderItem.init(
     {
-      price: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-      },
       quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      price: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+      }
     },
     {
       sequelize,

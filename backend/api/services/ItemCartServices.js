@@ -1,4 +1,4 @@
-const { cartitem, product } = require("../db/models");
+const { cartitem, product, user } = require("../db/models");
 const { Op } = require("sequelize");
 
 class ShoppingCarteServices {
@@ -33,7 +33,10 @@ class ShoppingCarteServices {
         attributes: ["id", "quantity"],
         include: {
           model: product,
-          attributes: { exclude: ["createdAt", "updatedAt"] },
+          where:{
+            deletedAt: null,
+          },
+          attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
         },
       });
       items.map((item) => {

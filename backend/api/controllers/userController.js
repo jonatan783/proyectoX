@@ -3,7 +3,7 @@ const UserServices = require('../services/UserServices');
 class UserController {
   static async register(req, res, next) {
     try {
-      const respuesta = await UserServices.register(req, next);
+      const respuesta = await UserServices.register(req, res, next);
       return res.status(200).json(respuesta);
     } catch (err) {
       res.status(500).json(err);
@@ -19,7 +19,7 @@ class UserController {
   }
   static async userUpdate(req, res, next) {
     try {
-      const user = await UserServices.userUpdate(req, next);
+      const user = await UserServices.userUpdate(req, res, next);
       return res.status(200).json(user);
     } catch (err) {
       res.status(500).json(err);

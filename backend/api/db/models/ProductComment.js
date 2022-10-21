@@ -4,29 +4,18 @@ module.exports = (sequelize, DataTypes) => {
   class ProductComment extends Model {
     static associate(models) {
       // define association here
-      ProductComment.belongsTo(models.product, {as: 'comentarios', foreignKey: 'productId'});
+      ProductComment.belongsTo(models.product, {foreignKey: 'productId'});
+      ProductComment.belongsTo(models.user, {foreignKey: 'userId'});
     }
   }
   ProductComment.init(
     {
-      name: {
+      userName: {
+        type: DataTypes.STRING,
+      },
+      comment: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      price: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-      },
-      stock: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      img: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
       },
     },
     {

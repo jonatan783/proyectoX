@@ -1,23 +1,71 @@
-const { OrderDetail, CartItem } = require("../db/models");
+const { orderdetail, cartitem, product, orderitem } = require("../db/models");
+const { infoByMail } = require("../utils/infoByMail");
 
 class OrderDetailServices {
   static async newOrden(req, next) {
-    const { UserId, total } = req.body;
+    const { userId } = req.body;
+    let arrayIdVendedor = [];
+    let objIdVendedor = {};
     try {
-      const order = await OrderDetail.create({
-        UserId,
-        total,
-        status: "pending",
+      const carrito = await cartitem.findAll({
+        atributes: ["id", "quantity", "productId"],
+        where: {
+          userId,
+        },
+        include: {
+          model: product,
+        },
       });
-      return order;
+      carrito.map(async (cartItem) => {
+        if (!arrayIdVendedor.includes(cartItem.product.vendedorId)) {
+          arrayIdVendedor.push(cartItem.product.vendedorId);
+        }
+        if (objIdVendedor[cartItem.product.vendedorId] === undefined) {
+          objIdVendedor[cartItem.product.vendedorId] =
+            Number(cartItem.product.price) * Number(cartItem.quantity);
+        } else {
+          objIdVendedor[cartItem.product.vendedorId] =
+            objIdVendedor[cartItem.product.vendedorId] +
+            Number(cartItem.product.price) * Number(cartItem.quantity);
+        }
+      });
+      await Promise.all(
+        arrayIdVendedor.map(async (vendedorId) => {
+          console.log('id vendedor', vendedorId);
+          const order = await orderdetail.create({
+            userId,
+            vendedorId,
+            status: "pending",
+            total: objIdVendedor[vendedorId],
+          });
+          carrito.map(async (item) => {
+            if (order.vendedorId === item.product.vendedorId) {
+              orderitem.create({
+                quantity: item.quantity,
+                productId: item.productId,
+                orderDetailId: order.id,
+                price: item.product.price
+              });
+            }
+          });
+        })
+      );
+      await cartitem.destroy({
+        where: {
+          userId,
+        },
+      });
+      // infoByMail(mensaje,email1,email2);
+      return "Procesado con éxito";
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }
   static async OrderUpdate(req, next) {
     const { id } = req.params;
     try {
-      const order = await OrderDetail.update(req.body, {
+      const order = await orderdetail.update(req.body, {
         where: {
           id,
         },
@@ -30,12 +78,13 @@ class OrderDetailServices {
     }
   }
   static async orderGetAll(req, next) {
-    const { UserId } = req.params;
+    const { userId, rol } = req.params;
+    const options =
+      rol === "comprador" ? { userId: userId } : { vendedorId: userId };
+    console.log(options);
     try {
-      const orders = await OrderDetail.findAll({
-        where: {
-          UserId,
-        },
+      const orders = await orderdetail.findAll({
+        where: options,
       });
       return orders;
     } catch (err) {
@@ -45,13 +94,23 @@ class OrderDetailServices {
   static async orderGetOne(req, next) {
     const { id } = req.params;
     try {
-      const order = await OrderDetail.findOne({
+      const order = await orderdetail.findOne({
         where: {
-          id
-        }
+          id,
+        },
+        include: {
+          atributes: ["quantity", "price"],
+          model: orderitem,
+          include: {
+            paranoid: false,
+            atributes: ["name", "description"],
+            model: product,
+          },
+        },
       });
       return order;
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }
