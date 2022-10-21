@@ -13,6 +13,7 @@ import CommentsComponent from "./Comments/CommentsComponent";
 import EditCategFormComponent from "./EditCategForm/EditCategFormComponent";
 import EditProductFormComponent from "./EditProductForm/EditProductFormComponent";
 import FilterSearchComponent from "./FilterSearch/FilterSearchComponent";
+import FormModalComponent from "./FormModal/FormModalComponent";
 import FooterComponent from "./Footer/FooterComponent";
 import GridComponent from "./Grid/GridComponent";
 import LoginComponent from "./Login/LoginComponent";
@@ -28,6 +29,7 @@ import OrderHistorialComponent from "./OrderHistorial/OrderHistorialComponent";
 import SidebarComponent from "./Sidebar/SidebarComponent";
 import SingleProductComponent from "./SingleProduct/SingleProductComponent";
 import ValorationComponent from "./Valoration/ValorationComponent";
+import UserPopoverComponent from "./UserPopover/UserPopoverComponent";
 
 export {
     AdminCategoriesComponent,
@@ -45,6 +47,7 @@ export {
     EditCategFormComponent,
     EditProductFormComponent,
     FilterSearchComponent,
+    FormModalComponent,
     FooterComponent,
     GridComponent,
     LoginComponent,
@@ -60,4 +63,5 @@ export {
     SidebarComponent,
     SingleProductComponent,
     ValorationComponent,
+    UserPopoverComponent,
 }

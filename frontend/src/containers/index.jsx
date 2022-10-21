@@ -13,6 +13,7 @@ import CommentsContainer from "./CommentsContainer";
 import EditCategFormContainer from "./EditCategFormContainer";
 import EditProductFormContainer from "./EditProductFormContainer";
 import FilterSearchContainer from "./FilterSearchContainer";
+import FormModalContainer from "./FormModalContainer";
 import FooterContainer from "./FooterContainer";
 import GridContainer from "./GridContainer";
 import LoginContainer from "./LoginContainer";
@@ -28,6 +29,7 @@ import SingleProductContainer from "./SingleProductContainer";
 import ValorationContainer from "./ValorationContainer";
 import OrderItemHistoryContainer from './OrderItemHistoryContainer'
 import OrderDetailsHeaderContainer from "./OrderDetailsHeaderContainer";
+import UserPopoverContainer from "./UserPopoverContainer";
 
 export {
     AdminCategoriesContainer,
@@ -45,6 +47,7 @@ export {
     EditCategFormContainer,
     EditProductFormContainer,
     FilterSearchContainer,
+    FormModalContainer,
     FooterContainer,
     GridContainer,
     LoginContainer,
@@ -60,4 +63,5 @@ export {
     ValorationContainer,
     OrderItemHistoryContainer,
     OrderDetailsHeaderContainer,
+    UserPopoverContainer,
 }
