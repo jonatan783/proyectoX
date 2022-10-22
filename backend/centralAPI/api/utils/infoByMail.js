@@ -8,7 +8,7 @@ const infoByMail= (mensajeString, email) => {
     secure: true,
     auth: {
       user: process.env.E_MAIL,
-      pass: E_CLAVE,
+      pass: process.env.E_CLAVE,
     },
   });
   const emailConfig = {

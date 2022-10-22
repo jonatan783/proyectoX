@@ -25,5 +25,21 @@ class UserController {
       res.status(500).json(err);
     }
   }
+  static async recovery(req, res, next) {
+    try {
+      const mensaje = await UserServices.recovery(req, res, next);
+      return res.status(200).json(mensaje);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+  static async recoverySend(req, res, next) {
+    try {
+      const mensaje = await UserServices.recoverySend(req, res, next);
+      return res.status(200).json(mensaje);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 module.exports = UserController;
