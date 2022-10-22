@@ -51,6 +51,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
+      recovery: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
@@ -68,6 +71,10 @@ module.exports = (sequelize, DataTypes) => {
       .then((hash) => {
         user.password = hash;
       });
+  });
+  User.addHook("beforeUpdate", async (user) => {
+    const hash = await user.setHash(user.password, user.salt);
+    user.password = hash;
   });
   return User;
 };

@@ -46,4 +46,14 @@ function isSuperAdmin(req, res, next) {
   });
 }
 
-module.exports = {isAuth, isAdmin, isSuperAdmin};
+function recoveryPass (req, res, next) {
+  const secret = process.env.JWT_PASS;
+  const { token } = req.params;
+  jwt.verify(token, secret, (err, user) => {
+    if (err) return res.sendStatus(401);
+    req.user = user;
+    next();
+  });
+}
+
+module.exports = {isAuth, isAdmin, isSuperAdmin, recoveryPass};
