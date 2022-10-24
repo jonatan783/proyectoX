@@ -51,7 +51,7 @@ const CommentsComponent = ({ lengthComment }) => {
         ) : (
           <>
             <button
-              class='buttonComment'
+              className='buttonComment'
               type='button'
               data-bs-toggle='collapse'
               data-bs-target='#collapseExample'
@@ -60,8 +60,8 @@ const CommentsComponent = ({ lengthComment }) => {
             >
               Comentar
             </button>
-            <div class='collapse' id='collapseExample'>
-              <div class='card-body'>
+            <div className='collapse' id='collapseExample'>
+              <div className='card-body'>
                 Necesitas iniciar sesion pra poder comentar
               </div>
             </div>

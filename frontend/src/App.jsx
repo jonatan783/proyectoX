@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router';
 import { 
   AdminCategoriesContainer,
   AdminOrdersContainer,
