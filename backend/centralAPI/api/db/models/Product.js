@@ -4,11 +4,14 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate(models) {
       // define association here
-      Product.belongsTo(models.user, {foreignKey: 'vendedorId'})
-      Product.hasMany(models.cartitem, {foreignKey: 'productId'});
-      Product.hasMany(models.orderitem, {foreignKey: 'productId'});
-      Product.hasMany(models.productcomment, {foreignKey: 'productId'});
-      Product.hasMany(models.productvaloration, {as: 'valorations', foreignKey: 'productId'});
+      Product.belongsTo(models.user, { foreignKey: "vendedorId" });
+      Product.hasMany(models.cartitem, { foreignKey: "productId" });
+      Product.hasMany(models.orderitem, { foreignKey: "productId" });
+      Product.hasMany(models.productcomment, { foreignKey: "productId" });
+      Product.hasMany(models.productvaloration, {
+        as: "valorations",
+        foreignKey: "productId",
+      });
       Product.belongsToMany(models.category, {
         through: "product_category",
       });
@@ -19,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        set(value) {
+          this.setDataValue('name', value.toLowerCase());
+        }
       },
       description: {
         type: DataTypes.STRING,
@@ -40,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       paranoid: true,
       modelName: "product",
-    },
+    }
   );
   return Product;
 };
