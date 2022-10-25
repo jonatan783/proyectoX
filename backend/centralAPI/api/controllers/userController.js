@@ -41,5 +41,13 @@ class UserController {
       res.status(500).json(err);
     }
   }
+  static async addInfo(req, res, next) {
+    try {
+      const mensaje = await UserServices.addInfo(req, res, next);
+      return res.status(201).json(mensaje);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
 }
 module.exports = UserController;

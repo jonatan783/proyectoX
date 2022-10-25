@@ -1,4 +1,4 @@
-const { user, role } = require("../db/models");
+const { user, datauser } = require("../db/models");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { infoByMail } = require("../utils/infoByMail");
@@ -116,6 +116,15 @@ class UserServices {
       );
       if (!updatedRows) throw new Error("Token inválido");
       return "Has actualizado tu contraseña";
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+  static async addInfo(req, next) {
+    try {
+      await datauser.create(req.body);
+      return "Has actualizado tu información";
     } catch (err) {
       console.log(err);
       throw err;
