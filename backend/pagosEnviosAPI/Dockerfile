@@ -2,7 +2,7 @@
 
 FROM node:16
 
-WORKDIR /src
+WORKDIR /app
 
 COPY ./package.json package.json
 COPY . .
