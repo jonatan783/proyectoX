@@ -17,6 +17,6 @@ const SERVER_PORT = process.env.API_PORT || 3002
 
 sequelize.sync({alter: false}).then((data) => {
   app.listen(SERVER_PORT, (req, res) => {
-    console.log("Server Listening on port: " + SERVER_PORT);
+    console.log("Server centralAPI corriendo en puerto " + SERVER_PORT);
   });
 });
