@@ -66,6 +66,16 @@ services:
       - "./backend/centralAPI/.env"
     #depends_on:
     #  - db
+  # pagos_envios_microservice:
+  #   build: ./backend/pagosEnviosAPI
+  #   ports:
+  #     - "3006:3006"
+  #   volumes:
+  #     - "./backend/agosEnviosAPI:/src"
+  #   env_file:
+  #     - "./backend/pagosEnviosAPI/.env"
+  #   #depends_on:
+  #   #  - db
   client:
     build: ./frontend
     ports:
