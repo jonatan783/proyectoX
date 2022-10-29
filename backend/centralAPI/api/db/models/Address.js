@@ -29,6 +29,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      datos_adicionales: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      coordenadas: {
+        type: DataTypes.ARRAY(DataTypes.DECIMAL),
+      }
     },
     {
       sequelize,
