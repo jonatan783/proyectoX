@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         set(value) {
-          this.setDataValue('name', value.toLowerCase());
-        }
+          this.setDataValue("name", value.toLowerCase());
+        },
       },
       description: {
         type: DataTypes.STRING,
@@ -40,6 +40,17 @@ module.exports = (sequelize, DataTypes) => {
       },
       img: {
         type: DataTypes.ARRAY(DataTypes.STRING),
+      },
+      dimensiones: {
+        type: DataTypes.ARRAY(DataTypes.DECIMAL),
+        allowNull: false,
+      },
+      volumen: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          const vol = this.dimensiones.reduce((p,c)=>p*c);
+          return vol;
+        },
       },
     },
     {
