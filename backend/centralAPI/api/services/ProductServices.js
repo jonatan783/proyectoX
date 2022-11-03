@@ -31,7 +31,7 @@ class ProductServices {
     }
   }
   static async addProduct(req, next) {
-    const { name, description, categorias, price, stock, img, vendedorId, dimensiones } = req.body;
+    const { name, description, categorias, price, stock, img, vendedorId, dimensiones, peso } = req.body;
     try {
       const producto = await product.create({
         name,
@@ -41,6 +41,7 @@ class ProductServices {
         img,
         vendedorId,
         dimensiones,
+        peso
       });
       categorias.map(async categoryName => {
         const categoria = await category.findOne({
