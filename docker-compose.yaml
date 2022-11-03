@@ -37,24 +37,6 @@ services:
       # Make sure to set this in production
       # (see https://docs.directus.io/self-hosted/config-options#general)
       # PUBLIC_URL: 'https://directus.example.com'
-
-  # rabbitmq:
-  #   image: rabbitmq:3.10-management
-  #   hostname: "rabbitmq"
-  #   container_name: Rabbitmq
-  #   restart: always
-  #   ports:
-  #     - 15672:15672
-  #     - 5672:5672
-  #   volumes:
-  #     - "./backend/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
-  #   healthcheck:
-  #     test: rabbitmq-diagnostics -q ping
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
-  #   labels:
-  #     NAME: "rabbitmq"
       
   central_api:
     build: ./backend/centralAPI
@@ -66,16 +48,27 @@ services:
       - "./backend/centralAPI/.env"
     #depends_on:
     #  - db
+
   pagos_envios_microservice:
     build: ./backend/pagosEnviosAPI
     ports:
-      - "3006:3006"
+      - "3005:3005"
     volumes:
       - "./backend/pagosEnviosAPI:/app"
     env_file:
       - "./backend/pagosEnviosAPI/.env"
-    #depends_on:
-    #  - db
+    depends_on:
+      - envios_microservice
+
+  envios_microservice:
+    build: ./backend/enviosMicroservice
+    ports:
+      - "3105:3105"
+    volumes:
+      - "./backend/enviosMicroservice:/app"
+    env_file:
+      - "./backend/enviosMicroservice/.env"
+      
   client:
     build: ./frontend
     ports:

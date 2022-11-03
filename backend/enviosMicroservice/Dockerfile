@@ -11,4 +11,4 @@ RUN ["npm", "install"]
 
 CMD ["npm", "run", "dev"]
 
-EXPOSE 3005
+EXPOSE 3105
