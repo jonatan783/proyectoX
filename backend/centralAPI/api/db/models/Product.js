@@ -52,6 +52,10 @@ module.exports = (sequelize, DataTypes) => {
           return vol;
         },
       },
+      peso: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+      }
     },
     {
       sequelize,
