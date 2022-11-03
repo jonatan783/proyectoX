@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import { portType } from './types'
-/* eslint-disable @typescript-eslint/no-var-requires */
-const db: any = require('./db/models/index')
+import db from './db/models/index'
+const router = express.Router()
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config()
 
@@ -10,6 +10,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use('/', router)
 
 const SERVER_PORT: portType = process.env.API_PORT ?? 3006
 
