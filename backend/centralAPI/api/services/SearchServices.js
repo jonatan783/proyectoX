@@ -1,4 +1,4 @@
-const { product, address } = require("../db/models");
+const { product, address, category } = require("../db/models");
 const { Op } = require("sequelize");
 
 class SearchServices {
@@ -21,6 +21,23 @@ class SearchServices {
         })
       );
       return arrayProduct.reverse();
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }
+  static async searchByCat(req, next) {
+    const { id } = req.params;
+    try {
+      const { products } = await category.findOne({
+        where: {
+          id
+        },
+        include:{
+          model: product
+        }
+      });
+      return products;
     } catch (err) {
       console.log(err);
       throw err;
