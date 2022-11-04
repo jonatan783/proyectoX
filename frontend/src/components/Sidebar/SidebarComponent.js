@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Cart from '../Cart/CartComponent';
+import style from './sidebar.module.scss';
 
 const SidebarComponent = () => {
   return (
-    <div>
+    <div className={style.container}>
       <div
-        className='iconNavbar'
+        className={style.iconCart}
         type='button'
         data-bs-toggle='offcanvas'
         data-bs-target='#offcanvasRight'

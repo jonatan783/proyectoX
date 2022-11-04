@@ -1,7 +1,3 @@
-import AdminCategoriesComponent from "./AdminCategories/AdminCategoriesComponent";
-import AdminOrdersComponent from "./AdminOrders/AdminOrdersComponent";
-import AdminProductsComponent from "./AdminProducts/AdminProductsComponent";
-import AdminUsersComponent from "./AdminUsers/AdminUsersComponent";
 import ButtonsCardComponent from "./ButtonCard/ButtonCardComponent";
 import CardComponent from "./Card/CardComponent";
 import CartItemsComponent from "./CartItems/CartItemsComponent";
@@ -10,14 +6,11 @@ import CartComponent from "./Cart/CartComponent";
 import CartDetailsComponent from "./CartDetails/CartDetailsComponent";
 import CartDetailsHeaderComponent from "./CartDetailsHeader/CartDetailsHeaderComponent";
 import CommentsComponent from "./Comments/CommentsComponent";
-import EditCategFormComponent from "./EditCategForm/EditCategFormComponent";
-import EditProductFormComponent from "./EditProductForm/EditProductFormComponent";
 import FilterSearchComponent from "./FilterSearch/FilterSearchComponent";
 import FormModalComponent from "./FormModal/FormModalComponent";
 import FooterComponent from "./Footer/FooterComponent";
 import GridComponent from "./Grid/GridComponent";
 import LoginComponent from "./Login/LoginComponent";
-import NavbarComponent from "./Navbar/NavbarComponent";
 import NewCategFormComponent from "./NewCategForm/NewCategFormComponent";
 import NewProductFormComponent from "./NewProductForm/NewProductFormComponent";
 import NotFoundComponent from "./NotFound/NotFoundComponent";
@@ -30,12 +23,15 @@ import SidebarComponent from "./Sidebar/SidebarComponent";
 import SingleProductComponent from "./SingleProduct/SingleProductComponent";
 import ValorationComponent from "./Valoration/ValorationComponent";
 import UserPopoverComponent from "./UserPopover/UserPopoverComponent";
+import HeaderComponent from "./Header/HeaderComponent"
+import SearchNavComponent from './SearchNav/SearchNavComponent'
+import SearchComponent from './Search/SearchComponent'
+import ListOfCategoriesComponent from './ListOfCategories/ListOfCategoriesComponent'
+import CarrouselProductComponent from './CarrouselProduct/CarrouselProductComponent'
+import OrderComponent from "./Order/OrderComponent";
+
 
 export {
-    AdminCategoriesComponent,
-    AdminOrdersComponent,
-    AdminProductsComponent,
-    AdminUsersComponent,
     ButtonsCardComponent,
     CardComponent,
     CartComponent,
@@ -44,14 +40,11 @@ export {
     CartDetailsComponent,
     CartDetailsHeaderComponent,
     CommentsComponent,
-    EditCategFormComponent,
-    EditProductFormComponent,
     FilterSearchComponent,
     FormModalComponent,
     FooterComponent,
     GridComponent,
     LoginComponent,
-    NavbarComponent,
     NewCategFormComponent,
     NewProductFormComponent,
     NotFoundComponent,
@@ -64,4 +57,10 @@ export {
     SingleProductComponent,
     ValorationComponent,
     UserPopoverComponent,
+    HeaderComponent,
+    SearchNavComponent,
+    SearchComponent,
+    ListOfCategoriesComponent,
+    CarrouselProductComponent,
+    OrderComponent,
 }

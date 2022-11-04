@@ -1,6 +1,6 @@
 .footer {
   background-color: #f8f9fa;
-
+  width: 100vw;
   margin-bottom: auto !important;
   margin-right: 0px !important;
   justify-self: end;
@@ -13,4 +13,23 @@
 
 .copyright {
   padding-left: 30px;
+}
+.lolo{
+  width: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.copy {
+  padding: 5px 0;
+  color: #728697;
+  font-family: 'CircularXX Light';
+  font-size: 12px;
+  font-weight: 300;
+  height: 14px px;
+  letter-spacing: 0;
+  line-height: 14px;
+  margin: 20 auto;
+  text-align: center;
+  width: 235px;
 }

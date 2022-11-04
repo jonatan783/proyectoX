@@ -1,7 +1,4 @@
-import AdminCategoriesContainer from "./AdminCategoriesContainer";
-import AdminOrdersContainer from "./AdminOrdersContainer";
-import AdminProductsContainer from "./AdminProductsContainer";
-import AdminUserContainer from "./AdminUserContainer";
+
 import ButtonsCardContainer from "./ButtonsCardContainer";
 import CardContainer from "./CardContainer";
 import CarouselContainer from "./CarouselContainer";
@@ -10,14 +7,11 @@ import CartDetailsContainer from "./CartDetailsContainer";
 import CartDetailsHeaderContainer from "./CartDetailsHeaderContainer";
 import CartItemsContainer from "./CartItemsContainer"
 import CommentsContainer from "./CommentsContainer";
-import EditCategFormContainer from "./EditCategFormContainer";
-import EditProductFormContainer from "./EditProductFormContainer";
 import FilterSearchContainer from "./FilterSearchContainer";
 import FormModalContainer from "./FormModalContainer";
 import FooterContainer from "./FooterContainer";
 import GridContainer from "./GridContainer";
 import LoginContainer from "./LoginContainer";
-import NavbarContainer from "./NavbarContainer";
 import NewCategFormContainer from "./NewCategFormContainer";
 import NewProductFormContainer from "./NewProductFormContainer";
 import NotFoundContainer from "./NotFoundContainer";
@@ -30,12 +24,16 @@ import ValorationContainer from "./ValorationContainer";
 import OrderItemHistoryContainer from './OrderItemHistoryContainer'
 import OrderDetailsHeaderContainer from "./OrderDetailsHeaderContainer";
 import UserPopoverContainer from "./UserPopoverContainer";
+import HeaderContainer from "./HeaderContainer";
+import SearchNavContainer from './SearchNavContainer'
+import SearchContainer from "./SearchContainer";
+import ListOfCategoriesContainer from "./ListOfCategoriesContainer";
+import CarrouselProductContainer from "./CarrouselProductContainer";
+import OrderContainer from "./OrderContainer";
+import FeatuedOrderContainer from './FeatuedOrderContainer'
+import FeaturedOrderDiscountContainer from "./FeaturedOrderDiscountContainer";
 
 export {
-    AdminCategoriesContainer,
-    AdminOrdersContainer,
-    AdminProductsContainer,
-    AdminUserContainer,
     ButtonsCardContainer,
     CardContainer,
     CarouselContainer,
@@ -44,14 +42,11 @@ export {
     CartDetailsHeaderContainer,
     CartItemsContainer,
     CommentsContainer,
-    EditCategFormContainer,
-    EditProductFormContainer,
     FilterSearchContainer,
     FormModalContainer,
     FooterContainer,
     GridContainer,
     LoginContainer,
-    NavbarContainer,
     NewCategFormContainer,
     NewProductFormContainer,
     NotFoundContainer,
@@ -64,4 +59,12 @@ export {
     OrderItemHistoryContainer,
     OrderDetailsHeaderContainer,
     UserPopoverContainer,
+    HeaderContainer,
+    SearchNavContainer,
+    SearchContainer,
+    ListOfCategoriesContainer,
+    CarrouselProductContainer,
+    OrderContainer,
+    FeatuedOrderContainer,
+    FeaturedOrderDiscountContainer,
 }

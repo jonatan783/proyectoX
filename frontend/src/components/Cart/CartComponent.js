@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { addOrCreateItemCart, deleteItemCart } from '../../redux/itemCart';
-import '../Sidebar/Sidebar.css'
+import './cart.css'
 
 const CartComponent = () => {
   const navigate = useNavigate();

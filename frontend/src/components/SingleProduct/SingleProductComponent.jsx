@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Valoration, Comments } from '..'
 import { ValorationContainer, CommentsContainer } from '../../containers';
 import './SingleProduct.css';
-import '../Sidebar/Sidebar.css'
+import '../Cart/cart.css';
 import '../Valoration/Valoration.css'
 import { getProductById } from '../../requests/productRequest'
 
@@ -39,9 +39,9 @@ const SingleProductComponent = () => {
 
   useEffect(() => {
     getProductById(id)
-    .then(res => setProduct(res.data))
+      .then(res => setProduct(res.data))
   }, [id]);
-  useEffect(() => {});
+  useEffect(() => { });
 
   const handleImageClick = event => {
     setMainSrc(event.target.src);
@@ -66,16 +66,16 @@ const SingleProductComponent = () => {
           <div className='row thumbnails-div col-4'>
             {product.img
               ? product.img.map((ruta, index) => {
-                  return (
-                    <img
-                      className='product-thumbnail'
-                      src={ruta}
-                      onClick={handleImageClick}
-                      alt='product'
-                      key={index}
-                    ></img>
-                  );
-                })
+                return (
+                  <img
+                    className='product-thumbnail'
+                    src={ruta}
+                    onClick={handleImageClick}
+                    alt='product'
+                    key={index}
+                  ></img>
+                );
+              })
               : null}
           </div>
           <div className='main-image col-8'>
