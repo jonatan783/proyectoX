@@ -17,6 +17,14 @@ class SearchController {
       res.status(500).json(err);
     }
   }
+  static async searchByPromo(req, res, next) {
+    try {
+      const productos = await SearchServices.searchByPromo(req, next);
+      return res.status(200).json(productos);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
   static async addAddress(req, res, next) {
     try {
       const respuesta = await SearchServices.addAddress(req, next);

@@ -55,7 +55,17 @@ module.exports = (sequelize, DataTypes) => {
       peso: {
         type: DataTypes.DECIMAL,
         allowNull: false,
-      }
+      },
+      precioPromo: {
+        type: DataTypes.DECIMAL,
+      },
+      descuento: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          const descuento = 1 - this.precioPromo/this.price;
+          return descuento;
+        },
+      },
     },
     {
       sequelize,
