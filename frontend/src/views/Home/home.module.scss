@@ -1,0 +1,32 @@
+.container {
+    position: relative;
+    background-color: #38b36512;
+    padding-bottom: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .containerSearch {
+        position: relative;
+        .search {
+            z-index: 10;
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            top: -29px;
+        }
+    }
+
+    .title {
+        margin-top: 100px;
+        color: #000;
+        font-family: 'CircularXX Medium';
+        font-size: 26px;
+        font-weight: 500;
+        height: 32px;
+        letter-spacing: -.5px;
+        line-height: 32px;
+    }
+}

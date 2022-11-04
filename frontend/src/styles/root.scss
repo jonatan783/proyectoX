@@ -1,0 +1,140 @@
+/* #root {
+   height: 100vh;
+} */
+body {
+   box-sizing: border-box !important;
+   margin: 0;
+   padding: 0;
+   display: flex;
+   justify-content: center;
+   overflow-x: hidden;
+}
+
+
+#app {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+*,
+*::after,
+*::before {
+   box-sizing: inherit;
+}
+
+code {
+   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+}
+
+body::-webkit-scrollbar {
+   width: 12px;
+
+   /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+   border-left: 1px solid #ced3dd;
+   background: rgb(255, 255, 255);
+
+   /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+   background: linear-gradient(227.65deg, #23d929 0%, #08592f 100%);
+   /* color of the scroll thumb */
+   border-radius: 20px;
+   /* roundness of the scroll thumb */
+   border: 2px solid #ced3dd;
+   /* creates padding around scroll thumb */
+}
+
+@font-face {
+   font-family: "CircularXX Black";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-Black.otf");
+}
+
+@font-face {
+   font-family: "CircularXX BlackItalic";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-BlackItalic.otf");
+}
+
+@font-face {
+   font-family: "CircularXX Bold";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-Bold.otf");
+}
+
+@font-face {
+   font-family: "CircularXX BoldItalic";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-BoldItalic.otf");
+}
+
+@font-face {
+   font-family: "CircularXX Book";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-Book.otf");
+
+}
+
+@font-face {
+   font-family: "CircularXX BookItalic";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-BookItalic.otf");
+}
+
+@font-face {
+   font-family: "CircularXX ExtraBlack";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-ExtraBlack.otf");
+}
+
+@font-face {
+   font-family: "CircularXX ExtraBlackItalic";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-ExtraBlackItalic.otf");
+}
+
+@font-face {
+   font-family: "CircularXX Italic";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-Italic.otf");
+}
+
+
+@font-face {
+   font-family: "CircularXX Light";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-Light.otf");
+}
+
+@font-face {
+   font-family: "CircularXX LightItalic";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-LightItalic.otf");
+}
+
+@font-face {
+   font-family: "CircularXX Medium";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-Medium.otf");
+}
+
+@font-face {
+   font-family: "CircularXX MediumItalic";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-MediumItalic.otf");
+}
+
+@font-face {
+   font-family: "CircularXX Regular";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-Regular.otf");
+
+}
+
+@font-face {
+   font-family: "CircularXX Thin";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-Thin.otf");
+}
+
+@font-face {
+   font-family: "CircularXX ThinItalic";
+   src: url("../assets/font/CircularXX/CircularXX/CircularXX-ThinItalic.otf");
+}
+
+//carrousel
+.carousel-control-next,
+.carousel-control-prev {
+   width: fit-content;
+}

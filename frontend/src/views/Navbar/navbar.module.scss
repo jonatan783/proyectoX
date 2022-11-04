@@ -1,0 +1,31 @@
+.container {
+    height: 65px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px -5px 10px 2px;
+    
+    .header {
+        height: 100%;
+        width: 1500px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .containerSearch{
+        display:flex;
+    }
+}
+
+@media (max-width: 1480px) {
+    .header {
+        width: 1240px !important;
+    }
+}
+
+@media (max-width: 1240px) {
+    .header {
+        width: 100% !important;
+        margin: 0 10px;
+    }
+}

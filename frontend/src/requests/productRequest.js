@@ -1,14 +1,16 @@
 import axios from 'axios';
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
-export const getProductByName = async (name) => {//no actualizado
+export const postProductByName = async (searchArr) => {//no actualizado
     try {
-        const productByName = await axios.get(`/api/product/name/${name}`)
+        console.log('este es el arreglo para el request', searchArr)
+        const productByName = await axios.post(`${REACT_APP_API_URL}/product/name`, searchArr)
         return productByName
     } catch (error) {
         throw error
     }
 }
+
 
 export const deleteProductById = async (id) => {
     try {
