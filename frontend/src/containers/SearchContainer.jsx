@@ -1,25 +1,51 @@
-import React, { useState } from 'react'
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 //import { postProductByName } from '../requests/productRequest';
 import { SearchComponent } from '../components'
 
 function SearchContainer() {
-    const [product, setProduct] = useState(null);
     const { register, handleSubmit, errors, reset } = useForm();
 
-    const category = ['Decoración', 'Macetas', 'Accesorios', 'Herramientas Manuales', 'Riego', "tierras", "semillas", "fertilizantes"]
+    const navigate = useNavigate()
 
+    const category = [
+        'Decoración',
+        'Macetas',
+        'Accesorios',
+        'Herramientas Manuales',
+        'Riego',
+        "tierras",
+        "semillas",
+        "fertilizantes"
+    ]
+
+    /*  const onSubmit = (data) => {
+         const searchLower = data.search.toLowerCase();
+         const searchSplit = searchLower.split(' ');
+         if (searchSplit.length !== ['']) {
+             reset()
+             console.log('estas buscando', searchSplit)
+             // postProductByName(searchSplit)
+             //    .then(res => setProduct(res.data))
+         }
+     }; */
     const onSubmit = (data) => {
-        const searchLower = data.search.toLowerCase();
-        const searchSplit = searchLower.split(' ');
-        if (searchSplit.length !== ['']) {
+        if (data.search) {
             reset()
-            console.log('estas buscando', searchSplit)
-            // postProductByName(searchSplit)
-            //    .then(res => setProduct(res.data))
+            const searchLower = data.search.toLowerCase();
+            const searchReplace = searchLower.replaceAll(' ', '-')
+            navigate(`/search/${searchReplace}/category/false`)
         }
     };
-    const searchByCategory = (category) => alert(category.target.value)
+
+
+    const searchByCategory = (data) => {
+        const categoryLower = data.target.value.toLowerCase();
+        const categoryReplace = categoryLower.replaceAll(' ', '_')
+        navigate(`/search/false/category/${categoryReplace}`)
+    }
+
     return (
         <SearchComponent
             category={category}

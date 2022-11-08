@@ -10,9 +10,9 @@
         box-sizing: border-box;
         height: 50px;
         width: 800px;
-        border: 1px solid #E4EAF4;
-        border-radius: 8px;
-        background-color: #FFFFFF;
+        border: 1px solid #0000;
+        border-radius: 14px;
+        background: linear-gradient(108deg, white -13.56%, white 158.3%) padding-box, linear-gradient(215deg, #78ba16 0%, #3d7838 100%) border-box;
 
         .formSearch {
             display: flex;
@@ -62,7 +62,7 @@
 
                 .selected {
                     border: none;
-                    border-left: 1px solid #DADCDE;
+                    border-left: 1px solid #78ba16;
                     padding-left: 40px;
                     cursor: pointer;
 

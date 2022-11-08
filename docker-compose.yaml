@@ -49,25 +49,7 @@ services:
     #depends_on:
     #  - db
 
-  pagos_envios_microservice:
-    build: ./backend/pagosEnviosAPI
-    ports:
-      - "3005:3005"
-    volumes:
-      - "./backend/pagosEnviosAPI:/app"
-    env_file:
-      - "./backend/pagosEnviosAPI/.env"
-    depends_on:
-      - envios_microservice
-
-  envios_microservice:
-    build: ./backend/enviosMicroservice
-    ports:
-      - "3105:3105"
-    volumes:
-      - "./backend/enviosMicroservice:/app"
-    env_file:
-      - "./backend/enviosMicroservice/.env"
+  
       
   client:
     build: ./frontend

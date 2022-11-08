@@ -2,7 +2,6 @@ import React from 'react'
 import style from './search.module.scss'
 import { BsSearch } from 'react-icons/bs';
 import { BiCategory } from 'react-icons/bi';
-import { FiFilter } from 'react-icons/fi'
 
 function SearchComponent({
   category,

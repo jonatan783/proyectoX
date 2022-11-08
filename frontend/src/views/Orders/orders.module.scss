@@ -1,0 +1,14 @@
+.container {
+    padding-top: 30px;
+    width: 100%;
+    min-height: 100vh;
+    background: rgba(56, 179, 101, 0.0705882353);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .containerColumn{
+        margin-top: 30px;
+        display:flex;
+    }
+}

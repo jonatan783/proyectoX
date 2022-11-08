@@ -4,7 +4,6 @@ import Carousel from 'react-bootstrap/Carousel';
 import style from './carrouselProduct.module.scss';
 
 function carrouselProductComponent({ orders }) {
-    console.log('data=>', orders)
     return (
         <Carousel variant="dark"  fade className={style.containerCarrousel}>
             {orders?.map((order, i) => (
