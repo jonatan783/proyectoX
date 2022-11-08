@@ -2,24 +2,23 @@
 'use strict'
 import { Model } from 'sequelize'
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Role extends Model {
+  class UserValoration extends Model {
     static associate (models: any) {
       // define association here
-      Role.hasOne(models.user, { as: 'rol', foreignKey: 'rolId' })
+      UserValoration.belongsTo(models.user, { foreignKey: 'userId' })
     }
   }
-  Role.init(
+  UserValoration.init(
     {
-      role: {
-        type: DataTypes.STRING,
-        allowNull: false
+      valoration: {
+        type: DataTypes.INTEGER,
+        allowNull: true
       }
     },
     {
       sequelize,
-      modelName: 'role',
-      timestamps: false
+      modelName: 'uservaloration'
     }
   )
-  return Role
+  return UserValoration
 }

@@ -1,0 +1,114 @@
+{
+  "productos": [
+    {
+      "name": "MACETA DE TELA GEOTEXTIL EDEN AUTOPODA 30 LITROS",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["accesorios"],
+      "price": 950,
+      "stock": 20,
+      "vendedorId": 5,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/973/maceta-de-tela-geotextil-eden-autopoda-30-litros_699.jpeg","https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/973/maceta-de-tela-geotextil-eden-autopoda-30-litros_4544.jpeg"]
+    },
+    {
+      "name": "COMBO MEDIDOR DE PH DIGITAL CON REGULADOR EDEN LESS",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["accesorios"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 5,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/283/combo-medidor-de-ph-digital-con-regulador-eden-less_8105.jpeg","https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/283/combo-medidor-de-ph-digital-con-regulador-eden-less_1636.jpeg","https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/283/combo-medidor-de-ph-digital-con-regulador-eden-less_1636.jpeg"]
+    },
+    {
+      "name": "CINTURON TRAMONTINA KIT JARDINERIA 8 PIEZAS",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["accesorios"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 5,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/519/cinturon-tramontina-kit-jardineria-8-piezas_1474.jpeg","https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/519/cinturon-tramontina-kit-jardineria-8-piezas_6651.jpeg"]
+    },
+    {
+      "name": "COOLER AGROLED 6 PULGADAS METALICO CABLEADO RULEMAN 220V 2 UNIDADES",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["accesorios"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 5,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/1618/cooler-agroled-4-pulgadas-metalico-cableado-ruleman-220v-2-unidades_6042.jpeg","https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/1618/cooler-agroled-4-pulgadas-metalico-cableado-ruleman-220v-2-unidades_7551.jpeg"]
+    },
+    {
+      "name": "EDEN ROOTS ESTIMULADOR DE RAICES 500 CC",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["aditivos"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 3,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/1018/eden-roots-estimulador-de-raices-500cc_7672.jpeg","https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/1018/eden-roots-estimulador-de-raices-500cc_3868.jpeg"]
+    },
+    {
+      "name": "EDEN 4PACK FERTILIZANTES PREMIUM PARA TODAS LAS ETAPAS 125 CC",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["aditivos"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 3,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/270/eden-4pack-roots-vege-flora-sugar-pack-completo_2257.jpeg","https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/270/combo-eden-roots-vege-flora-sugar-125cc_8996.png", "https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/270/eden-4pack-roots-vege-flora-sugar-pack-completo_2257.jpeg"]
+    },
+    {
+      "name": "EDEN TIERRA DE DIATOMEAS 125GR",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["aditivos"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 3,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/119/tierra-de-diatomea_7371.png"]
+    },
+    {
+      "name": "PANEL LED GROWTECH P1200 LÍNEA COGORDO",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["iluminacion"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 3,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/1530/panel-led-growtech-p1200-linea-cogordo_1213.jpeg", "https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/1530/panel-led-growtech-p1200-linea-cogordo_3612.jpeg"]
+    },
+    {
+      "name": "PANEL LED BIOLED RG110I FULL SPECTRUM CULTIVO INDOOR",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["iluminacion"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 3,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/925/panel-led-bioled-rg110i-full-spectrum-cultivo-indoor_9026.jpeg", "https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/925/panel-led-bioled-rg110i-full-spectrum-cultivo-indoor_1213.jpeg"]
+    },
+    {
+      "name": "SUSTRATO EDEN LIVIANO PREMIUM CULTIVO 10 LITROS",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "categorias": ["sustratos"],
+      "price": 3370,
+      "stock": 10,
+      "vendedorId": 3,
+      "dimensiones": [9, 6, 5],
+      "peso": 0.7,
+      "img": ["https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/936/sustrato-profesional-liviano-eden-perlita-turba-humus-vermi-10-lts_5525.jpeg", "https://www.upgrowshop.com/image.php?width=650&height=650&image=/images/products/936/sustrato-profesional-liviano-eden-perlita-turba-humus-vermi-10-lts_4075.jpeg"]
+    }
+  ]
+}

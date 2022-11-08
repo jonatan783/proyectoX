@@ -1,34 +1,32 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import S from 'sequelize'
-const db: any = require('../config/index')
-
-class PaymentDetail extends S.Model {
-  static associate (models: any) {
-    // define association here
-    PaymentDetail.belongsTo(models.orderdetail)
-  }
-}
-
-PaymentDetail.init(
-  {
-    amount: {
-      type: S.DECIMAL,
-      allowNull: false
-    },
-    provaider: {
-      type: S.STRING,
-      allowNull: false
-    },
-    status: {
-      type: S.STRING,
-      allowNull: false
+'use strict'
+import { Model } from 'sequelize'
+module.exports = (sequelize: any, DataTypes: any) => {
+  class PaymentDetail extends Model {
+    static associate (models: any) {
+      // define association here
+      PaymentDetail.belongsTo(models.orderdetail)
     }
-  },
-  {
-    sequelize: db,
-    modelName: 'paymentdetail'
   }
-)
-
-module.exports = PaymentDetail
+  PaymentDetail.init(
+    {
+      amount: {
+        type: DataTypes.DECIMAL,
+        allowNull: false
+      },
+      provaider: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
+    },
+    {
+      sequelize,
+      modelName: 'paymentdetail'
+    }
+  )
+  return PaymentDetail
+}

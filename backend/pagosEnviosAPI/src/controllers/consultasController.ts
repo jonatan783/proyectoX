@@ -3,18 +3,21 @@
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 // import axios from 'axios'
 import {} from 'dotenv/config'
-const { OrderDetail, OrdenItem } = require('../db/models/index')
+const { orderdetail, orderitem, product } = require('../db/models')
 
 class consultasController {
   static async cotizarPedYa (req: { params: any }, res: any) {
     const { idOrdenDeCompra } = req.params
     try {
-      const ordenCompra: any = await OrderDetail.findOne({
+      const ordenCompra: any = await orderdetail.findOne({
         where: {
           id: idOrdenDeCompra
         },
         include: {
-          model: OrdenItem
+          model: orderitem,
+          include: {
+            model: product
+          }
         }
       })
       res.status(200).send(ordenCompra)
