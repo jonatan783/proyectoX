@@ -29,11 +29,19 @@ module.exports = (sequelize: any, DataTypes: any) => {
       codigo_postal: {
         type: DataTypes.INTEGER,
         allowNull: false
+      },
+      datos_adicionales: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      coordenadas: {
+        type: DataTypes.ARRAY(DataTypes.DECIMAL)
       }
     },
     {
       sequelize,
-      modelName: 'address'
+      modelName: 'address',
+      timestamps: false
     }
   )
   return Address

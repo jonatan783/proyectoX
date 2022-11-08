@@ -3,6 +3,7 @@
 import { Model } from 'sequelize'
 module.exports = (sequelize: any, DataTypes: any) => {
   class Product extends Model {
+    [x: string]: any
     static associate (models: any) {
       // define association here
       Product.belongsTo(models.user, { foreignKey: 'vendedorId' })
@@ -23,7 +24,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        set (value: string) {
+        set (value: any) {
           this.setDataValue('name', value.toLowerCase())
         }
       },
@@ -41,6 +42,31 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       img: {
         type: DataTypes.ARRAY(DataTypes.STRING)
+      },
+      dimensiones: {
+        type: DataTypes.ARRAY(DataTypes.DECIMAL),
+        allowNull: false
+      },
+      volumen: {
+        type: DataTypes.VIRTUAL,
+        get () {
+          const vol = this.dimensiones.reduce((p: any, c: any) => p * c)
+          return vol
+        }
+      },
+      peso: {
+        type: DataTypes.DECIMAL,
+        allowNull: false
+      },
+      precioPromo: {
+        type: DataTypes.DECIMAL
+      },
+      descuento: {
+        type: DataTypes.VIRTUAL,
+        get () {
+          const descuento = 1 - this.precioPromo / this.price
+          return descuento
+        }
       }
     },
     {

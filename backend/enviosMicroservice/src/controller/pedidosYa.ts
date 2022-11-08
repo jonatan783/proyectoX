@@ -176,7 +176,7 @@ class PedidosYaController {
     }
   }
 
-  static async confirmarOrdenEnvio (req: { params: { id: number | string } }, res: any) {
+  static async confirmarOrdenEnvio (req: { params: { id: string } }, res: any) {
     const { id } = req.params
     try {
       const [{ token }] = await Secret.find()
@@ -199,7 +199,6 @@ class PedidosYaController {
 
   static async getOrdenesEnvio (req: { query: getOrdenesEnvio }, res: any) {
     const { fromDate, toDate } = req.query
-    console.log(req.query)
     try {
       const [{ token }] = await Secret.find()
       const { data }: any = await axios.get(`https://courier-api.pedidosya.com/v1/shippings?fromDate=${fromDate}&toDate=${toDate}`, {
@@ -212,6 +211,48 @@ class PedidosYaController {
       if (err.message === 'Request failed with status code 403') {
         await newToken()
         await PedidosYaController.getOrdenesEnvio(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  static async getOrdenDetalle (req: { params: { id: string } }, res: any) {
+    const { id } = req.params
+    try {
+      const [{ token }] = await Secret.find()
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const { data }: any = await axios.get(`https://courier-api.pedidosya.com/v1/shippings/${id}`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      return res.status(200).json(data)
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newToken()
+        await PedidosYaController.getOrdenDetalle(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  static async cancelOrden (req: { params: { id: string }, body: { reasonText: string } }, res: any) {
+    const { id } = req.params
+    try {
+      const [{ token }] = await Secret.find()
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const { data }: any = await axios.post(`https://courier-api.pedidosya.com/v1/shippings/${id}/cancel`, req.body, {
+        headers: {
+          Authorization: token
+        }
+      })
+      return res.status(200).json(data)
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newToken()
+        await PedidosYaController.getOrdenDetalle(req, res)
       } else {
         return res.status(500).json(err.message)
       }

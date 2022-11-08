@@ -14,6 +14,7 @@ class CategoryController {
       const categorias = await CategoryServices.getAll(req, next);
       return res.status(200).json(categorias);
     } catch (err) {
+      console.log(err)
       res.status(500).json(err);
     }
   }

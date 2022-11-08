@@ -31,7 +31,17 @@ class ProductServices {
     }
   }
   static async addProduct(req, next) {
-    const { name, description, categorias, price, stock, img, vendedorId, dimensiones, peso } = req.body;
+    const {
+      name,
+      description,
+      categorias,
+      price,
+      stock,
+      img,
+      vendedorId,
+      dimensiones,
+      peso,
+    } = req.body;
     try {
       const producto = await product.create({
         name,
@@ -41,18 +51,62 @@ class ProductServices {
         img,
         vendedorId,
         dimensiones,
-        peso
+        peso,
       });
-      categorias.map(async categoryName => {
+      categorias.map(async (categoryName) => {
         const categoria = await category.findOne({
-          where:{
-            name: categoryName
-          }
-        })
-        producto.addCategory(categoria)
-      })
+          where: {
+            name: categoryName,
+          },
+        });
+        producto.addCategory(categoria);
+      });
       return "Creado";
     } catch (err) {
+      console.log("ver error", err);
+      throw err;
+    }
+  }
+  static async addProducts(req, next) {
+    const arrayProductos = req.body;
+    try {
+      await Promise.all(
+        arrayProductos.map(async (producto, i) => {
+          const {
+            name,
+            description,
+            categorias,
+            price,
+            stock,
+            img,
+            vendedorId,
+            dimensiones,
+            peso,
+          } = producto;
+          const productoGuardado = await product.create({
+            name,
+            description,
+            price,
+            stock,
+            img,
+            vendedorId,
+            dimensiones,
+            peso,
+          });
+          producto.categorias.map(async (categoryName) => {
+            const categoria = await category.findOne({
+              where: {
+                name: categoryName,
+              },
+            });
+            productoGuardado.addCategory(categoria);
+          });
+          console.log(`Producto ${i+1} agregado con exito`)
+        })
+      );
+      return "Creado";
+    } catch (err) {
+      console.log("ver error", err);
       throw err;
     }
   }
@@ -82,15 +136,17 @@ class ProductServices {
   }
   static async getByCategory(req, next) {
     //revisar la asociacion con producto
-    const { id } = req.params
+    const { id } = req.params;
     try {
       const { products } = await category.findByPk(id, {
-        include: [{ 
-          model: product,
-          attributes: {
-            exclude: ['createdAt', 'updatedAt']
-          }
-        }],
+        include: [
+          {
+            model: product,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
       });
       return products;
     } catch (err) {
@@ -99,7 +155,7 @@ class ProductServices {
     }
   }
   static async getByName(req, next) {
-    const {name} = req.params;
+    const { name } = req.params;
     try {
       const productos = await product.findAll({
         where: {

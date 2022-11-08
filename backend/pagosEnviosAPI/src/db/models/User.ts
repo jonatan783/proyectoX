@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-sequences */
-/* eslint-disable no-unused-expressions */
-'use strict'
-import bcrypt from 'bcrypt'
 import { Model } from 'sequelize'
+'use strict'
+const bcrypt = require('bcrypt')
 
 module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model {
-    setHash (password: string, salt: any) {
+    setHash (password: any, salt: any) {
       return bcrypt.hash(password, salt)
     }
 
@@ -67,20 +67,5 @@ module.exports = (sequelize: any, DataTypes: any) => {
       modelName: 'user'
     }
   )
-  User.addHook('beforeCreate', (user: any) => {
-    return bcrypt
-      .genSalt(16)
-      .then((salt: any) => {
-        user.salt = salt
-        return user.setHash(user.password, salt)
-      })
-      .then((hash) => {
-        user.password = hash
-      })
-  })
-  User.addHook('beforeUpdate', async (user: any) => {
-    const hash = await user.setHash(user.password, user.salt)
-    user.password = hash
-  })
   return User
 }
