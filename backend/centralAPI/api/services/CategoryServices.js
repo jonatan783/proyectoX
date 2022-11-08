@@ -21,7 +21,9 @@ class CategoryServices {
   }
   static async getAll(req, next) {
     try {
+      console.log('adentro')
       const categorias = await category.findAll();
+      console.log(categorias)
       return categorias;
     } catch (err) {
       throw err;

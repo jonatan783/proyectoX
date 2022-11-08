@@ -4,25 +4,17 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('categories', [{
-      name: "Semillas",
+      name: "semillas",
       description: "semillas de diferentes especies de canabis",
-      createdAt: new Date(),
-      updatedAt: new Date()
     },{
-      name: "Fertilizantes",
+      name: "fertilizantes",
       description: "Productos químicos para fetilizar la tierra",
-      createdAt: new Date(),
-      updatedAt: new Date()
     },{
-      name: "Fertilizantes naturales",
+      name: "fertilizantes naturales",
       description: "Productos organicos para fetilizar la tierra",
-      createdAt: new Date(),
-      updatedAt: new Date()
     },{
-      name: "Otros",
+      name: "otros",
       description: "Productos varios",
-      createdAt: new Date(),
-      updatedAt: new Date()
     }]);
   },
 

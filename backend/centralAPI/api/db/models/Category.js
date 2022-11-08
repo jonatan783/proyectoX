@@ -14,6 +14,18 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        set(value) {
+          this.setDataValue("name", value.toLowerCase());
+        },
+      },
+      categoryName: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          return `${this.name[0].toUpperCase()}${this.name.substr(
+            1,
+            this.name.length - 1
+          )}`;
+        },
       },
       description: {
         type: DataTypes.STRING,
@@ -23,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "category",
-    },
+      timestamps: false
+    }
   );
   return Category;
 };

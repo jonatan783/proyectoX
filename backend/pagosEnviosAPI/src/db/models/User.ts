@@ -8,8 +8,8 @@ import { Model } from 'sequelize'
 
 module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model {
-    setHash (password: string, salt: any) {
-      return bcrypt.hash(password, salt)
+    async setHash (password: string, salt: any) {
+      return await bcrypt.hash(password, salt)
     }
 
     static associate (models: any) {
@@ -20,10 +20,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
       User.hasOne(models.datauser, { foreignKey: 'userId' })
       User.hasMany(models.orderdetail), { as: 'comprador', foreignKey: 'userId' }
       User.hasMany(models.orderdetail), { as: 'vendedor', foreignKey: 'vendedorId' }
-      User.hasMany(models.cartitem, { as: 'Carrito', foreignKey: 'userId' })
-      User.hasMany(models.productcomment, { foreignKey: 'userId' })
-      User.hasMany(models.productvaloration, { foreignKey: 'userId' })
-      User.hasMany(models.uservaloration, { foreignKey: 'userId' })
     }
   }
   User.init(
@@ -67,8 +63,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
       modelName: 'user'
     }
   )
-  User.addHook('beforeCreate', (user: any) => {
-    return bcrypt
+  User.addHook('beforeCreate', async (user: any) => {
+    return await bcrypt
       .genSalt(16)
       .then((salt: any) => {
         user.salt = salt

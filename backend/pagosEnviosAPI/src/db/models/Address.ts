@@ -1,40 +1,42 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-'use strict'
-import { Model } from 'sequelize'
-module.exports = (sequelize: any, DataTypes: any) => {
-  class Address extends Model {
-    static associate (models: any) {
-      // define association here
-      Address.belongsTo(models.user, { as: 'domicilio', foreignKey: 'userId' })
-    }
+import S from 'sequelize'
+const db: any = require('../config/index')
+
+class Address extends S.Model {
+  static associate (models: any) {
+    // define association here
+    Address.belongsTo(models.user, { as: 'domicilio', foreignKey: 'userId' })
   }
-  Address.init(
-    {
-      calle: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      altura: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      localidad: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      provincia: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      codigo_postal: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      }
-    },
-    {
-      sequelize,
-      modelName: 'address'
-    }
-  )
-  return Address
 }
+
+Address.init(
+  {
+    calle: {
+      type: S.STRING,
+      allowNull: false
+    },
+    altura: {
+      type: S.STRING,
+      allowNull: false
+    },
+    localidad: {
+      type: S.STRING,
+      allowNull: false
+    },
+    provincia: {
+      type: S.STRING,
+      allowNull: false
+    },
+    codigo_postal: {
+      type: S.INTEGER,
+      allowNull: false
+    }
+  },
+  {
+    sequelize: db,
+    modelName: 'address'
+  }
+)
+
+module.exports = Address

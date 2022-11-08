@@ -53,6 +53,7 @@ class ProductServices {
       })
       return "Creado";
     } catch (err) {
+      console.log('ver error', err)
       throw err;
     }
   }
