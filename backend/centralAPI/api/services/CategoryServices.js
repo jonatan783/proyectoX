@@ -1,4 +1,5 @@
 const { product, category } = require("../db/models");
+const ver = require("../db/models");
 const { Op } = require("sequelize");
 
 class CategoryServices {
@@ -21,9 +22,7 @@ class CategoryServices {
   }
   static async getAll(req, next) {
     try {
-      console.log('adentro')
       const categorias = await category.findAll();
-      console.log(categorias)
       return categorias;
     } catch (err) {
       throw err;

@@ -1,30 +1,29 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import S from 'sequelize'
-const db: any = require('../config/index')
-
-class OrderItem extends S.Model {
-  static associate (models: any) {
-    // define association here
-    OrderItem.belongsTo(models.product, { foreignKey: 'productId' })
-  }
-}
-
-OrderItem.init(
-  {
-    quantity: {
-      type: S.INTEGER,
-      allowNull: false
-    },
-    price: {
-      type: S.DECIMAL,
-      allowNull: false
+'use strict'
+import { Model } from 'sequelize'
+module.exports = (sequelize: any, DataTypes: any) => {
+  class OrderItem extends Model {
+    static associate (models: any) {
+      // define association here
+      OrderItem.belongsTo(models.orderdetail, { foreignKey: 'orderDetailId' })
+      OrderItem.belongsTo(models.product, { foreignKey: 'productId' })
     }
-  },
-  {
-    sequelize: db,
-    modelName: 'orderitem'
   }
-)
-
-export default OrderItem
+  OrderItem.init(
+    {
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      price: {
+        type: DataTypes.DECIMAL,
+        allowNull: false
+      }
+    },
+    {
+      sequelize,
+      modelName: 'orderitem'
+    }
+  )
+  return OrderItem
+}

@@ -2,24 +2,25 @@
 'use strict'
 import { Model } from 'sequelize'
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Role extends Model {
+  class CartItem extends Model {
     static associate (models: any) {
       // define association here
-      Role.hasOne(models.user, { as: 'rol', foreignKey: 'rolId' })
+      CartItem.belongsTo(models.product, { foreignKey: 'productId' })
+      CartItem.belongsTo(models.user, { as: 'Carrito', foreignKey: 'userId' })
     }
   }
-  Role.init(
+  CartItem.init(
     {
-      role: {
-        type: DataTypes.STRING,
+      quantity: {
+        type: DataTypes.INTEGER,
         allowNull: false
       }
     },
     {
       sequelize,
-      modelName: 'role',
+      modelName: 'cartitem',
       timestamps: false
     }
   )
-  return Role
+  return CartItem
 }

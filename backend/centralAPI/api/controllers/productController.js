@@ -26,6 +26,14 @@ class ProductController {
       res.status(500).json(err);
     }
   }
+  static async addProducts(req, res, next) {
+    try {
+      const respuesta = await ProductServices.addProducts(req, next);
+      return res.status(200).json(respuesta);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
   static async updateProduct(req, res, next) {
     try {
       const respuesta = await ProductServices.updateProduct(req, next);

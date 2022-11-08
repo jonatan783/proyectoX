@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-sequences */
-/* eslint-disable no-unused-expressions */
-'use strict'
-import bcrypt from 'bcrypt'
 import { Model } from 'sequelize'
+'use strict'
+const bcrypt = require('bcrypt')
 
 module.exports = (sequelize: any, DataTypes: any) => {
   class User extends Model {
-    async setHash (password: string, salt: any) {
-      return await bcrypt.hash(password, salt)
+    setHash (password: any, salt: any) {
+      return bcrypt.hash(password, salt)
     }
 
     static associate (models: any) {
@@ -20,6 +20,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
       User.hasOne(models.datauser, { foreignKey: 'userId' })
       User.hasMany(models.orderdetail), { as: 'comprador', foreignKey: 'userId' }
       User.hasMany(models.orderdetail), { as: 'vendedor', foreignKey: 'vendedorId' }
+      User.hasMany(models.cartitem, { as: 'Carrito', foreignKey: 'userId' })
+      User.hasMany(models.productcomment, { foreignKey: 'userId' })
+      User.hasMany(models.productvaloration, { foreignKey: 'userId' })
+      User.hasMany(models.uservaloration, { foreignKey: 'userId' })
     }
   }
   User.init(
@@ -63,20 +67,5 @@ module.exports = (sequelize: any, DataTypes: any) => {
       modelName: 'user'
     }
   )
-  User.addHook('beforeCreate', async (user: any) => {
-    return await bcrypt
-      .genSalt(16)
-      .then((salt: any) => {
-        user.salt = salt
-        return user.setHash(user.password, salt)
-      })
-      .then((hash) => {
-        user.password = hash
-      })
-  })
-  User.addHook('beforeUpdate', async (user: any) => {
-    const hash = await user.setHash(user.password, user.salt)
-    user.password = hash
-  })
   return User
 }

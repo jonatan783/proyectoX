@@ -1,42 +1,42 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import S from 'sequelize'
-const db: any = require('../config/index')
-
-class OrderDetail extends S.Model {
-  static associate (models: any) {
-    OrderDetail.belongsTo(models.user, { as: 'comprador', foreignKey: 'userId' })
-    OrderDetail.belongsTo(models.user, { as: 'vendedor', foreignKey: 'vendedorId' })
-  }
-}
-
-OrderDetail.init(
-  {
-    total: {
-      type: S.DECIMAL,
-      allowNull: false,
-      defaultValue: 0
-    },
-    status: {
-      type: S.STRING,
-      allowNull: false,
-      defaultValue: 'Pending'
-    },
-    vendedorValorado: {
-      type: S.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
-    compradorValorado: {
-      type: S.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
+'use strict'
+import { Model } from 'sequelize'
+module.exports = (sequelize: any, DataTypes: any) => {
+  class OrderDetail extends Model {
+    static associate (models: any) {
+      // define association here
+      OrderDetail.belongsTo(models.user, { as: 'comprador', foreignKey: 'userId' })
+      OrderDetail.belongsTo(models.user, { as: 'vendedor', foreignKey: 'vendedorId' })
+      OrderDetail.hasMany(models.orderitem, { foreignKey: 'orderDetailId' })
     }
-  },
-  {
-    sequelize: db,
-    modelName: 'orderdetail'
   }
-)
-
-export default OrderDetail
+  OrderDetail.init(
+    {
+      total: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        defaultValue: 0
+      },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'Pending'
+      },
+      vendedorValorado: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
+      },
+      compradorValorado: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
+      }
+    },
+    {
+      sequelize,
+      modelName: 'orderdetail'
+    }
+  )
+  return OrderDetail
+}

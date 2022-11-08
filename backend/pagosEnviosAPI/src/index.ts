@@ -4,7 +4,7 @@ import cors from 'cors'
 import routes from './routes/index'
 import { portType } from './types'
 import {} from 'dotenv/config'
-const db: any = require('./db/config/index')
+const { sequelize } = require('./db/models/index')
 
 const app = express()
 
@@ -14,7 +14,7 @@ app.use('/', routes)
 
 const SERVER_PORT: portType = process.env.API_PORT ?? 3006
 
-db.sync().then((_data: any) => {
+sequelize.sync().then((_data: any) => {
   app.listen(SERVER_PORT, () => {
     console.log(`pagosEnviosMicroService corriendo en puerto ${SERVER_PORT}`)
   })
