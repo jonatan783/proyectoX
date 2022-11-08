@@ -3,7 +3,7 @@ const router = express.Router();
 const SearchController = require('../../controllers/searchController');
 const { isAuth } = require('../../middlewares/jwt');
 
-router.get('/', SearchController.searchByTag); // Busca productos por palabras
+router.post('/', SearchController.searchByTag); // Busca productos por palabras
 router.get('/promo', SearchController.searchByPromo); // Busca productos con descuento
 router.get('/:id', SearchController.searchByCat); // Busca productos por ide de categoría
 router.post('/direction/add/:userId', isAuth, SearchController.addAddress); // Agregar dirección de envío
