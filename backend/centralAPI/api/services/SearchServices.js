@@ -1,31 +1,62 @@
 const { product, address, category } = require("../db/models");
 const { Op } = require("sequelize");
+const { stringToArray } = require("../utils/functions");
 
 class SearchServices {
   static async searchByTag(req, next) {
-    const { arrayTags } = req.body;
-    let arrayProduct = [];
+    const { stringSearch } = req.body;
+    const { limitPage, orderKey, orderSense, page } = req.query;
+    const arrayTags = stringToArray(stringSearch);
+    console.log(arrayTags);
     try {
-      await Promise.all(
-        arrayTags.map(async (tag) => {
-          let objDeProductos = {};
-          const productos = await product.findAll({
-            where: {
-              name: {
-                [Op.substring]: tag,
-              },
-            },
-          });
-          objDeProductos[tag] = productos;
-          arrayProduct.push(objDeProductos);
-        })
-      );
-      return arrayProduct.reverse();
+      const { count, rows } = await product.findAndCountAll({
+        where: {
+          name: {
+            [Op.like]: { [Op.any]: arrayTags },
+          },
+        },
+        order: [
+          [orderKey, orderSense],
+        ],
+        offset: ((page-1)*limitPage),
+        limit: limitPage,
+      });
+      console.log(count,rows)
+      return rows;
     } catch (err) {
-      console.log(err);
+      console.log('ver error', err);
       throw err;
     }
   }
+  // servicio anterior (buscaba y ordenaba por cantidad de conincidencias del tag)
+  // static async searchByTag(req, next) {
+  //   const { stringSearch } = req.body;
+  //   const { limitPage, orderKey, orderSense } = req.query;
+  //   arrayTags = stringToArray(stringSearch);
+  //   let arrayProduct = [];
+  //   try {
+  //     await Promise.all(
+  //       arrayTags.map(async (tag) => {
+  //         let objDeProductos = {};
+  //         const { count, rows } = await product.findAndCountAll({
+  //           where: {
+  //             name: {
+  //               [Op.substring]: tag,
+  //             },
+  //           },
+  //           offset: 10,
+  //           limit: 2,
+  //         });
+  //         objDeProductos[tag] = rows;
+  //         arrayProduct.push(objDeProductos);
+  //       })
+  //     );
+  //     return arrayProduct.reverse();
+  //   } catch (err) {
+  //     console.log(err);
+  //     throw err;
+  //   }
+  // }
   static async searchByCat(req, next) {
     const { id } = req.params;
     try {

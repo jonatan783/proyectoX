@@ -6,6 +6,7 @@ class SearchController {
       const productos = await SearchServices.searchByTag(req, next);
       return res.status(200).json(productos);
     } catch (err) {
+      console.log(err)
       res.status(500).json(err);
     }
   }
