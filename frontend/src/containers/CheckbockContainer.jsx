@@ -1,21 +1,39 @@
-import React from 'react'
-import { CheckbockComponent } from '../component'
+import React, { useState, useEffect } from 'react'
+import { CheckbockComponent } from '../components'
 
-function CheckbockContainer({ id, check, setCheck, color, handleCheckItem }) {
+function CheckbockContainer(
+  {
+    id,
+    checkInitial,
+    check,
+    color,
+  }) {
 
-  if (check) {
+  const [colorState, setColorState] = useState()
 
-    const handleCheck = () => { setCheck(document.getElementById(id).checked) }
-    if (!check) color = { style: { background: '#CECECE' } }
-    else color = { style: { background: `${color}` } }
+  const colorFalse = { style: { background: '#CECECE' } }
+  const colorTrue = { style: { background: `${color}` } }
 
-  } else {
+  useEffect(() => {
+    if (checkInitial === true) {
+      document.getElementById(id).click()
+      setColorState(colorTrue)
+    }
+    else setColorState(colorFalse)
+  }, [])
 
-    const handleCheck = () => handleCheckItem(document.getElementById(id).checked)
+
+  const handleCheck = () => {
+    const state = document.getElementById(id).checked
+    state ? setColorState(colorTrue) : setColorState(colorFalse)
+    check(state , id)
   }
-  
   return (
-    <CheckbockComponent handleCheck={handleCheck} id={id} color={color} />
+    <CheckbockComponent
+      handleCheck={handleCheck}
+      id={id}
+      color={colorState}
+    />
   )
 }
 

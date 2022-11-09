@@ -20,22 +20,12 @@ function SearchContainer() {
         "fertilizantes"
     ]
 
-    /*  const onSubmit = (data) => {
-         const searchLower = data.search.toLowerCase();
-         const searchSplit = searchLower.split(' ');
-         if (searchSplit.length !== ['']) {
-             reset()
-             console.log('estas buscando', searchSplit)
-             // postProductByName(searchSplit)
-             //    .then(res => setProduct(res.data))
-         }
-     }; */
     const onSubmit = (data) => {
         if (data.search) {
             reset()
             const searchLower = data.search.toLowerCase();
             const searchReplace = searchLower.replaceAll(' ', '-')
-            navigate(`/search/${searchReplace}/category/false`)
+            navigate(`/search/${searchReplace}/category/none`)
         }
     };
 
@@ -43,7 +33,7 @@ function SearchContainer() {
     const searchByCategory = (data) => {
         const categoryLower = data.target.value.toLowerCase();
         const categoryReplace = categoryLower.replaceAll(' ', '_')
-        navigate(`/search/false/category/${categoryReplace}`)
+        navigate(`/search/none/category/${categoryReplace}`)
     }
 
     return (

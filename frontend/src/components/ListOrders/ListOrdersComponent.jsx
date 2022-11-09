@@ -6,8 +6,8 @@ function ListOrdersComponent({ orders }) {
   return (
     <div className={style.container}>
 
-      {orders?.map(order => (
-        <div className={style.orders} key={order.title}>
+      {orders?.map((order,i) => (
+        <div className={style.orders} key={i}>
           <div className={style.containerImg}>
             <img src={order.img[0]} alt='image product' className={style.img} />
           </div>

@@ -4,8 +4,9 @@ import { CheckbockContainer } from '../../containers'
 
 function FilterOrderComponent({
   search,
-  category,
   categories,
+  check,
+  checkInitial,
 }) {
   return (
     <div className={style.container}>
@@ -13,16 +14,18 @@ function FilterOrderComponent({
 
       <div className={style.containerCategories}>
         {categories?.map(categoryItem => (
-          <span className={style.category}>
-            {categoryItem}
+          <div className={style.category} key={categoryItem}>
+
+            <span>{categoryItem}</span>
+
             <CheckbockContainer
-              id={categoryItem}
-              check={null}
-              setCheck={null}
-              color={'green'}
-              handleC
+              id={categoryItem.toLowerCase().replaceAll(' ', '-')}
+              checkInitial={checkInitial}
+              check={check}
+              color={'#2ba42b'}
             />
-          </span>
+
+          </div>
         ))}
       </div>
     </div>

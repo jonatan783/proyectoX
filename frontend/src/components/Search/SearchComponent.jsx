@@ -16,23 +16,24 @@ function SearchComponent({
 
         <form className={style.formSearch} onSubmit={handleSubmit(onSubmit)} >
 
-          <h className={style.iconSearch} type='submit'>
+          <span className={style.iconSearch} type='submit'>
             <BsSearch />
-          </h>
+          </span>
           <input className={style.inputSearch}
             placeholder='¿Qué buscás?'
             {...register('search')}
           />
 
           <div className={style.containerSelected}>
-            <h className={style.iconCategory} >
+            <span className={style.iconCategory} >
               <BiCategory />
-            </h>
+            </span>
             <select className={`${style.selected} ${style.textSelected}`}
-            onChange={searchByCategory}
+              onChange={searchByCategory}
+              defaultValue='Categoría'
             >
 
-              <option selected disabled value="Categoría">Categoría</option>
+              <option disabled value="Categoría" >Categoría</option>
               {category?.map(category => (
                 <option key={category} value={category}>
                   {category}
