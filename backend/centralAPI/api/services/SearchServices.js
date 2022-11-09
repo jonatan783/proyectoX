@@ -5,15 +5,18 @@ const { stringToArray } = require("../utils/functions");
 class SearchServices {
   static async searchByTag(req, next) {
     const { stringSearch } = req.body;
-    const { limitPage, orderKey, orderSense, page } = req.query;
-    const arrayTags = stringToArray(stringSearch);
-    console.log(arrayTags);
+    const { limitPage, orderKey, orderSense, page, name } = req.query;
+    const option = name?{name:name}:{}
     try {
       const { count, rows } = await product.findAndCountAll({
         where: {
           name: {
-            [Op.like]: { [Op.any]: arrayTags },
+            [Op.like]: { [Op.any]: stringToArray(stringSearch) },
           },
+        },
+        include: {
+          model: category,
+          where:option
         },
         order: [
           [orderKey, orderSense],
@@ -21,10 +24,9 @@ class SearchServices {
         offset: ((page-1)*limitPage),
         limit: limitPage,
       });
-      console.log(count,rows)
-      return rows;
+      return {cantidad: count, data: rows};
     } catch (err) {
-      console.log('ver error', err);
+      console.log(err);
       throw err;
     }
   }

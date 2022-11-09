@@ -5,6 +5,7 @@ const sumaDeArray = (arr1, arr2) => {
   }
   return r;
 };
+// Construye el arreglo para el Op del service buscar por palabras
 const stringToArray = (string) => {
   const quitarTag = [
     "el",
@@ -38,7 +39,7 @@ const stringToArray = (string) => {
   let arrayTag = string
     .toLowerCase()
     .split(" ")
-    .filter((tag, index) => {
+    .filter((tag) => {
       if (tag !== "" && !quitarTag.includes(tag)) return tag;
     });
   arrayTag = arrayTag.filter((tag, index) => {
