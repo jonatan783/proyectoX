@@ -4,43 +4,52 @@ const { stringToArray } = require("../utils/functions");
 
 class SearchServices {
   static async searchByTag(req, next) {
-    const { stringSearch } = req.body;
+    const { stringSearch, rangoPrecio } = req.body;
     const { limitPage, orderKey, orderSense, page, name } = req.query;
-    const option = name?{name:name}:{}
-    let arrayCategorias = []
+    const categoryOption = name ? { name: name } : {};
+    const productOption = {
+      name: {
+        [Op.like]: { [Op.any]: stringToArray(stringSearch) },
+      },
+    };
+    rangoPrecio
+      ? (productOption.price = {
+          [Op.between]: [rangoPrecio[0], rangoPrecio[1]],
+        })
+      : null;
+    let arrayCategorias = [];
+    console.log(productOption)
     try {
+      if (stringSearch === "")
+        throw new Error(
+          "No se encuentran resultados si no se especifica al menos una palabra clave"
+        );
       const categoryProductMatch = await category.findAll({
-        attributes: ['name'],
-        include:{
-          model:product,
-          attributes: ['id'],
+        attributes: ["name"],
+        include: {
+          model: product,
+          attributes: ["id"],
           where: {
             name: {
               [Op.like]: { [Op.any]: stringToArray(stringSearch) },
             },
-          }
-        }
-      })
-      categoryProductMatch.map(cat => {
-        arrayCategorias.push(cat.name)
-      })
-      const { count, rows } = await product.findAndCountAll({
-        where: {
-          name: {
-            [Op.like]: { [Op.any]: stringToArray(stringSearch) },
           },
         },
+      });
+      categoryProductMatch.map((cat) => {
+        arrayCategorias.push(cat.name);
+      });
+      const { count, rows } = await product.findAndCountAll({
+        where: productOption,
         include: {
           model: category,
-          where:option
+          where: categoryOption,
         },
-        order: [
-          [orderKey, orderSense],
-        ],
-        offset: ((page-1)*limitPage),
+        order: [[orderKey, orderSense]],
+        offset: (page - 1) * limitPage,
         limit: limitPage,
       });
-      return {cantidad: count, data: rows, categorias: arrayCategorias};
+      return { cantidad: count, data: rows, categorias: arrayCategorias };
     } catch (err) {
       console.log(err);
       throw err;
