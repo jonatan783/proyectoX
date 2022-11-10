@@ -33,6 +33,7 @@ import ListOrdersContainer from './ListOrdersContainer'
 import FilterOrderContainer from "./FilterOrderContainer";
 import PaginationContainer from "./PaginationContainer";
 import CheckbockContainer from "./CheckbockContainer";
+import SpinnerContainer from "./SpinnerContainer";
 
 export {
     ButtonsCardContainer,
@@ -69,5 +70,6 @@ export {
     ListOrdersContainer,
     FilterOrderContainer,
     PaginationContainer,
-    CheckbockContainer
+    CheckbockContainer,
+    SpinnerContainer,
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import { ListOrdersComponent } from '../components'
-import { orders } from '../jsonData/FakedataOrders'
+//import { orders } from '../jsonData/FakedataOrders'
 
-function ListOrdersContainer() {
+function ListOrdersContainer({ listOrder }) {
   return (
-    <ListOrdersComponent orders={orders} />
+    <ListOrdersComponent orders={listOrder} />
   )
 }
 

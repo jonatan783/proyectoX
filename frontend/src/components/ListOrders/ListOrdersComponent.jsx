@@ -1,28 +1,33 @@
 import React from 'react'
-import { PaginationContainer } from '../../containers'
+import { PaginationContainer, SpinnerContainer } from '../../containers'
 import style from './listOrder.module.scss'
 
 function ListOrdersComponent({ orders }) {
   return (
     <div className={style.container}>
 
-      {orders?.map((order,i) => (
+      {orders?.map((order, i) => (
         <div className={style.orders} key={i}>
           <div className={style.containerImg}>
             <img src={order.img[0]} alt='image product' className={style.img} />
           </div>
           <div className={style.containerData}>
-            <span className={style.title}>{order.title}</span>
-            {order.discount ? <>
-              <span className={style.discount}>{order.discount}</span>
-              <span className={style.previousPrice}>{order.previousPrice}</span>
-            </> : null}
-            <span className={style.price}>{order.price}</span>
+            <span className={style.title}>{order.name}</span>
+            {order.precioPromo ?
+              <>
+                <span className={style.discount}>{`${(order.descuento * 100).toFixed(2)} off`}</span>
+                <span className={style.previousPrice}>{`ARG ${order.price},00`}</span>
+                <span className={style.price}>{`ARG ${order.precioPromo},00`}</span>
+              </>
+              :
+              <span className={style.price}>{`ARG ${order.price},00`}</span>
+            }
           </div>
         </div>
       ))}
       <span className={style.pagination}>
-      <PaginationContainer />
+        <PaginationContainer />
+        <SpinnerContainer />
       </span>
     </div>
   )

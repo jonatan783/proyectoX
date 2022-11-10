@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {
   SearchContainer,
@@ -9,13 +9,13 @@ import {
 import style from './orders.module.scss'
 
 function OrdersView() {
-
+  const [listOrder, setListOrder] = useState([])
   return (
     <div className={style.container}>
       <SearchContainer />
       <div className={style.containerColumn}>
-        <FilterOrderContainer/>
-        <ListOrdersContainer />
+        <FilterOrderContainer setListOrder={setListOrder} />
+        <ListOrdersContainer listOrder={listOrder}/>
       </div>
     </div>
   )
