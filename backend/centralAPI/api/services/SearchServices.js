@@ -7,7 +7,23 @@ class SearchServices {
     const { stringSearch } = req.body;
     const { limitPage, orderKey, orderSense, page, name } = req.query;
     const option = name?{name:name}:{}
+    let arrayCategorias = []
     try {
+      const categoryProductMatch = await category.findAll({
+        attributes: ['name'],
+        include:{
+          model:product,
+          attributes: ['id'],
+          where: {
+            name: {
+              [Op.like]: { [Op.any]: stringToArray(stringSearch) },
+            },
+          }
+        }
+      })
+      categoryProductMatch.map(cat => {
+        arrayCategorias.push(cat.name)
+      })
       const { count, rows } = await product.findAndCountAll({
         where: {
           name: {
@@ -24,41 +40,12 @@ class SearchServices {
         offset: ((page-1)*limitPage),
         limit: limitPage,
       });
-      return {cantidad: count, data: rows};
+      return {cantidad: count, data: rows, categorias: arrayCategorias};
     } catch (err) {
       console.log(err);
       throw err;
     }
   }
-  // servicio anterior (buscaba y ordenaba por cantidad de conincidencias del tag)
-  // static async searchByTag(req, next) {
-  //   const { stringSearch } = req.body;
-  //   const { limitPage, orderKey, orderSense } = req.query;
-  //   arrayTags = stringToArray(stringSearch);
-  //   let arrayProduct = [];
-  //   try {
-  //     await Promise.all(
-  //       arrayTags.map(async (tag) => {
-  //         let objDeProductos = {};
-  //         const { count, rows } = await product.findAndCountAll({
-  //           where: {
-  //             name: {
-  //               [Op.substring]: tag,
-  //             },
-  //           },
-  //           offset: 10,
-  //           limit: 2,
-  //         });
-  //         objDeProductos[tag] = rows;
-  //         arrayProduct.push(objDeProductos);
-  //       })
-  //     );
-  //     return arrayProduct.reverse();
-  //   } catch (err) {
-  //     console.log(err);
-  //     throw err;
-  //   }
-  // }
   static async searchByCat(req, next) {
     const { id } = req.params;
     try {
