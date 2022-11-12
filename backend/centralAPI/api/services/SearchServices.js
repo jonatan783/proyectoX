@@ -18,7 +18,6 @@ class SearchServices {
         })
       : null;
     let arrayCategorias = [];
-    console.log(productOption)
     try {
       if (stringSearch === "")
         throw new Error(
