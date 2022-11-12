@@ -8,6 +8,7 @@ export interface ordenDeEnvíoType {
 
 export interface secret {
   token: string
+  service: string
 }
 
 export interface devToken {
