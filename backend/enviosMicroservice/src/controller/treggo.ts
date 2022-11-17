@@ -4,10 +4,25 @@ import axios from 'axios'
 import {} from 'dotenv/config'
 import newTokenTreggo from '../middleware/newTokenTreggo'
 import Secret from '../db/Secret'
-import { getOrdenesEnvio } from '../types'
+import { getSecretType, reqCotizarType, reqShipmentCreationType } from '../types'
 
 class TreggoController {
-  static async costo (req: { body: any }, res: any) {
+  static async saveToken (_req: any, res: any) {
+    try {
+      const { data }: any = await axios.post('http://api.ar.treggo.co/1/token', {
+        email: process.env.MAIL_TREGGO,
+        secret: process.env.SECRET_TREGGO,
+        mode: process.env.MODE_TREGGO
+      })
+      const secret = new Secret({ service: 'treggo', token: data.token })
+      await secret.save()
+      return res.status(200).json('Token generado y guardado con éxito')
+    } catch (err: any) {
+      return res.status(500).json(err)
+    }
+  }
+
+  static async costo (req: { body: reqCotizarType }, res: any) {
     const { volumen, peso, latComprador, lonComprador, addressComprador, cityComprador, addressVendedor, cityVendedor, latVendedor, lonVendedor, orderItems, zipComprador, zipVendedor, type } = req.body
     const sendInfo: any = {
       pickup: {
@@ -33,10 +48,11 @@ class TreggoController {
       packages: orderItems.length // modificar, solo pasar cantidad de paquetes, no la info de cada paquete
     }
     try {
-      const secret: any = await Secret.findOne({ service: 'treggo' })
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
       const { data }: any = await axios.post('http://api.ar.treggo.co/1/rates', sendInfo, {
         headers: {
-          Authorization: secret.token
+          Authorization
         }
       })
       return res.status(200).json(data.price)
@@ -51,7 +67,7 @@ class TreggoController {
     }
   }
 
-  static async shipmentCreation (req: { body: any }, res: any) {
+  static async shipmentCreation (req: { body: reqShipmentCreationType }, res: any) {
     const { ordenCompraId, volumen, peso, emailComprador, nameComprador, latComprador, lonComprador, addressComprador, additionalComprador, cityComprador, celuComprador, nameVendedor, addressVendedor, additionalVendedor, cityVendedor, latVendedor, lonVendedor, celuVendedor, emailVendedor, orderItems, zipComprador, zipVendedor, type } = req.body
     console.log(ordenCompraId, 'para guardar en db mongo')
     const sendInfo: any = {
@@ -91,10 +107,11 @@ class TreggoController {
       packages: orderItems.length // modificar, solo pasar cantidad de paquetes, no la info de cada paquete
     }
     try {
-      const secret: any = await Secret.findOne({ service: 'treggo' })
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
       const { data }: any = await axios.post('http://api.ar.treggo.co/1/shipment', sendInfo, {
         headers: {
-          Authorization: secret.token
+          Authorization
         }
       })
       return res.status(200).json(data)
@@ -109,101 +126,74 @@ class TreggoController {
     }
   }
 
-  static async confirmarOrdenEnvio (req: { params: { id: string } }, res: any) {
+  static async cancelOrden (req: { body: { id: string } }, res: any) {
+    try {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const { data }: any = await axios.put('http://api.ar.treggo.co/1/shipment/cancel', req.body, {
+        headers: {
+          Authorization
+        }
+      })
+      return res.status(200).json(data)
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newTokenTreggo()
+        await TreggoController.cancelOrden(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  static async getStatus (req: { params: { id: string } }, res: any) {
     const { id } = req.params
     try {
-      const secret: any = await Secret.findOne({ service: 'pedidosya' })
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      const { data }: any = await axios.post(`https://courier-api.pedidosya.com/v1/shippings/${id}/confirm`, {}, {
+      const { data }: any = await axios.get(`http://api.ar.treggo.co/1/shipment/${id}`, {
         headers: {
-          Authorization: secret.token
+          Authorization
         }
       })
       return res.status(200).json(data)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 403') {
         await newTokenTreggo()
-        await TreggoController.confirmarOrdenEnvio(req, res)
+        await TreggoController.getStatus(req, res)
       } else {
         return res.status(500).json(err.message)
       }
     }
   }
 
-  static async getOrdenesEnvio (req: { query: getOrdenesEnvio }, res: any) {
-    const { fromDate, toDate } = req.query
-    try {
-      const secret: any = await Secret.findOne({ service: 'pedidosya' })
-      const { data }: any = await axios.get(`https://courier-api.pedidosya.com/v1/shippings?fromDate=${fromDate}&toDate=${toDate}`, {
-        headers: {
-          Authorization: secret.token
-        }
-      })
-      return res.status(200).json(data)
-    } catch (err: any) {
-      if (err.message === 'Request failed with status code 403') {
-        await newTokenTreggo()
-        await TreggoController.getOrdenesEnvio(req, res)
-      } else {
-        return res.status(500).json(err.message)
-      }
-    }
-  }
-
-  static async getOrdenDetalle (req: { params: { id: string } }, res: any) {
+  static async getEtiqueta (req: { params: { id: string } }, res: any) {
     const { id } = req.params
     try {
-      const secret: any = await Secret.findOne({ service: 'pedidosya' })
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      const { data }: any = await axios.get(`https://courier-api.pedidosya.com/v1/shippings/${id}`, {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      const opt: any = {
+        method: 'get',
+        url: `http://api.ar.treggo.co/1/shipment/${id}/label/a4`,
+        responseType: 'arraybuffer',
+        responseEncoding: 'binary',
         headers: {
-          Authorization: secret.token
+          Authorization
         }
-      })
-      return res.status(200).json(data)
+      }
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const { data }: any = await axios(opt)
+      res.contentType('application/pdf')
+      return res.status(200).send(data)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 403') {
         await newTokenTreggo()
-        await TreggoController.getOrdenDetalle(req, res)
+        await TreggoController.getEtiqueta(req, res)
       } else {
         return res.status(500).json(err.message)
       }
-    }
-  }
-
-  static async cancelOrden (req: { params: { id: string }, body: { reasonText: string } }, res: any) {
-    const { id } = req.params
-    try {
-      const secret: any = await Secret.findOne({ service: 'pedidosya' })
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      const { data }: any = await axios.post(`https://courier-api.pedidosya.com/v1/shippings/${id}/cancel`, req.body, {
-        headers: {
-          Authorization: secret.token
-        }
-      })
-      return res.status(200).json(data)
-    } catch (err: any) {
-      if (err.message === 'Request failed with status code 403') {
-        await newTokenTreggo()
-        await TreggoController.getOrdenDetalle(req, res)
-      } else {
-        return res.status(500).json(err.message)
-      }
-    }
-  }
-
-  static async saveToken (_req: any, res: any) {
-    try {
-      const { data }: any = await axios.post('http://api.ar.treggo.co/1/token', {
-        email: process.env.MAIL_TREGGO,
-        secret: process.env.SECRET_TREGGO,
-        mode: process.env.MODE_TREGGO
-      })
-      const secret = new Secret({ service: 'treggo', token: data.token })
-      await secret.save()
-      return res.status(200).json('Token generado y guardado con éxito')
-    } catch (err: any) {
-      return res.status(500).json(err)
     }
   }
 }
