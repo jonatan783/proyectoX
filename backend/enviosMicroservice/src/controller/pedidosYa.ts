@@ -15,7 +15,7 @@ class PedidosYaController {
       return res.status(200).send({ disponible: false, motivo: 'Distancia supera los 15 km permitidos' })
     }
     try {
-      const [{ token }] = await Secret.find()
+      const secret: any = await Secret.findOne({ service: 'pedidosya' })
       const { data } = await axios.post('https://courier-api.pedidosya.com/v1/estimates/coverage', {
         waypoints: [
           {
@@ -29,7 +29,7 @@ class PedidosYaController {
         ]
       }, {
         headers: {
-          Authorization: token
+          Authorization: secret.token
         }
       })
       if (data.waypoints[0].status === 'OK' && data.waypoints[1].status === 'OK') return res.status(200).send({ disponible: true, motivo: 'Hay cobertura en origen y destino' })
@@ -93,10 +93,10 @@ class PedidosYaController {
       })
     }
     try {
-      const [{ token }] = await Secret.find()
+      const secret: any = await Secret.findOne({ service: 'pedidosya' })
       const { data }: any = await axios.post('https://courier-api.pedidosya.com/v1/estimates/shippings', sendInfo, {
         headers: {
-          Authorization: token
+          Authorization: secret.token
         }
       })
       return res.status(200).json(data.price)
@@ -159,10 +159,10 @@ class PedidosYaController {
       ]
     }
     try {
-      const [{ token }] = await Secret.find()
+      const secret: any = await Secret.findOne({ service: 'pedidosya' })
       const { data }: any = await axios.post('https://courier-api.pedidosya.com/v1/shippings', sendInfo, {
         headers: {
-          Authorization: token
+          Authorization: secret.token
         }
       })
       return res.status(200).json(data)
@@ -179,11 +179,11 @@ class PedidosYaController {
   static async confirmarOrdenEnvio (req: { params: { id: string } }, res: any) {
     const { id } = req.params
     try {
-      const [{ token }] = await Secret.find()
+      const secret: any = await Secret.findOne({ service: 'pedidosya' })
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       const { data }: any = await axios.post(`https://courier-api.pedidosya.com/v1/shippings/${id}/confirm`, {}, {
         headers: {
-          Authorization: token
+          Authorization: secret.token
         }
       })
       return res.status(200).json(data)
@@ -200,10 +200,10 @@ class PedidosYaController {
   static async getOrdenesEnvio (req: { query: getOrdenesEnvio }, res: any) {
     const { fromDate, toDate } = req.query
     try {
-      const [{ token }] = await Secret.find()
+      const secret: any = await Secret.findOne({ service: 'pedidosya' })
       const { data }: any = await axios.get(`https://courier-api.pedidosya.com/v1/shippings?fromDate=${fromDate}&toDate=${toDate}`, {
         headers: {
-          Authorization: token
+          Authorization: secret.token
         }
       })
       return res.status(200).json(data)
@@ -220,11 +220,11 @@ class PedidosYaController {
   static async getOrdenDetalle (req: { params: { id: string } }, res: any) {
     const { id } = req.params
     try {
-      const [{ token }] = await Secret.find()
+      const secret: any = await Secret.findOne({ service: 'pedidosya' })
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       const { data }: any = await axios.get(`https://courier-api.pedidosya.com/v1/shippings/${id}`, {
         headers: {
-          Authorization: token
+          Authorization: secret.token
         }
       })
       return res.status(200).json(data)
@@ -241,11 +241,11 @@ class PedidosYaController {
   static async cancelOrden (req: { params: { id: string }, body: { reasonText: string } }, res: any) {
     const { id } = req.params
     try {
-      const [{ token }] = await Secret.find()
+      const secret: any = await Secret.findOne({ service: 'pedidosya' })
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       const { data }: any = await axios.post(`https://courier-api.pedidosya.com/v1/shippings/${id}/cancel`, req.body, {
         headers: {
-          Authorization: token
+          Authorization: secret.token
         }
       })
       return res.status(200).json(data)
@@ -256,6 +256,24 @@ class PedidosYaController {
       } else {
         return res.status(500).json(err.message)
       }
+    }
+  }
+
+  static async saveToken (_req: any, res: any) {
+    try {
+      const { data }: any = await axios.post('https://auth-api.pedidosya.com/v1/token', {
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
+        grant_type: 'password',
+        password: process.env.PASSWORD,
+        username: process.env.USERNAME
+      })
+      const secret = new Secret({ service: 'pedidosya', token: data.access_token })
+      await secret.save()
+      return res.status(200).json('Token generado y guardado con éxito')
+    } catch (err: any) {
+      console.log(err)
+      return res.status(500).json('No se pudo generar o guardar token')
     }
   }
 }
