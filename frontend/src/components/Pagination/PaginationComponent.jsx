@@ -1,19 +1,42 @@
-import Pagination from 'react-bootstrap/Pagination';
+import style from './pagination.module.scss'
 
-function AdvancedExample() {
+function PaginationComponent({
+    handleFirst,
+    handleItemLeft,
+    handleItemRight,
+    handleLast,
+    pagination,
+}
+) {
     return (
-        <Pagination>
-            <Pagination.First />
-            <Pagination.Prev />
+        <div className={style.container}>
+            {pagination[0] ?
+                <span className={style.button} onClick={() => handleFirst()}>
+                    {pagination[0]}
+                </span> : null}
 
-            <Pagination.Item>{11}</Pagination.Item>
-            <Pagination.Item active>{12}</Pagination.Item>
-            <Pagination.Item>{13}</Pagination.Item>
+            {pagination[1] ?
+                <span className={style.button} onClick={() => handleItemLeft()}>
+                    {pagination[1]}
+                </span> : null}
 
-            <Pagination.Next />
-            <Pagination.Last />
-        </Pagination>
+            {pagination[2] ?
+                <span className={`${style.button} ${style.selected}`}>
+                    {pagination[2]}
+                </span> : null
+            }
+
+            {pagination[3] ?
+                <span className={style.button} onClick={() => handleItemRight()}>
+                    {pagination[3]}
+                </span> : null}
+
+            {pagination[4] ?
+                <span className={style.button} onClick={() => handleLast()}>
+                    {pagination[4]}
+                </span> : null}
+        </div>
     );
 }
 
-export default AdvancedExample;
+export default PaginationComponent;

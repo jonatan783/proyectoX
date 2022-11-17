@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-//import { postProductByName } from '../requests/productRequest';
 import { SearchComponent } from '../components'
 
 function SearchContainer() {
@@ -25,7 +24,7 @@ function SearchContainer() {
             reset()
             const searchLower = data.search.toLowerCase();
             const searchReplace = searchLower.replaceAll(' ', '-')
-            navigate(`/search/${searchReplace}/category/none`)
+            navigate(`/search/${searchReplace}/category/all/limitPage/10/orderSense/DESC/orderKey/id/page/1`)
         }
     };
 
@@ -33,7 +32,7 @@ function SearchContainer() {
     const searchByCategory = (data) => {
         const categoryLower = data.target.value.toLowerCase();
         const categoryReplace = categoryLower.replaceAll(' ', '_')
-        navigate(`/search/none/category/${categoryReplace}`)
+        navigate(`/search/none/category/${categoryReplace}/limitPage/10/orderSense/DESC/orderKey/id/page/1`)
     }
 
     return (

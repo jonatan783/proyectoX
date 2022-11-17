@@ -40,7 +40,9 @@ function App() {
         <Route path='/CartDetails' element={<CartDetailsContainer />} />
         <Route path='/orderDetails/:id' element={<OrderDetailContainer />} />
         <Route path='/product/:id' element={<SingleProductContainer />} />
-        <Route path='/search/:search/category/:category' element={<OrdersView/>} />
+        <Route path='/search/:search/category/:category/limitPage/:limitPage/orderSense/:orderSense/orderKey/:orderKey/page/:page' element={<OrdersView />} />
+        <Route path='/search/:search/category/:category/limitPage/:limitPage/orderSense/:orderSense/orderKey/:orderKey/page/:page?:startingPrice' element={<OrdersView />} />
+
         <Route path='/*' element={<NotFoundContainer />} />
       </Routes>
       <FooterContainer />

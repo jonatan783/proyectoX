@@ -34,6 +34,7 @@ import FilterOrderContainer from "./FilterOrderContainer";
 import PaginationContainer from "./PaginationContainer";
 import CheckbockContainer from "./CheckbockContainer";
 import SpinnerContainer from "./SpinnerContainer";
+import DropdawnContainer from "./DropdawnContainer";
 
 export {
     ButtonsCardContainer,
@@ -72,4 +73,5 @@ export {
     PaginationContainer,
     CheckbockContainer,
     SpinnerContainer,
+    DropdawnContainer,
 }

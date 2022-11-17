@@ -7,26 +7,39 @@ function CheckbockContainer(
     checkInitial,
     check,
     color,
+    checked,
   }) {
 
   const [colorState, setColorState] = useState()
+
 
   const colorFalse = { style: { background: '#CECECE' } }
   const colorTrue = { style: { background: `${color}` } }
 
   useEffect(() => {
+    const checkbox = document.getElementById(id)
+
     if (checkInitial === true) {
-      document.getElementById(id).click()
+      if (!checkbox.checked) checkbox.click()
       setColorState(colorTrue)
     }
-    else setColorState(colorFalse)
-  }, [])
+    else {
+      if (checkbox.checked)  checkbox.click()
+      setColorState(colorFalse)
+    }
+
+    if (checked) checkbox.defaultChecked = checkInitial
+  }, [checkInitial])
+
 
 
   const handleCheck = () => {
-    const state = document.getElementById(id).checked
-    state ? setColorState(colorTrue) : setColorState(colorFalse)
-    check(state , id)
+    if (!checked) {
+      const state = document.getElementById(id).checked
+      state ? setColorState(colorTrue) : setColorState(colorFalse)
+      check(state, id)
+    }
+
   }
   return (
     <CheckbockComponent

@@ -32,6 +32,7 @@ import FilterOrderComponent from "./FilterOrder/FilterOrderComponent";
 import PaginationComponent from "./Pagination/PaginationComponent";
 import CheckbockComponent from "./Checkbox/CheckbockComponent"
 import SpinnerComponent from "./Spinner/SpinnerComponent"
+import DropdawnComponent from "./Dropdaw/DropdawnComponent";
 
 export {
     ButtonsCardComponent,
@@ -68,4 +69,5 @@ export {
     PaginationComponent,
     CheckbockComponent,
     SpinnerComponent,
+    DropdawnComponent,
 }

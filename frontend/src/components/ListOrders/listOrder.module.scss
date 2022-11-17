@@ -1,68 +1,103 @@
 .container {
     display: flex;
     flex-direction: column;
-    cursor: pointer;
 
-    .orders {
-        width: 890px;
-        height: 200px;
-        background-color: white;
-        border-radius: 8px;
-        margin-bottom: 5px;
+    .containerOrders {
+        min-height: 100%;
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
-        .containerImg {
+        .orders {
+            width: 890px;
             height: 200px;
-            width: 200px;
-            padding: 5px;
-            box-sizing: border-box;
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            display: flex;
+            cursor: pointer;
 
-            .img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                border-radius: 4px;
+            .containerImg {
+                height: 200px;
+                width: 200px;
+                padding: 5px;
+                box-sizing: border-box;
+
+                .img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    border-radius: 4px;
+                }
+            }
+
+            .containerData {
+                display: flex;
+                flex-direction: column;
+                margin-left: 12px;
+
+                .title {
+                    margin: 15px 0 5px;
+                    color: #063312e9;
+                    font-family: 'CircularXX Light';
+                    font-size: 21px;
+                    letter-spacing: 0;
+                    line-height: 25px;
+                    text-transform: capitalize;
+                }
+
+                .discount {
+                    color: white;
+                    background-color: rgb(20, 147, 41);
+                    width: max-content;
+                    padding: 0 7px;
+                    border-radius: 5px;
+                    margin-bottom: 5px;
+                }
+
+                .previousPrice {
+                    text-decoration: line-through;
+                    color: rgb(46 125 67 / 60%);
+                    font-family: Rubik;
+                    font-size: 15px;
+                    font-weight: 300;
+                }
+
+                .price {
+                    color: #063312e9;
+                    font-family: Rubik;
+                    font-size: 23px;
+                    font-weight: 100;
+                }
             }
         }
+    }
 
-        .containerData {
-            display: flex;
-            flex-direction: column;
-            margin-left: 12px;
+    .notFound {
+        width: 890px;
+        height: 100%;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
-            .title {
-                margin: 15px 0 5px;
-                color: #063312e9;
-                font-family: 'CircularXX Light';
-                font-size: 21px;
-                letter-spacing: 0;
-                line-height: 25px;
-                text-transform: capitalize;
-            }
+        .notFoundIcon {
+            width: 400px;
+            height: 400px;
+            background-image: url(../../assets/img/notFaund/undraw_Searching_re_3ra9.png);
+            background-size: cover;
+            background-position: center;
+        }
 
-            .discount {
-                color: white;
-                background-color: rgb(20, 147, 41);
-                width: max-content;
-                padding: 0 7px;
-                border-radius: 5px;
-                margin-bottom: 5px;
-            }
-
-            .previousPrice {
-                text-decoration: line-through;
-                color: rgb(46 125 67 / 60%);
-                font-family: Rubik;
-                font-size: 15px;
-                font-weight: 300;
-            }
-
-            .price {
-                color: #063312e9;
-                font-family: Rubik;
-                font-size: 23px;
-                font-weight: 100;
-            }
+        .notFoundTitle {
+            height: 19px;
+            color: #020617e4;
+            font-family: 'CircularXX Book';
+            font-size: 17px;
+            font-weight: 400;
+            letter-spacing: 0;
+            line-height: 19px;
         }
     }
 

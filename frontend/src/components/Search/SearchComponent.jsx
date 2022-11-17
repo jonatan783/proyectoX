@@ -19,8 +19,12 @@ function SearchComponent({
           <span className={style.iconSearch} type='submit'>
             <BsSearch />
           </span>
-          <input className={style.inputSearch}
+          <input
+            type="search"
+            id='search'
             placeholder='¿Qué buscás?'
+            maxLength="20"
+            className={style.inputSearch}
             {...register('search')}
           />
 

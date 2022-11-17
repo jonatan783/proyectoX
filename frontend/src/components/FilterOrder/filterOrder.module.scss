@@ -1,11 +1,136 @@
 .container {
     width: 300px;
-    height: 600px;
+    height: min-content;
     border-radius: 6px;
     background-color: white;
-    margin-right: 10px;
-    height: 600px;
-    border-radius: 6px;
-    background-color: white;
-    margin-right: 10px;
+    margin: 0 10px 0 0;
+    padding: 7px 7px 30px;
+    display: flex;
+    flex-direction: column;
+
+    .search {
+        margin-top: 10px;
+        color: #000;
+        font-family: 'CircularXX Medium';
+        font-size: 29px;
+        font-weight: 300;
+        letter-spacing: -.5px;
+        line-height: 32px;
+        text-transform: capitalize;
+    }
+
+    .icon {
+        font-size: 20px;
+        color: #33994a;
+        margin-left: 8px;
+    }
+
+
+    .text {
+        color: rgb(32, 32, 32);
+        font-family: 'CircularXX Regular';
+        font-size: 16px;
+        letter-spacing: 0;
+        line-height: 19px;
+        margin: 0 5px 0 28px;
+        padding-bottom: 6px;
+        text-transform: capitalize;
+    }
+
+    .title {
+        margin-top: 25px;
+        color: #127a2a;
+        font-family: "CircularXX Medium";
+        font-size: 21px;
+        letter-spacing: -0.5px;
+
+    }
+
+    .subtitle {
+        margin: 25px 0 0 12px;
+        color: #040404d6;
+        font-family: "CircularXX Medium";
+        font-size: 20px;
+        letter-spacing: -0.5px;
+    }
+
+    .containerCategory {
+        display: flex;
+        align-items: center;
+    }
+
+    .containerPrice {
+        margin-left: 10px;
+
+        .input {
+            width: 85px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid rgb(43, 164, 43);
+            box-sizing: border-box;
+        }
+
+        .input:focus-visible {
+            outline: none;
+            border: 2px solid rgb(43, 164, 43);
+        }
+
+        .input[type=number]::-webkit-inner-spin-button,
+        .input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .button {
+            border: none;
+            background: transparent;
+            margin: 0 0 0 8px;
+            padding: 0;
+        }
+    }
+
+
+
+    .bsUpload {
+        color: rgb(43, 164, 43);
+        font-size: 23px;
+        cursor: pointer;
+    }
+
+    .orderContainer {
+        width: 228px;
+        margin: 10px 0 10px 10px;
+        display: flex;
+        flex-direction: column;
+
+        .orders {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        .price {
+            color: rgb(84, 83, 83);
+            font-family: 'CircularXX Regular';
+            font-size: 13px;
+            letter-spacing: -.5px;
+            text-align: center;
+            height: 28px;
+            width: 110px;
+            border-radius: 5px;
+            border: 1px solid rgb(43, 164, 43);
+            padding-top: 4px;
+            cursor: pointer;
+        }
+
+        .priceSelected {
+            color: white !important;
+            background-color: rgb(43, 164, 43) !important;
+        }
+    }
+
 }

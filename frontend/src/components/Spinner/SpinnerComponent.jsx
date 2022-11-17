@@ -16,11 +16,3 @@ function SpinnerComponent() {
 }
 
 export default SpinnerComponent
-/* <div className={style.container}>
-
-        <div className={style.icon}>
-
-          <div className={style.spinner}></div>
-
-        </div>
-      </div> */

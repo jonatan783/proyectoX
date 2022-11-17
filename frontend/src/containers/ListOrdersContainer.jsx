@@ -1,10 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { ListOrdersComponent } from '../components'
 //import { orders } from '../jsonData/FakedataOrders'
 
-function ListOrdersContainer({ listOrder }) {
+function ListOrdersContainer() {
+  const searchOrder = useSelector(state => state.searchOrder)
   return (
-    <ListOrdersComponent orders={listOrder} />
+    <ListOrdersComponent
+      orders={searchOrder.data}
+      payload={searchOrder.loading}
+    />
   )
 }
 
