@@ -114,7 +114,7 @@ class PedidosYaController {
   }
 
   static async nuevaOrdenEnvio (req: { body: reqNuevaOrden }, res: any) {
-    const { ordenCompraId, volumen, peso, emailComprador, nameComprador, latComprador, lonComprador, addressComprador, additionalComprador, cityComprador, celuComprador, instrComprador, nameVendedor, addressVendedor, additionalVendedor, cityVendedor, latVendedor, lonVendedor, celuVendedor, instrVendedor, orderItems } = req.body
+    const { ordenCompraId, volumen, peso, compradorId, emailComprador, nameComprador, latComprador, lonComprador, addressComprador, additionalComprador, cityComprador, celuComprador, instrComprador, vendedorId, nameVendedor, addressVendedor, additionalVendedor, cityVendedor, latVendedor, lonVendedor, celuVendedor, instrVendedor, orderItems } = req.body
     const sendInfo: sendInfoType = {
       referenceId: ordenCompraId,
       isTest: true,
@@ -168,6 +168,8 @@ class PedidosYaController {
           Authorization
         }
       })
+      const newOrder = new Secret({ proveedor: 'pedidosya', vendedorId, compradorId, ordenCompraId, status: data.id, costo: data.price.total, precio: data.price.total * 1.1 })
+      await newOrder.save()
       return res.status(200).json(data)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 403') {
@@ -190,6 +192,7 @@ class PedidosYaController {
           Authorization
         }
       })
+
       return res.status(200).json(data)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 403') {
