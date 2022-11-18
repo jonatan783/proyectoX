@@ -56,6 +56,7 @@ function FilterOrderComponent({
         {categories[0]?.map(categoryItem => (
           <div className={style.containerCategory} key={categoryItem.category}>
             <span className={style.text}>{categoryItem.category}</span>
+            <span className={style.cover}></span>
             <CheckbockContainer
               id={categoryItem.category.toLowerCase().replaceAll(' ', '-')}
               checkInitial={categoryItem.check}

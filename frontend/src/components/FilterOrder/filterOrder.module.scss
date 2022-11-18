@@ -43,6 +43,16 @@
             text-transform: capitalize;
         }
 
+        .cover {
+            z-index: 10;
+            height: 25px;
+            width: 32px;
+            background-color: transparent;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
         .title {
             margin-top: 25px;
             color: #127a2a;
@@ -63,6 +73,8 @@
         .containerCategory {
             display: flex;
             align-items: center;
+            position: relative;
+            width: min-content;
         }
 
         .containerPrice {

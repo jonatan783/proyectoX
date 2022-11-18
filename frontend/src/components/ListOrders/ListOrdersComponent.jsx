@@ -48,8 +48,8 @@ function
         </>
       }
       {payload ?
-        <div className={style.containerOrders}>
-          {[...Array(3).keys()].map(i => (
+        <div className={style.containerOrders} style={{ justifyContent:'flex-start'}}>
+          {[...Array(4).keys()].map(i => (
             <div className={`${style.orders}`} key={i}>
               <Placeholder className={style.containerImg} animation="glow">
                 <Placeholder style={{ fontSize: '190px', paddingLeft: '100%' }} />

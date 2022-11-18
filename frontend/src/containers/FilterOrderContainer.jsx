@@ -12,7 +12,9 @@ function FilterOrderContainer() {
     let { priceRange } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [price, setPrice] = useState(priceRange === 'none' ? ['', ''] : JSON.parse(priceRange));
+    console.log('este es el rango ', priceRange=='none')
+    const [price, setPrice] = useState(priceRange == 'none' ? ['', ''] : JSON.parse(priceRange));
+    console.log('este es el price', price)
     let { register, getValues } = useForm({ defaultValues: { startingPrice: price[0], finalPrice: price[1], } });
 
     //variables de estado
@@ -25,12 +27,15 @@ function FilterOrderContainer() {
         if (priceRange !== 'none') priceRange = JSON.parse(priceRange)
         if ((search !== 'none') && (category === 'all')) fnDispatch(search, '', priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page);
         if ((search !== 'none') && (category !== 'all')) fnDispatch(search, category, priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page);
+        if (search === 'none') fnDispatch('', category, priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page)
+        setOrderSelected(typeOrder.flat().find(i => i.id === orderKey))
     }, [search, page, category, limitPage, orderKey, priceRange]);
 
 
     //filtros seleccionados
     const categorySelected = (select) => {
         if (select === 'Todas') select = 'all';
+        if (search === 'none') priceRange = 'none'
         fnNavigate(search, select, priceRange, limitPage, orderKey, 1);
     }
 
@@ -60,7 +65,7 @@ function FilterOrderContainer() {
     //funciones unicas
     const fnCategory = (arrCategory) => {
         if (arrCategory.length) {
-            setCategories([arrCategory.map(i => {
+            let categories = [arrCategory.map(i => {
                 if (category === 'all') return { category: i, check: true }
                 else {
                     if (category == i) {
@@ -68,7 +73,9 @@ function FilterOrderContainer() {
                     }
                     else { return { category: i, check: false } }
                 }
-            }), [...arrCategory, 'Todas']])
+            }), [...arrCategory, 'Todas']]
+            if(search === 'none') categories[1].pop() //omitims la opcion de todas las categorias
+            setCategories(categories)
         }
         else setCategories([[], ['No existen categorías']])
     }
@@ -78,7 +85,7 @@ function FilterOrderContainer() {
     const fnDispatch = (search, category, priceRange, limitPage, orderSense, orderKey, page) => {
         dispatch(getSearchByName({ search, category, priceRange, limitPage, orderSense, orderKey, page }))
             .then((res) => {
-                if (search !== 'none') fnCategory(res.payload.response.data.categorias)
+                if (search !== 'none') fnCategory(res.payload.data.categorias)
                 else fnCategory(categoriesName)
             })
     }
