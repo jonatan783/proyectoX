@@ -9,14 +9,10 @@ function SearchContainer() {
     const navigate = useNavigate()
 
     const category = [
-        'Decoración',
-        'Macetas',
-        'Accesorios',
-        'Herramientas Manuales',
-        'Riego',
-        "tierras",
-        "semillas",
-        "fertilizantes"
+        'accesorios',
+        'aditivos',
+        'iluminacion',
+        "sustratos",
     ]
 
     const onSubmit = (data) => {
@@ -24,15 +20,14 @@ function SearchContainer() {
             reset()
             const searchLower = data.search.toLowerCase();
             const searchReplace = searchLower.replaceAll(' ', '-')
-            navigate(`/search/${searchReplace}/category/all/limitPage/10/orderSense/DESC/orderKey/id/page/1`)
+            navigate(`/search/${searchReplace}/category/all/priceRange/none/limitPage/10/orderKey/masRecienteId/page/1`)
         }
     };
 
 
     const searchByCategory = (data) => {
         const categoryLower = data.target.value.toLowerCase();
-        const categoryReplace = categoryLower.replaceAll(' ', '_')
-        navigate(`/search/none/category/${categoryReplace}/limitPage/10/orderSense/DESC/orderKey/id/page/1`)
+        navigate(`/search/none/category/${categoryLower}/priceRange/none/limitPage/10/orderKey/masRecienteId/page/1`)
     }
 
     return (

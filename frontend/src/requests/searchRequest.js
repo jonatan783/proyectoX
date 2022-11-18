@@ -2,19 +2,17 @@ import axios from 'axios'
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL
 
 
-export const getSearchByName = async ({ search, category, limitPage, orderSense, orderKey, page, range }) => {
+export const getSearchByNameRequest = async ({ search, category, priceRange, limitPage, orderSense, orderKey, page }) => {
+    if (!Array.isArray(priceRange) || !priceRange) priceRange = null;
     try {
         const searchByName = await axios.post(
             `${REACT_APP_API_URL}/comprador/search?limitPage=${limitPage}&orderKey=${orderKey}&orderSense=${orderSense}&page=${page}&name=${category}`,
-            { stringSearch: search }
+            {
+                stringSearch: search,
+                rangoPrecio: priceRange
+            }
         )
-        return {
-            response: searchByName,
-            page: page,
-            search: search,
-            limitPage: limitPage,
-            orderSense: orderSense
-        }
+        return searchByName
     } catch (error) {
         throw error
     }

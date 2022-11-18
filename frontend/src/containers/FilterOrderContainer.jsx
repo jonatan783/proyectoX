@@ -1,62 +1,59 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from "react-hook-form";
-import { FilterOrderComponent } from '../components'
-import { getSearchByName } from '../redux/searchOrder'
-import { locality, ordersByPages, typeOrder } from '../jsonData/filterData'
+import { FilterOrderComponent } from '../components';
+import { getSearchByName } from '../redux/searchOrder';
+import { categoriesName, locality, ordersByPages, typeOrder } from '../jsonData/filterData';
 
 function FilterOrderContainer() {
-    console.log(useParams())
-    const { search, category, limitPage, orderSense, orderKey, page } = useParams()
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const { register, getValues, getFieldState, formState: { isDirty, dirtyFields }, reset } = useForm({
-        defaultValues: {
-            startingPrice: "",
-            finalPrice: '',
-        }
-    });
-  
-    const searchOrder = useSelector(state => state.searchOrder)
-    const [categories, setCategories] = useState([[], []])
-    const [categorySelect, setCategorySelect] = useState(category)
-    const [orderByPagesSelected, setOrderByPagesSelected] = useState(10)
-    const [orderSelected, setOrderSelected] = useState(
-        {
-            orderName: 'Mas Reciente',
-            orderSense: 'DESC',
-            orderKey: 'id',
-        },)
+    //variables de configuracion
+    const { search, category, limitPage, orderKey, page } = useParams();
+    let { priceRange } = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [price, setPrice] = useState(priceRange === 'none' ? ['', ''] : JSON.parse(priceRange));
+    let { register, getValues } = useForm({ defaultValues: { startingPrice: price[0], finalPrice: price[1], } });
+
+    //variables de estado
+    const searchOrder = useSelector(state => state.searchOrder);
+    const [categories, setCategories] = useState([[], []]);
+    const [upDate, setUpDate] = useState(false)
+    const [orderSelected, setOrderSelected] = useState(typeOrder.flat().find(i => i.id === orderKey));
 
     useEffect(() => {
-        if ((search !== 'false') && (category === 'all')) fnDispatch(search, '', limitPage, orderSense, orderKey, page)
-        if ((search !== 'false') && (category !== 'all')) fnDispatch(search, category, limitPage, orderSense, orderKey, page)
-        if (orderByPagesSelected !== limitPage) setOrderByPagesSelected(limitPage)
-    }, [search, page, category, limitPage, orderSense, orderKey])
+        if (priceRange !== 'none') priceRange = JSON.parse(priceRange)
+        if ((search !== 'none') && (category === 'all')) fnDispatch(search, '', priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page);
+        if ((search !== 'none') && (category !== 'all')) fnDispatch(search, category, priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page);
+    }, [search, page, category, limitPage, orderKey, priceRange]);
 
 
     //filtros seleccionados
     const categorySelected = (select) => {
-        if (select === 'Todas') select = 'all'
-        setCategorySelect(select)
-        fnNavigate(search, select, limitPage, orderSense, orderKey, 1)
+        if (select === 'Todas') select = 'all';
+        fnNavigate(search, select, priceRange, limitPage, orderKey, 1);
     }
 
-    const localitySelected = (select) => console.log(select)
+    const localitySelected = (select) => console.log(select);
 
     const priceSelected = () => {
-       console.log(getValues())
+        const startingPrice = Number(getValues().startingPrice)
+        let finalPrice = Number(getValues().finalPrice)
+        let price
+        if (!finalPrice) finalPrice = 999999
+        if (startingPrice < finalPrice) price = `[${startingPrice},${finalPrice}]`
+        else price = `[${finalPrice} , ${startingPrice}]`
+        setPrice(JSON.parse(price))
+        fnNavigate(search, category, price, limitPage, orderKey, 1)
     }
 
     const typeOrderSelected = (select) => {
         setOrderSelected(select)
-        fnNavigate(search, category, limitPage, select.orderSense, select.orderKey, 1)
+        fnNavigate(search, category, priceRange, limitPage, select.id, 1)
     }
 
     const fnOrderByPagesSelected = (select) => {
-        setOrderByPagesSelected(select)
-        fnNavigate(search, category, select, orderSense, orderKey, 1)
+        fnNavigate(search, category, priceRange, select, orderKey, 1)
     }
 
 
@@ -64,9 +61,9 @@ function FilterOrderContainer() {
     const fnCategory = (arrCategory) => {
         if (arrCategory.length) {
             setCategories([arrCategory.map(i => {
-                if (categorySelect === 'all') return { category: i, check: true }
+                if (category === 'all') return { category: i, check: true }
                 else {
-                    if (categorySelect == i) {
+                    if (category == i) {
                         return { category: i, check: true }
                     }
                     else { return { category: i, check: false } }
@@ -76,37 +73,43 @@ function FilterOrderContainer() {
         else setCategories([[], ['No existen categorías']])
     }
 
-    //Aciones del componente
-    const fnDispatch = (search, category, limitPage, orderSense, orderKey, page) => {
-        dispatch(getSearchByName({ search, category, limitPage, orderSense, orderKey, page }))
-            .then((res) => fnCategory(res.payload.response.data.categorias))
-    }
-    const fnNavigate = (search, category, limitPage, orderSense, orderKey, page) => {
-        navigate(`/search/${search}/category/${category}/limitPage/${limitPage}/orderSense/${orderSense}/orderKey/${orderKey}/page/${page}`)
-    }
 
+    //Aciones del componente
+    const fnDispatch = (search, category, priceRange, limitPage, orderSense, orderKey, page) => {
+        dispatch(getSearchByName({ search, category, priceRange, limitPage, orderSense, orderKey, page }))
+            .then((res) => {
+                if (search !== 'none') fnCategory(res.payload.response.data.categorias)
+                else fnCategory(categoriesName)
+            })
+    }
+    const fnNavigate = (search, category, priceRange, limitPage, orderKey, page) => {
+        navigate(`/search/${search}/category/${category}/priceRange/${priceRange}/limitPage/${limitPage}/orderKey/${orderKey}/page/${page}`)
+    }
     return (
         <FilterOrderComponent
-            search={search.replaceAll('-', ' ')}
+            search={search.replaceAll('-', ' ')}         //busqueda
             orders={searchOrder.orders}
+            category={category}
 
-            categories={categories}
+            categories={categories}                      //categoría
             categorySelected={categorySelected}
 
-            priceSelected={priceSelected}
+            priceSelected={priceSelected}                //precio
             register={register}
-            getFieldState={getFieldState}
+            price={price}
+            getValues={getValues}
+            setUpDate={setUpDate}
 
-            locality={locality}
+            locality={locality}                           //localidad
             localitySelected={localitySelected}
 
-            typeOrder={typeOrder}
+            typeOrder={typeOrder}                         //orden
             typeOrderSelected={typeOrderSelected}
             orderSelected={orderSelected}
 
-            fnOrderByPagesSelected={fnOrderByPagesSelected}
+            fnOrderByPagesSelected={fnOrderByPagesSelected} //pagina
             ordersByPages={ordersByPages}
-            orderByPagesSelected={orderByPagesSelected}
+            orderByPagesSelected={limitPage}
         />
     )
 }

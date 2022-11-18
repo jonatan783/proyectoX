@@ -4,17 +4,12 @@ import * as searchOrderRequest from "../requests/searchRequest";
 const searchState = {
     loading: false,
     data: [],
-    categories:[],
-    page:1,
-    orders:1,
-    search:'',
-    limitPage:1,
-    orderSense:'',
+    orders:0,
 }
 
 export const getSearchByName = createAsyncThunk(
     "GET-SEARCH-BY-NAME",
-    searchOrderRequest.getSearchByName
+    searchOrderRequest.getSearchByNameRequest
 );
 
 const searchSlice = createSlice({
@@ -25,14 +20,9 @@ const searchSlice = createSlice({
             state.loading = true;
         },
         [getSearchByName.fulfilled]: (state, action) => {
-            state.data = action.payload.response.data.data;
+            state.data = action.payload.data.data;
             state.loading = false;
-            state.categories = action.payload.response.data.categorias;
-            state.page = action.payload.page
-            state.orders = action.payload.response.data.cantidad;
-            state.search = action.payload.search
-            state.limitPage = action.payload.limitPage
-            state.orderSense = action.payload.orderSense
+            state.orders = action.payload.data.cantidad;
         },
         [getSearchByName.rejected]: (state, action) => {
             state.loading = false;

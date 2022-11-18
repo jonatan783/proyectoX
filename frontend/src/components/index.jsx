@@ -33,6 +33,7 @@ import PaginationComponent from "./Pagination/PaginationComponent";
 import CheckbockComponent from "./Checkbox/CheckbockComponent"
 import SpinnerComponent from "./Spinner/SpinnerComponent"
 import DropdawnComponent from "./Dropdaw/DropdawnComponent";
+import BreadcrumbsComponent from "./Breadcrumbs/BreadcrumbsComponent";
 
 export {
     ButtonsCardComponent,
@@ -70,4 +71,5 @@ export {
     CheckbockComponent,
     SpinnerComponent,
     DropdawnComponent,
+    BreadcrumbsComponent,
 }

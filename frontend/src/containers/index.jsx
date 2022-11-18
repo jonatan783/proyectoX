@@ -35,6 +35,7 @@ import PaginationContainer from "./PaginationContainer";
 import CheckbockContainer from "./CheckbockContainer";
 import SpinnerContainer from "./SpinnerContainer";
 import DropdawnContainer from "./DropdawnContainer";
+import BreadcrumbsContainer from "./BreadcrumbsContainer";
 
 export {
     ButtonsCardContainer,
@@ -74,4 +75,5 @@ export {
     CheckbockContainer,
     SpinnerContainer,
     DropdawnContainer,
+    BreadcrumbsContainer,
 }

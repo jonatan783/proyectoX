@@ -6,7 +6,8 @@ import { useSelector } from 'react-redux';
 function PaginationContainer() {
 
   const navigate = useNavigate();
-  const { search, category, limitPage, orderSense, orderKey, page } = useParams()
+  const { search, category, limitPage, orderKey, page } = useParams()
+  let { priceRange } = useParams()
   const searchOrder = useSelector(state => state.searchOrder);
   const [pagination, setPagination] = useState([null, null, null, null, null]);
 
@@ -15,7 +16,7 @@ function PaginationContainer() {
   const pages = Number(page)
 
   useEffect(() => {
-    if (maximumPage === 1) setPagination([null, null, pages , null, null])
+    if (maximumPage === 1) setPagination([null, null, pages, null, null])
     if (maximumPage === 2) {
       if (pages === 1) setPagination([null, null, pages, pages + 1, null])
       if (pages === 2) setPagination([null, pages - 1, pages, null, null])
@@ -40,9 +41,8 @@ function PaginationContainer() {
   const handleLast = () => selectedPage(maximumPage)
 
   const selectedPage = (page) => {
-    navigate(`/search/${search}/category/${category}/limitPage/${limitPage}/orderSense/${orderSense}/orderKey/${orderKey}/page/${page}`)
+    navigate(`/search/${search}/category/${category}/priceRange/${priceRange}/limitPage/${limitPage}/orderKey/${orderKey}/page/${page}`)
   }
-
 
 
   return (
