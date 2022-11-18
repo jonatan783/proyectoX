@@ -3,7 +3,11 @@ export type portType = string | 3106
 export interface ordenDeEnvíoType {
   vendedorId: number
   compradorId: number
-  ordenDeCompraId: number
+  ordenCompraId: number
+  proveedor: 'pedidosya' | 'treggo'
+  status: string
+  precio: number
+  costo: number
 }
 
 export interface secret {
@@ -60,6 +64,8 @@ export interface reqNuevaOrden {
   celuComprador: string
   instrVendedor: stringorder
   orderItems: array[object]
+  compradorId: number
+  vendedorId: number
 }
 
 export interface getOrdenesEnvio {
