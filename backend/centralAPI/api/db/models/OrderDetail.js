@@ -31,6 +31,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         defaultValue: false,
       },
+      idEnvio: {
+        type: DataTypes.STRING,
+        defaultValue: null,
+      },
+      proveedorEnvio: {
+        type: DataTypes.STRING,
+        defaultValue: null,
+      },
     },
     {
       sequelize,

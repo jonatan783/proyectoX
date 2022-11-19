@@ -4,6 +4,7 @@ import axios from 'axios'
 import {} from 'dotenv/config'
 import newTokenTreggo from '../middleware/newTokenTreggo'
 import Secret from '../db/Secret'
+import OrdenDeEnvio from '../db/OrdenDeEnvio'
 import { getSecretType, reqCotizarType, reqShipmentCreationType } from '../types'
 
 class TreggoController {
@@ -68,8 +69,7 @@ class TreggoController {
   }
 
   static async shipmentCreation (req: { body: reqShipmentCreationType }, res: any) {
-    const { ordenCompraId, volumen, peso, emailComprador, nameComprador, latComprador, lonComprador, addressComprador, additionalComprador, cityComprador, celuComprador, nameVendedor, addressVendedor, additionalVendedor, cityVendedor, latVendedor, lonVendedor, celuVendedor, emailVendedor, orderItems, zipComprador, zipVendedor, type } = req.body
-    console.log(ordenCompraId, 'para guardar en db mongo')
+    const { vendedorId, compradorId, ordenCompraId, volumen, peso, emailComprador, nameComprador, latComprador, lonComprador, addressComprador, additionalComprador, cityComprador, celuComprador, nameVendedor, addressVendedor, additionalVendedor, cityVendedor, latVendedor, lonVendedor, celuVendedor, emailVendedor, orderItems, zipComprador, zipVendedor, type } = req.body
     const sendInfo: any = {
       origin: {
         type: 'API',
@@ -114,7 +114,9 @@ class TreggoController {
           Authorization
         }
       })
-      return res.status(200).json(data)
+      const newOrder = new OrdenDeEnvio({ proveedor: 'treggo', vendedorId, compradorId, ordenCompraId, status: 'PREORDER', ordenEnvioId: data.id })
+      await newOrder.save()
+      return res.status(200).json(data.id)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 401') {
         await newTokenTreggo()
@@ -136,7 +138,10 @@ class TreggoController {
           Authorization
         }
       })
-      return res.status(200).json(data)
+      const orden: any = await OrdenDeEnvio.findOne((req.body))
+      orden.status = 'cancelado'
+      await orden.save()
+      return res.status(200).json(data.cancelacion)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 403') {
         await newTokenTreggo()
