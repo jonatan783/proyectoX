@@ -2,7 +2,7 @@ import React from 'react'
 import style from './search.module.scss'
 import { BsSearch } from 'react-icons/bs';
 import { BiCategory } from 'react-icons/bi';
-import { FiFilter } from 'react-icons/fi'
+import { DropdawnContainer } from '../../containers'
 
 function SearchComponent({
   category,
@@ -17,31 +17,24 @@ function SearchComponent({
 
         <form className={style.formSearch} onSubmit={handleSubmit(onSubmit)} >
 
-          <h className={style.iconSearch} type='submit'>
+          <span className={style.iconSearch} type='submit'>
             <BsSearch />
-          </h>
-          <input className={style.inputSearch}
+          </span>
+          <input
+            type="search"
+            id='search'
             placeholder='¿Qué buscás?'
+            maxLength="20"
+            className={style.inputSearch}
             {...register('search')}
           />
 
           <div className={style.containerSelected}>
-            <h className={style.iconCategory} >
+            <span className={style.iconCategory} >
               <BiCategory />
-            </h>
-            <select className={`${style.selected} ${style.textSelected}`}
-            onChange={searchByCategory}
-            >
-
-              <option selected disabled value="Categoría">Categoría</option>
-              {category?.map(category => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-
-              ))}
-
-            </select>
+            </span>
+            <span className={`${style.selected} ${style.textSelected}`}>Categorías</span>
+            <DropdawnContainer options={category} optionClick={searchByCategory} />
           </div>
         </form>
 

@@ -11,8 +11,6 @@ import FormModalComponent from "./FormModal/FormModalComponent";
 import FooterComponent from "./Footer/FooterComponent";
 import GridComponent from "./Grid/GridComponent";
 import LoginComponent from "./Login/LoginComponent";
-import NewCategFormComponent from "./NewCategForm/NewCategFormComponent";
-import NewProductFormComponent from "./NewProductForm/NewProductFormComponent";
 import NotFoundComponent from "./NotFound/NotFoundComponent";
 import OrderItemsComponent from "./OrderItems/OrderItemsComponent";
 import OrderItemHistoryComponent from "./OrderItemHistory/OrderItemHistoryComponent";
@@ -29,7 +27,13 @@ import SearchComponent from './Search/SearchComponent'
 import ListOfCategoriesComponent from './ListOfCategories/ListOfCategoriesComponent'
 import CarrouselProductComponent from './CarrouselProduct/CarrouselProductComponent'
 import OrderComponent from "./Order/OrderComponent";
-
+import ListOrdersComponent from './ListOrders/ListOrdersComponent'
+import FilterOrderComponent from "./FilterOrder/FilterOrderComponent";
+import PaginationComponent from "./Pagination/PaginationComponent";
+import CheckbockComponent from "./Checkbox/CheckbockComponent"
+import SpinnerComponent from "./Spinner/SpinnerComponent"
+import DropdawnComponent from "./Dropdaw/DropdawnComponent";
+import BreadcrumbsComponent from "./Breadcrumbs/BreadcrumbsComponent";
 
 export {
     ButtonsCardComponent,
@@ -45,8 +49,6 @@ export {
     FooterComponent,
     GridComponent,
     LoginComponent,
-    NewCategFormComponent,
-    NewProductFormComponent,
     NotFoundComponent,
     OrderItemsComponent,
     OrderItemHistoryComponent,
@@ -63,4 +65,11 @@ export {
     ListOfCategoriesComponent,
     CarrouselProductComponent,
     OrderComponent,
+    ListOrdersComponent,
+    FilterOrderComponent,
+    PaginationComponent,
+    CheckbockComponent,
+    SpinnerComponent,
+    DropdawnComponent,
+    BreadcrumbsComponent,
 }

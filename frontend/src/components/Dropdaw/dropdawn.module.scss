@@ -1,0 +1,66 @@
+.container {
+    position: relative;
+    height: 100%;
+
+    .selected {
+        cursor: pointer;
+        font-size: 23px;
+        color: #3d7838;
+    }
+
+    .containerOptions {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        z-index: 100;
+        width: max-content;
+        min-width: 160px;
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-radius: 14px;
+        background: linear-gradient(108deg, white -13.56%, white 158.3%) padding-box, linear-gradient(215deg, #78ba16 0%, #3d7838 100%) border-box;
+        border-radius: 5px;
+        //animation: goDown 3s ease;
+        box-sizing: border-box;
+
+        .option {
+            width: 100%;
+            margin: 5px 0;
+            padding: 0 10px;
+            cursor: pointer;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .option:hover {
+            background: #78ba1632;
+        }
+
+    }
+
+    .input {
+        width: 0px;
+        height: 0px;
+        margin: 0;
+        padding: 0;
+        border: none;
+
+    }
+
+}
+
+@keyframes goDown {
+    0% {
+        height: 0px
+    }
+
+    50% {
+        height: 100px
+    }
+
+    100% {
+        height: 100%
+    }
+}

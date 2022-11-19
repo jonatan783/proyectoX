@@ -10,9 +10,9 @@
         box-sizing: border-box;
         height: 50px;
         width: 800px;
-        border: 1px solid #E4EAF4;
-        border-radius: 8px;
-        background-color: #FFFFFF;
+        border: 1px solid #0000;
+        border-radius: 14px;
+        background: linear-gradient(108deg, white -13.56%, white 158.3%) padding-box, linear-gradient(215deg, #78ba16 0%, #3d7838 100%) border-box;
 
         .formSearch {
             display: flex;
@@ -37,6 +37,7 @@
                 font-weight: 300;
                 letter-spacing: 0;
                 line-height: 19px;
+                background-color: rgb(255, 255, 255);
             }
 
             .inputSearch::placeholder {
@@ -47,40 +48,40 @@
                 outline: none;
             }
 
+            .inputSearch:-internal-autofill-selected {
+                background-color: red !important;
+                border-radius: 3px;
+            }
+
             .containerSelected {
 
                 position: absolute;
                 right: 58px;
+                display: flex;
+                align-items: center;
 
                 .iconCategory {
                     position: absolute;
-                    top: -5px;
+                    top: -10px;
                     left: 10px;
                     font-size: 25px;
-                    cursor: pointer;
                 }
 
                 .selected {
                     border: none;
-                    border-left: 1px solid #DADCDE;
+                    border-left: 1px solid #78ba16;
                     padding-left: 40px;
                     cursor: pointer;
 
                 }
 
-                .selected:focus-visible {
-                    outline: none !important;
-                }
 
                 .textSelected {
-                    height: 30px;
                     color: #5f815d;
-                    font-family: 'CircularXX Medium';
+                    font-family: "CircularXX Medium";
                     font-size: 16px;
                     font-weight: 500;
                     letter-spacing: 0;
-                    line-height: 19px;
-                    text-align: right;
                 }
             }
 

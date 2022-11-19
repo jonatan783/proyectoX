@@ -1,4 +1,4 @@
-import "./Footer.css";
+import "./Footer.scss";
 
 const FooterComponent = () => {
   return (
@@ -43,9 +43,9 @@ const FooterComponent = () => {
           </ul>
         </div>
       </footer>
-      <div className='lolo'>
-        <div className='copi'>
-          Copyright Nash © 2020 - All rights reserved.
+      <div className='containerCopy'>
+        <div className='copy'>
+          Copyright Sativa © 2020 - All rights reserved.
         </div>
       </div>
 

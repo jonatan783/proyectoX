@@ -1,4 +1,3 @@
-
 import ButtonsCardContainer from "./ButtonsCardContainer";
 import CardContainer from "./CardContainer";
 import CarouselContainer from "./CarouselContainer";
@@ -12,8 +11,6 @@ import FormModalContainer from "./FormModalContainer";
 import FooterContainer from "./FooterContainer";
 import GridContainer from "./GridContainer";
 import LoginContainer from "./LoginContainer";
-import NewCategFormContainer from "./NewCategFormContainer";
-import NewProductFormContainer from "./NewProductFormContainer";
 import NotFoundContainer from "./NotFoundContainer";
 import OrderDetailContainer from "./OrderDetailContainer";
 import OrderHistorialContainer from "./OrderHistorialContainer";
@@ -32,6 +29,13 @@ import CarrouselProductContainer from "./CarrouselProductContainer";
 import OrderContainer from "./OrderContainer";
 import FeatuedOrderContainer from './FeatuedOrderContainer'
 import FeaturedOrderDiscountContainer from "./FeaturedOrderDiscountContainer";
+import ListOrdersContainer from './ListOrdersContainer'
+import FilterOrderContainer from "./FilterOrderContainer";
+import PaginationContainer from "./PaginationContainer";
+import CheckbockContainer from "./CheckbockContainer";
+import SpinnerContainer from "./SpinnerContainer";
+import DropdawnContainer from "./DropdawnContainer";
+import BreadcrumbsContainer from "./BreadcrumbsContainer";
 
 export {
     ButtonsCardContainer,
@@ -47,8 +51,6 @@ export {
     FooterContainer,
     GridContainer,
     LoginContainer,
-    NewCategFormContainer,
-    NewProductFormContainer,
     NotFoundContainer,
     OrderDetailContainer,
     OrderHistorialContainer,
@@ -67,4 +69,11 @@ export {
     OrderContainer,
     FeatuedOrderContainer,
     FeaturedOrderDiscountContainer,
+    ListOrdersContainer,
+    FilterOrderContainer,
+    PaginationContainer,
+    CheckbockContainer,
+    SpinnerContainer,
+    DropdawnContainer,
+    BreadcrumbsContainer,
 }

@@ -1,7 +1,9 @@
-import Navbar from './Navbar/Navbar'
-import Home from './Home/Home'
+import NavbarView from './Navbar/NavbarView'
+import HomeView from './Home/HomeView'
+import OrdersView from './Orders/OrdersView'
 
 export{
-    Navbar,
-    Home,
+    NavbarView,
+    HomeView,
+    OrdersView,
 }
