@@ -2,6 +2,7 @@ import React from 'react'
 import style from './search.module.scss'
 import { BsSearch } from 'react-icons/bs';
 import { BiCategory } from 'react-icons/bi';
+import { DropdawnContainer } from '../../containers'
 
 function SearchComponent({
   category,
@@ -32,20 +33,8 @@ function SearchComponent({
             <span className={style.iconCategory} >
               <BiCategory />
             </span>
-            <select className={`${style.selected} ${style.textSelected}`}
-              onChange={searchByCategory}
-              defaultValue='Categoría'
-            >
-
-              <option disabled value="Categoría" >Categoría</option>
-              {category?.map(category => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-
-              ))}
-
-            </select>
+            <span className={`${style.selected} ${style.textSelected}`}>Categorías</span>
+            <DropdawnContainer options={category} optionClick={searchByCategory} />
           </div>
         </form>
 

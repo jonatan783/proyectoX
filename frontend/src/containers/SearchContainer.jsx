@@ -26,7 +26,7 @@ function SearchContainer() {
 
 
     const searchByCategory = (data) => {
-        const categoryLower = data.target.value.toLowerCase();
+        const categoryLower = data.toLowerCase();
         navigate(`/search/none/category/${categoryLower}/priceRange/none/limitPage/10/orderKey/masRecienteId/page/1`)
     }
 

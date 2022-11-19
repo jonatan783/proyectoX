@@ -12,10 +12,8 @@ function FilterOrderContainer() {
     let { priceRange } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log('este es el rango ', priceRange=='none')
     const [price, setPrice] = useState(priceRange == 'none' ? ['', ''] : JSON.parse(priceRange));
-    console.log('este es el price', price)
-    let { register, getValues } = useForm({ defaultValues: { startingPrice: price[0], finalPrice: price[1], } });
+    let { register, getValues, reset } = useForm({ defaultValues: { startingPrice: price[0], finalPrice: price[1], } });
 
     //variables de estado
     const searchOrder = useSelector(state => state.searchOrder);
@@ -23,11 +21,16 @@ function FilterOrderContainer() {
     const [upDate, setUpDate] = useState(false)
     const [orderSelected, setOrderSelected] = useState(typeOrder.flat().find(i => i.id === orderKey));
 
+
     useEffect(() => {
-        if (priceRange !== 'none') priceRange = JSON.parse(priceRange)
-        if ((search !== 'none') && (category === 'all')) fnDispatch(search, '', priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page);
-        if ((search !== 'none') && (category !== 'all')) fnDispatch(search, category, priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page);
-        if (search === 'none') fnDispatch('', category, priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page)
+        if (priceRange !== 'none') priceRange = JSON.parse(priceRange) //si existe algu precio seleccionado pasamos a array el rango de precios
+        else {
+            reset()                                                    //resetiamos el formulario
+            setPrice(['', ''])
+        }
+        if ((search !== 'none') && (category === 'all')) fnDispatch(search, '', priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page); //traemos la búsqueda por nombre y todas las categorías
+        if ((search !== 'none') && (category !== 'all')) fnDispatch(search, category, priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page); //traemos la búsqueda por nombre y categoría
+        if (search === 'none') fnDispatch('', category, priceRange, limitPage, orderSelected.orderSense, orderSelected.orderKey, page)      //traemos la busqueda por categoría
         setOrderSelected(typeOrder.flat().find(i => i.id === orderKey))
     }, [search, page, category, limitPage, orderKey, priceRange]);
 
@@ -45,10 +48,15 @@ function FilterOrderContainer() {
         const startingPrice = Number(getValues().startingPrice)
         let finalPrice = Number(getValues().finalPrice)
         let price
-        if (!finalPrice) finalPrice = 999999
-        if (startingPrice < finalPrice) price = `[${startingPrice},${finalPrice}]`
-        else price = `[${finalPrice} , ${startingPrice}]`
-        setPrice(JSON.parse(price))
+        if (!startingPrice && !finalPrice) { //no existen los valores del precio
+            setPrice(['', ''])
+            price = 'none'
+        } else {                               //existen los valores del precio. Acomodamos el arreglo de menor a mayor
+            if (!finalPrice) finalPrice = 99999999
+            if (startingPrice < finalPrice) price = `[${startingPrice},${finalPrice}]`
+            else price = `[${finalPrice} , ${startingPrice}]`
+            setPrice(JSON.parse(price))
+        }
         fnNavigate(search, category, price, limitPage, orderKey, 1)
     }
 
@@ -74,7 +82,7 @@ function FilterOrderContainer() {
                     else { return { category: i, check: false } }
                 }
             }), [...arrCategory, 'Todas']]
-            if(search === 'none') categories[1].pop() //omitims la opcion de todas las categorias
+            if (search === 'none') categories[1].pop() //omitims la opcion de todas las categorias
             setCategories(categories)
         }
         else setCategories([[], ['No existen categorías']])
