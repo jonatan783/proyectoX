@@ -4,6 +4,7 @@ import axios from 'axios'
 import {} from 'dotenv/config'
 import newToken from '../middleware/newToken'
 import Secret from '../db/Secret'
+import OrdenDeEnvio from '../db/OrdenDeEnvio'
 import { bodyReqType, sendInfoType, reqNuevaOrden, getOrdenesEnvio, getSecretType } from '../types'
 import calcularDistancia from '../utils/utils'
 import timeConverter from '../utils/timeConverter'
@@ -168,9 +169,9 @@ class PedidosYaController {
           Authorization
         }
       })
-      const newOrder = new Secret({ proveedor: 'pedidosya', vendedorId, compradorId, ordenCompraId, status: data.id, costo: data.price.total, precio: data.price.total * 1.1 })
+      const newOrder = new OrdenDeEnvio({ proveedor: 'pedidosya', vendedorId, compradorId, ordenCompraId, status: data.status, ordenEnvioId: data.id, costo: data.price.total, precio: data.price.total * 1.1 })
       await newOrder.save()
-      return res.status(200).json(data)
+      return res.status(200).json(data.id)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 403') {
         await newToken()
@@ -192,8 +193,10 @@ class PedidosYaController {
           Authorization
         }
       })
-
-      return res.status(200).json(data)
+      const orden: any = await OrdenDeEnvio.findOne(({ id }))
+      orden.status = data.status
+      await orden.save()
+      return res.status(200).json(orden.status)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 403') {
         await newToken()
@@ -258,7 +261,10 @@ class PedidosYaController {
           Authorization
         }
       })
-      return res.status(200).json(data)
+      const orden: any = await OrdenDeEnvio.findOne(({ id }))
+      orden.status = data.status
+      await orden.save()
+      return res.status(200).json(orden.status)
     } catch (err: any) {
       if (err.message === 'Request failed with status code 403') {
         await newToken()

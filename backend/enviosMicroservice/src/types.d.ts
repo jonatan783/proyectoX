@@ -4,6 +4,7 @@ export interface ordenDeEnvíoType {
   vendedorId: number
   compradorId: number
   ordenCompraId: number
+  ordenEnvioId: string
   proveedor: 'pedidosya' | 'treggo'
   status: string
   precio: number
@@ -104,4 +105,6 @@ export interface reqShipmentCreationType extends reqCotizarType {
   additionalVendedor: string
   celuVendedor: string
   emailVendedor: string
+  vendedorId: number
+  compradorId: string
 }
