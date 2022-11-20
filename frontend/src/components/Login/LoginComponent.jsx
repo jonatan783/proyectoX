@@ -102,8 +102,9 @@ const LoginComponent = () => {
 
   return (
     <div>
-      <FormModalContainer data={dataRegister} title={'Registro'} subTitles={subTitleRegister} id={'registerModal'} nameButton={'Registrate'} />
-      <FormModalContainer data={dataLogin} title={'Iniciar sesión'} subTitles={subTitleLogin} id={'loginModal'} nameButton={'Iniciar sesión'}/>
+      <FormModalContainer data={dataRegister} subTitles={subTitleRegister} />
+      <FormModalContainer data={dataLogin}  subTitles={subTitleLogin} />
+      <FormModalContainer  data={dataRegister} subTitles={subTitleRegister}/>
       <UserPopoverContainer/>   
     </div>
   );

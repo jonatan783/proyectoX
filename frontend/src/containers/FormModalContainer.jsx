@@ -1,10 +1,10 @@
 import React from 'react'
 import { FormModalComponent } from '../components'
 
-const FormModalContainer = ({title, subTitles, id, nameButton, data}) => {
+const FormModalContainer = ({subTitles, data}) => {
     return (
         <div>
-            <FormModalComponent title={title} subTitles={subTitles} id={id} nameButton={nameButton} data={data}/>
+            <FormModalComponent subTitles={subTitles} data={data}/>
         </div>
     )
 }

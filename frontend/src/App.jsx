@@ -12,7 +12,8 @@ import {
   OrderDetailContainer,
   OrderHistorialContainer,
   SingleProductContainer,
-  FormModalContainer
+  FormModalContainer,
+  UserProfileContainer
 } from './containers';
 import {
   Navbar,
@@ -56,7 +57,8 @@ function App() {
         <Route path='/CartDetails' element={<CartDetailsContainer />} />
         <Route path='/orderDetails/:id' element={<OrderDetailContainer />} />
         <Route path='/product/:id' element={<SingleProductContainer />} />
-        {user.roleId === 2 ? (
+        <Route path='/profile' element={<UserProfileContainer />} />
+        {/* user.roleId === 2 */ true? (
           <>
             <Route path='/admin/products/new-product' element={<NewProductFormContainer />} />
             <Route path='/admin/categories/new-category' element={<NewCategFormContainer />} />

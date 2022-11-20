@@ -24,6 +24,7 @@ import ValorationContainer from "./ValorationContainer";
 import OrderItemHistoryContainer from './OrderItemHistoryContainer'
 import OrderDetailsHeaderContainer from "./OrderDetailsHeaderContainer";
 import UserPopoverContainer from "./UserPopoverContainer";
+import UserProfileContainer from "./UserProfileContainer";
 import HeaderContainer from "./HeaderContainer";
 import SearchNavContainer from './SearchNavContainer'
 import SearchContainer from "./SearchContainer";
@@ -59,6 +60,7 @@ export {
     OrderItemHistoryContainer,
     OrderDetailsHeaderContainer,
     UserPopoverContainer,
+    UserProfileContainer,
     HeaderContainer,
     SearchNavContainer,
     SearchContainer,

@@ -14,11 +14,20 @@ const UserPopoverComponent = () => {
           placement={placement}
           overlay={
             <Popover id={`popover-positioned-${placement}`}>
-              <Popover.Body style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: 0, width: 120, height: 76, borderRadius: '0.25rem', background: 'white',}}>
+              <Popover.Body style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: 0, width: 120, /* height: 76, */ borderRadius: '0.25rem', background: 'white',}}>
+                <button type='button' className='buttonLogin' data-bs-toggle='modal' data-bs-target='#profile' data-bs-whatever='@mdo' style={{height: 38, borderRadius: '0.25rem', backgroundColor: 'white'}}>
+                  Perfil
+                </button>
+                <button type='button' className='buttonLogin' data-bs-toggle='modal' data-bs-target='#sell' data-bs-whatever='@mdo' style={{height: 38, borderRadius: '0.25rem', backgroundColor: 'white'}}>
+                  Ventas
+                </button>
                 <button type='button' className='buttonLogin' data-bs-toggle='modal' data-bs-target='#loginModal' data-bs-whatever='@mdo' style={{height: 38, borderRadius: '0.25rem', backgroundColor: 'white'}}>
-                  Login
+                  Iniciar Sesión
                 </button>
                 <button type='button' className='buttonLogin' data-bs-toggle='modal' data-bs-target='#registerModal' data-bs-whatever='@mdo' style={{ height: 38, borderRadius: '0.25rem', backgroundColor: 'white'}}>Register
+                </button>
+                <button type='button' className='buttonLogin' data-bs-toggle='modal' data-bs-target='#loginModal' data-bs-whatever='@mdo' style={{height: 38, borderRadius: '0.25rem', backgroundColor: 'white'}}>
+                  Cerrar Sesión
                 </button>
               </Popover.Body>
             </Popover>

@@ -23,6 +23,7 @@ import SidebarComponent from "./Sidebar/SidebarComponent";
 import SingleProductComponent from "./SingleProduct/SingleProductComponent";
 import ValorationComponent from "./Valoration/ValorationComponent";
 import UserPopoverComponent from "./UserPopover/UserPopoverComponent";
+import UserProfileComponent from "./UserPrifile/UserProfileComponent";
 import HeaderComponent from "./Header/HeaderComponent"
 import SearchNavComponent from './SearchNav/SearchNavComponent'
 import SearchComponent from './Search/SearchComponent'
@@ -57,6 +58,7 @@ export {
     SingleProductComponent,
     ValorationComponent,
     UserPopoverComponent,
+    UserProfileComponent,
     HeaderComponent,
     SearchNavComponent,
     SearchComponent,

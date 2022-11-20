@@ -1,0 +1,130 @@
+
+
+.containerFile {
+    position: relative;
+    margin: 20px 0 15px 0;
+    box-sizing: border-box;
+    height: 100px;
+    width: 100px;
+    border: 1px dashed #E0E0EA;
+    border-radius: 4px;
+    background-color: #F7F7FF;
+
+    .addImage {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .iconAddImage {
+        position: revert;
+        margin: 16px 0 0 39px;
+        height: 49px;
+        width: 21px;
+        color: #000000;
+        font-family: 'CircularXX Light';
+        font-size: 40px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 49px;
+        cursor: pointer;
+    }
+
+    .textAddImage {
+        position: revert;
+        margin: 2px 0 0 15px;
+        height: 14px;
+        width: 69px;
+        color: #000000;
+        font-family: 'CircularXX Light';
+        font-size: 12px;
+        font-weight: 300;
+        letter-spacing: 0;
+        line-height: 14px;
+        cursor: pointer;
+    }
+}
+
+@keyframes fadeinright {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.imgContainer {
+    position: relative;
+
+    .images {
+        box-sizing: border-box;
+        height: 100px;
+        width: 100px;
+        border: 1px solid #E0E0EA;
+        border-radius: 4px;
+        margin: 20px 0 15px 5px;
+        animation: fadeinright 500ms ease-in-out;
+        cursor: pointer;
+    }
+
+    .iconBin {
+        visibility: hidden;
+        position: absolute;
+        top: 100px;
+        left: 90px;
+        font-size: 20px !important;
+        color: #1f339a;
+        cursor: pointer;
+    }
+
+}
+
+.imgContainer:hover {
+    .images {
+        opacity: 0.8;
+    }
+
+    .iconBin {
+        visibility: visible;
+    }
+}
+
+.containerModal {
+    display: flex;
+    align-items: center;
+    margin: 0 30px;
+
+    .columnImg {
+        width: 15%;
+        height: 450px;
+        margin-right: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .carouselImg {
+        height: 450px;
+        width: 450px;
+        border-radius: 5px;
+    }
+
+}
+
+.ima {
+    width: 68px;
+    height: 68px;
+    box-sizing: border-box;
+    margin: 3px 0;
+    border: 1px solid #E0E7FF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.selectToggle {
+    border: 3px solid #aebef0;
+}
