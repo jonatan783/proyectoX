@@ -3,11 +3,17 @@ export type portType = string | 3106
 export interface ordenDeEnvíoType {
   vendedorId: number
   compradorId: number
-  ordenDeCompraId: number
+  ordenCompraId: number
+  ordenEnvioId: string
+  proveedor: 'pedidosya' | 'treggo'
+  status: string
+  precio: number
+  costo: number
 }
 
 export interface secret {
   token: string
+  service: string
 }
 
 export interface devToken {
@@ -59,9 +65,46 @@ export interface reqNuevaOrden {
   celuComprador: string
   instrVendedor: stringorder
   orderItems: array[object]
+  compradorId: number
+  vendedorId: number
 }
 
 export interface getOrdenesEnvio {
   fromDate: string
   toDate: string
+}
+
+export interface getSecretType {
+  token: string
+}
+
+export interface reqCotizarType {
+  volumen: number
+  peso: number
+  latComprador: number
+  lonComprador: number
+  addressComprador: string
+  cityComprador: string
+  addressVendedor: string
+  cityVendedor: string
+  latVendedor: number
+  lonVendedor: number
+  orderItems: array[object]
+  zipComprador: number
+  zipVendedor: number
+  type: string
+}
+
+export interface reqShipmentCreationType extends reqCotizarType {
+  ordenCompraId: number
+  emailComprador: string
+  nameComprador: string
+  additionalComprador: string
+  celuComprador: string
+  nameVendedor: string
+  additionalVendedor: string
+  celuVendedor: string
+  emailVendedor: string
+  vendedorId: number
+  compradorId: string
 }

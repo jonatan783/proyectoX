@@ -18,11 +18,10 @@ class SearchServices {
         })
       : null;
     let arrayCategorias = [];
-    console.log(productOption)
     try {
-      if (stringSearch === "")
+      if ((stringSearch === "") && (!name))
         throw new Error(
-          "No se encuentran resultados si no se especifica al menos una palabra clave"
+          "No se encuentran resultados si no se especifica al menos una palabra clave o la categoría"
         );
       const categoryProductMatch = await category.findAll({
         attributes: ["name"],

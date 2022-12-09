@@ -4,7 +4,7 @@ import {
   HeaderContainer,
   LoginContainer,
   SidebarContainer,
-  SearchNavContainer
+ /*  SearchNavContainer */
 } from '../../containers'
 
 
@@ -15,7 +15,7 @@ function Navbar() {
         <span className="fs-3 title">Sativa</span>
         <HeaderContainer />
         <div className={style.containerSearch}>
-          <SearchNavContainer />
+          {/* <SearchNavContainer /> */}
           <LoginContainer />
           <SidebarContainer />
         </div>

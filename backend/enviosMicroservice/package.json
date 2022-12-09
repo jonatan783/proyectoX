@@ -27,7 +27,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^6.7.0"
+    "mongoose": "^6.7.0",
+    "node-fetch": "^3.3.0"
   },
   "eslintConfig": {
     "parserOptions": {

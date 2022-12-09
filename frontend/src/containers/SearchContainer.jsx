@@ -1,25 +1,35 @@
-import React, { useState } from 'react'
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-//import { postProductByName } from '../requests/productRequest';
 import { SearchComponent } from '../components'
 
 function SearchContainer() {
-    const [product, setProduct] = useState(null);
     const { register, handleSubmit, errors, reset } = useForm();
 
-    const category = ['Decoración', 'Macetas', 'Accesorios', 'Herramientas Manuales', 'Riego', "tierras", "semillas", "fertilizantes"]
+    const navigate = useNavigate()
+
+    const category = [
+        'accesorios',
+        'aditivos',
+        'iluminacion',
+        "sustratos",
+    ]
 
     const onSubmit = (data) => {
-        const searchLower = data.search.toLowerCase();
-        const searchSplit = searchLower.split(' ');
-        if (searchSplit.length !== ['']) {
+        if (data.search) {
             reset()
-            console.log('estas buscando', searchSplit)
-            // postProductByName(searchSplit)
-            //    .then(res => setProduct(res.data))
+            const searchLower = data.search.toLowerCase();
+            const searchReplace = searchLower.replaceAll(' ', '-')
+            navigate(`/search/${searchReplace}/category/all/priceRange/none/limitPage/10/orderKey/masRecienteId/page/1`)
         }
     };
-    const searchByCategory = (category) => alert(category.target.value)
+
+
+    const searchByCategory = (data) => {
+        const categoryLower = data.toLowerCase();
+        navigate(`/search/none/category/${categoryLower}/priceRange/none/limitPage/10/orderKey/masRecienteId/page/1`)
+    }
+
     return (
         <SearchComponent
             category={category}

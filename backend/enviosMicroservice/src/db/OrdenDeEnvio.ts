@@ -1,10 +1,15 @@
 import { Schema, model } from 'mongoose'
 import { ordenDeEnvíoType } from '../types'
 
-const userSchema = new Schema<ordenDeEnvíoType>({
+const orderSchema = new Schema<ordenDeEnvíoType>({
   vendedorId: { type: Number, required: true },
   compradorId: { type: Number, required: true },
-  ordenDeCompraId: { type: Number, required: true }
+  ordenCompraId: { type: Number, required: true },
+  ordenEnvioId: { type: String, required: true },
+  proveedor: { type: String, required: true },
+  status: { type: String, required: true },
+  costo: { type: Number, required: true, default: 0 },
+  precio: { type: Number, required: true, default: 0 }
 })
 
-module.exports = model<ordenDeEnvíoType>('ordenDeEnvio', userSchema)
+export default model<ordenDeEnvíoType>('ordenDeEnvio', orderSchema)

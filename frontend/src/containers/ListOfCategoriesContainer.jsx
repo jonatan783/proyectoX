@@ -47,7 +47,6 @@ function ListOfCategoriesContainer() {
   ]
 
   const handleOnclick = (category) => alert(`has hecho click en ${category}`)
-  console.log('category', categories)
   return (
     <ListOfCategoriesComponent
       categories={categories}

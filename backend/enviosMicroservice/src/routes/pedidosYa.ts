@@ -3,6 +3,7 @@ import express from 'express'
 import PedidosYaController from '../controller/pedidosYa'
 const router = express.Router()
 
+router.post('/token', PedidosYaController.saveToken) // consultar si la zona tiene cobertura de flota
 router.post('/cobertura', PedidosYaController.cobertura) // consultar si la zona tiene cobertura de flota
 router.post('/cotizar', PedidosYaController.costo) // consultar costo de envío
 router.post('/setorden', PedidosYaController.nuevaOrdenEnvio) // crear orden de envío

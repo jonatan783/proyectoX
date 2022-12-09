@@ -1,0 +1,39 @@
+.myCheckbox input {
+    display: none
+}
+
+.myCheckbox span {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 31px;
+    height: 17px;
+    border-radius: 17px;
+    background: #F9FAFF;
+    border: 1px solid #E0E7FF;
+    cursor: pointer;
+
+}
+
+.myCheckbox span::after {
+    content: "";
+    display: block;
+    position: relative;
+    top: -1px;
+    width: 17px;
+    height: 17px;
+    transform: scale(0.7);
+    border-radius: 50%;
+    background: rgb(254, 254, 254);
+    transition: 0.5s;
+
+}
+
+.myCheckbox input:checked~span::after {
+    background: rgb(255, 255, 255);
+    transform: scale(0.7) translate(18px);
+    top: -1px;
+}
+
+.myCheckbox input:checked~span {
+    background: rgb(2, 0, 128);
+}

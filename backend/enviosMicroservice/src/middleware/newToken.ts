@@ -4,7 +4,6 @@ import {} from 'dotenv/config'
 import Secret from '../db/Secret'
 
 const newToken = async () => {
-  const [{ token }] = await Secret.find()
   try {
     const { data }: any = await axios.post('https://auth-api.pedidosya.com/v1/token', {
       client_id: process.env.CLIENT_ID,
@@ -13,7 +12,7 @@ const newToken = async () => {
       password: process.env.PASSWORD,
       username: process.env.USERNAME
     })
-    const secret: any = await Secret.findOne({ token })
+    const secret: any = await Secret.findOne(({ service: 'pedidosya' }))
     secret.token = data.access_token
     await secret.save()
     console.log('actualizado!')

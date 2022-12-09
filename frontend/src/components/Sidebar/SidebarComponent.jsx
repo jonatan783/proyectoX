@@ -19,6 +19,7 @@ const SidebarComponent = () => {
         tabIndex='-1'
         id='offcanvasRight'
         aria-labelledby='offcanvasRightLabel'
+        style={{/* border: '1px solid red', */ width: '50%', backgroundColor: 'rgb(208, 217, 208)'}}
       >
         <div className='offcanvas-header '>
           <h5 id='offcanvasRightLabel'>CARRITO DE COMPRAS</h5>
@@ -29,6 +30,7 @@ const SidebarComponent = () => {
             aria-label='Close'
           ></button>
         </div>
+        <hr /* style={{width: '90%'}} *//>
         <Cart />
       </div>
     </div>

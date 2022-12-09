@@ -1,0 +1,19 @@
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+
+    .items {
+        color: rgb(32, 32, 32);
+        font-family: "CircularXX Regular";
+        font-size: 16px;
+        text-transform: capitalize;
+    }
+
+    .icon {
+        font-size: 19px;
+        color: #3d7838;
+        vertical-align: sub;
+    }
+}

@@ -1,4 +1,4 @@
-.containerSidebar {
+/* .containerSidebar {
     display: flex;
     margin-inline: 10px;
     font-family: sans-serif;
@@ -6,15 +6,15 @@
     height: 640px;
     flex-direction: column;
     justify-content: space-between;
-}
+} */
 
-.titleCart {
+/* .titleCart {
     font-size: 20px;
     display: flex;
-    margin-left: 85px;
+    margin-left: 30px;
     margin-right: 20px;
     justify-content: space-between;
-}
+} */
 
 .containerCart {
     margin-top: 10px;
