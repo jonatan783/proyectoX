@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 import axios from 'axios'
-import {} from 'dotenv/config'
+import dotenv from 'dotenv'
 import newToken from '../middleware/newToken'
 import Secret from '../db/Secret'
 import OrdenDeEnvio from '../db/OrdenDeEnvio'
 import { bodyReqType, sendInfoType, reqNuevaOrden, getOrdenesEnvio, getSecretType } from '../types'
 import calcularDistancia from '../utils/utils'
 import timeConverter from '../utils/timeConverter'
+dotenv.config()
 
 class PedidosYaController {
   static async cobertura (req: { body: bodyReqType }, res: any) {
@@ -281,15 +282,75 @@ class PedidosYaController {
         client_id: process.env.CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET,
         grant_type: 'password',
-        password: process.env.PASSWORD,
-        username: process.env.USERNAME
+        password: process.env.PYA_PASSWORD,
+        username: process.env.PYA_USERNAME
       })
-      const secret = new Secret({ service: 'pedidosya', token: data.access_token })
+      let secret: any = await Secret.findOne({ where: { service: 'pedidosya' } })
+      console.log(secret)
+      if (secret !== null) {
+        secret.token = data.access_token
+      } else {
+        secret = new Secret({ service: 'pedidosya', token: data.access_token })
+      }
       await secret.save()
       return res.status(200).json('Token generado y guardado con éxito')
     } catch (err: any) {
       console.log(err)
-      return res.status(500).json('No se pudo generar o guardar token')
+      return res.status(500).json(err)
+    }
+  }
+
+  static async getCallback (req: null, res: any) {
+    try {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'pedidosya' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      const { data }: any = await axios.get('https://courier-api.pedidosya.com/v1/callbacks', {
+        headers: {
+          Authorization
+        }
+      })
+      return res.status(200).json(data)
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newToken()
+        await PedidosYaController.getCallback(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  static async setCallback (req: { body: { url: string
+    authorizationKey: string
+    topic: string
+    notificationType: string
+    isTest: boolean } }, res: any) {
+    try {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'pedidosya' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      await axios.post('https://courier-api.pedidosya.com/v1/callbacks', req.body, {
+        headers: {
+          Authorization
+        }
+      })
+      return res.status(200).json('url guardada exitosamente')
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newToken()
+        await PedidosYaController.setCallback(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  // ruta para recibir los cambios de estados desde la api de pedidos ya. falta definir que vamos a hacer con los avisos
+  static async callbackReciver (req: any, res: any) {
+    try {
+      console.log(req)
+      return res.status(200).end()
+    } catch (err: any) {
+      return res.status(500).end()
     }
   }
 }
