@@ -3,7 +3,8 @@ import cors from 'cors'
 import { portType } from './types'
 import mongoose from 'mongoose'
 import routes from './routes/index'
-import {} from 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 
