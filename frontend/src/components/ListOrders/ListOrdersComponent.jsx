@@ -5,23 +5,25 @@ import style from './listOrder.module.scss'
 
 function
   ListOrdersComponent({
-    orders,
+    order,
     payload,
     styles,
   }) {
-    console.log('orders ---> ', orders)
+    console.log('orders ---> ', order)
     console.log('payload ---> ',payload)
 
   return (
-    <div className={style.container}>
-      {orders && !payload && (orders.length) ?
-        <div className={style.containerOrders} /* style={{border: '1px solid red', width: 100}} */>
-          {orders?.map((order, i) => (
-            <div className={style.orders} key={i} style={{...styles?.orders}}>
-              <div className={style.containerImg} style={{width: styles?.containerImg?.width, height: styles?.containerImg?.width,}}>
-                <img src={order.img[0]} alt='image product' className={style.img} style={{width: styles?.img?.width, height: styles?.img?.width}}/>
+    <div className={style.container} style={{...styles?.container}}>
+      {order && !payload && (order.id) ?
+        <div className={style.containerOrders} /* style={{border: '1px solid red'}}  *//* style={{border: '1px solid red', width: 100}} */>
+          {/* {orders?.map((order, i) => ( */}   
+            {/* border-top-right-radius: 0;
+            border-bottom-right-radius: 0; */}
+            <div className={style.orders} key={order.id} style={{...styles?.orders}}>
+              <div className={style.containerImg} style={{width: styles?.containerImg?.width, height: styles?.containerImg?.height, }}>
+                <img src={order.img[0]} alt='image product' className={style.img} style={{width: styles?.img?.width, height: styles?.img?.height,}}/>
               </div>
-              <div className={style.containerData}>
+              <div className={style.containerData} /* style={{border: '1px solid red'}} */>
                 <span className={style.title} style={{fontSize: styles?.title?.fontSize}}>{order.name}</span>
                 {order.precioPromo ?
                   <>
@@ -34,7 +36,7 @@ function
                 }
               </div>
             </div>
-          ))}
+          {/* ))} */}
           <span className={style.pagination}>
             <PaginationContainer />
           </span>
@@ -52,7 +54,7 @@ function
         </>
       }
       {payload ?
-        <div className={style.containerOrders} style={{ justifyContent:'flex-start'}}>
+        <div className={style.containerOrders} style={{ justifyContent:'flex-start'}}>sadasdsa
           {[...Array(4).keys()].map(i => (
             <div className={`${style.orders}`} key={i}>
               <Placeholder className={style.containerImg} animation="glow">

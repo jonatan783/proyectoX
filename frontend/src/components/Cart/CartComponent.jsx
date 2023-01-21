@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { ListOrdersContainer } from '../../containers';
+import { ListOrdersContainer, DropdawnContainer } from '../../containers';
 import { addOrCreateItemCart, deleteItemCart } from '../../redux/itemCart';
+import { convertNumToArray } from '../../utils/functions';
 import './cart.css'
 
 const CartComponent = () => {
@@ -50,25 +51,29 @@ const CartComponent = () => {
   };
 
   const styles = {
+    container: {
+      height: 110
+    },
     orders: {
       display: 'flex',
       /* border: '1px solid blue', */
-      width: 470,
+      width: '100%',
       height: 100,
       backgroundColor: 'white',
-      borderRadius: 8,
+/*       borderRadius: 8, */
       marginBottom: 5,
+      borderTopRightRadius: 0, 
+      borderBottomRightRadius: 0
+      /* flexDirection: 'column' */
     },
     containerImg: {
-      height: 100,
       width: 100,
-      padding: 5,
-      boxSizing: 'borderBox',
+      height: 100,
     },
     img: {
-      width: '100%',
+      width: 80,
       height: '100%',
-      objectRit: 'contain',
+      // objectRit: 'contain',
       borderRadius: 4,
     },
     title: {
@@ -91,98 +96,48 @@ const CartComponent = () => {
 
   return (
     <>
-      <div className='containerSidebar row' style={{/* backgroundColor: 'red' */}}>
-        {/* <div> */}
-          <div className='titleCart col-8 ' style={{/* border: '1px solid blue', */ marginLeft: 30, marginRight: -30}}>Productos
-            <div><ListOrdersContainer orders={searchOrder.data} payload={searchOrder.loading} styles={styles}/></div>
+      <div className='containerSidebar row' style={{ height: '80%', overflow: 'scroll'}}>
+        <div className='titleCart col-8 ' style={{ width: '62%', marginLeft: 15, paddingRight: 0, height: 400}}>Productos
+          <div>
+            { searchOrder.data.map((order, i) => <div key={i} ><ListOrdersContainer order={order} styles={styles}/></div> )}
           </div>
-          <div className='titleCart col-2 '>Unidades
-            <div style={styles.orders}></div>
-          </div>
-          <div className='titleCart col-2 '>Subtotal
-    
-              {searchOrder?.data.map((dat, index) => 
-                <div style={styles.orders}>{`ARG ${dat.price},00`}</div>
-              )}
-       
-          </div>
-          {/* <>
-            {items?.map(({ id, quantity, product, ShoppingCartId }, i) => {
-              return (
-                <div key={id} className='containerCart'>
-                  <div className='itemImg'>
-                    <ion-icon name='leaf-outline'></ion-icon>
-                  </div>
-                  <div className='subContainerCart'>
-                    <div>
-                      <li className='dataItem'>{product.name}</li>
-                      <li className='dataItem'>${product.price}</li>
-                      <li className='quantityItem'>
-                        <button
-                          type='button'
-                          className='buttonQuantity'
-                          onClick={() =>
-                            resta(product, quantity, ShoppingCartId)
-                          }
-                        >
-                          -
-                        </button>
-                        <p className='quantity'>{quantity}</p>
-                        <button
-                          type='button'
-                          class='buttonQuantity'
-                          onClick={() =>
-                            suma(product, quantity, ShoppingCartId)
-                          }
-                        >
-                          +
-                        </button>
-                      </li>
-                      {quantity === product.stock ? (
-                        <li className='err'>sin stock</li>
-                      ) : null}
-                    </div>
-                    <div className='subtotal'>
-                      <li className='dataItem'>${product.price * quantity}</li>
-                      <div className='trashIcon' onClick={() => handleDelete(id)}>
-                        <ion-icon name='trash-outline'></ion-icon>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </> */}
-       {/*  </div> */}
-        {/* <div>
-          <div className='containerTotal'>
-            <span className='titleTotal'>Total a pagar</span>
-            <span className='titleTotal'>
-              $
-              {items
-                .map(({ quantity, product }) => quantity * product.price)
-                .reduce((total, i) => total + i, 0)}
-            </span>
-          </div>
-          <div className='subPrice'>
-            <div>
-              O hasta 6 cuotas sin interes de{' '}
-              {(
-                items
-                  .map(({ quantity, product }) => quantity * product.price)
-                  .reduce((total, i) => total + i, 0) / 6
-              ).toFixed(2)}
+        </div>
+
+        <div className='titleCart col-2 '  style={{padding: 0, }}>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Unidades</div>
+          {searchOrder?.data?.map((order, i) => 
+          <div className="containerDropdawn" key={i} style={{ height: 110, }}>
+            <div className="containerDropdawn1" style={{ height: 100, }}>
+              <div style={{display: 'flex',  marginTop: 20,  height: 35, justifyContent: 'space-evenly', alignItems: 'center', width: '90%', borderRadius: 5, backgroundColor: '#60c453'}}>
+                <div className='titleDropdawn' style={{ color: 'white', fontFamily: 'CircularXX Light', fontSize: 15, letterSpacing: 0, textTransform: 'capitalize', height: 25}}>1 unidad</div>
+                <div style={{height: 25}}><DropdawnContainer options={convertNumToArray(order?.stock)} optionClick={'fnOrderByPagesSelected'}/></div>
+              </div>
             </div>
-            <button
-              className='buttonQuantity starting'
-              onClick={handleOnCheckout}
-            >
-              Iniciar compra
-            </button>
           </div>
-        </div> */}
+          )}
+        </div>
+
+        <div className='titleCart col-2' style={{padding: 0,}}>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Subtotal</div>
+          {searchOrder?.data?.map((order, i) => 
+            <div className="containerDropdawn" key={i} style={{ height: 110,}}>
+              <div className="containerDropdawn1" style={{ height: 100, borderTopRightRadius: 8, borderBottomRightRadius: 8}}>
+                <div style={{display: 'flex',  marginTop: 20, height: 35, justifyContent: 'space-evenly', alignItems: 'center', width: '90%', borderRadius: 5, fontFamily: 'CircularXX Light', fontSize: 15, letterSpacing: 0, textTransform: 'capitalize', }}>{`ARG ${order.price},00`}
+                </div>
+              </div>
+            </div>
+          )} 
+        </div>
       </div>
-      {/* <ListOrdersContainer orders={searchOrder.data} payload={searchOrder.loading}/> */}
+      <div className='row' style={{ display: 'flex', justifyContent: 'space-between', marginLeft: 15, marginRight: 15, height: '10%',}}>
+          <div className='titleCart col-10 ' style={{ fontSize: 18, fontFamily: 'CircularXX Light', letterSpacing: 0, textTransform: 'capitalize', alignItems: 'center', display: 'flex'}}>Total a pagar</div>
+          <div className='titleCart col-2 ' style={{textAlign: 'start', fontSize: 18, fontFamily: 'CircularXX Light', letterSpacing: 0, textTransform: 'capitalize', alignItems: 'center', display: 'flex'}}>
+            {`$ ${'12123123'}`}
+          </div>
+          <div className='col-12' style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <button style={{backgroundColor: '#60c453', color: 'white', width: '100%', height: 38, borderRadius: 8, border: 0, marginBottom: 5}} onClick={handleOnCheckout}>Comprar</button>
+          </div>
+      </div>
     </>
   );
 };

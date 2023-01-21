@@ -7,7 +7,7 @@ import itemCartSlice from './itemCart';
 import searchSlice from './searchOrder';
 
 const store = configureStore({
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
   reducer: {
     user: userSlice,
     shoppingCart: shoppingCartSlice,

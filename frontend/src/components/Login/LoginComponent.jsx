@@ -104,7 +104,7 @@ const LoginComponent = () => {
     <div>
       <FormModalContainer data={dataRegister} subTitles={subTitleRegister} />
       <FormModalContainer data={dataLogin}  subTitles={subTitleLogin} />
-      <FormModalContainer  data={dataRegister} subTitles={subTitleRegister}/>
+      <FormModalContainer data={dataRegister} subTitles={subTitleRegister}/>
       <UserPopoverContainer/>   
     </div>
   );
