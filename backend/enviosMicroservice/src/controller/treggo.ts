@@ -308,5 +308,15 @@ class TreggoController {
       }
     }
   }
+
+  // ruta para recibir los cambios de estados desde la api de trego. falta definir que vamos a hacer con los avisos
+  static async webHookReciver (req: any, res: any) {
+    try {
+      console.log(req) // ver que hacemos
+      return res.status(200).end()
+    } catch (err: any) {
+      return res.status(500).end()
+    }
+  }
 }
 export default TreggoController
