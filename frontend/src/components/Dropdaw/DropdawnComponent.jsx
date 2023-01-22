@@ -7,7 +7,8 @@ function DropdawnComponent({
     options,
     optionClick,
     handleClick,
-    handleBlur
+    handleBlur,
+    styles
 }) {
 
     return (
@@ -15,6 +16,7 @@ function DropdawnComponent({
 
             <RiArrowDownSLine
                 className={style.selected}
+                style={{color: styles?.dropdown?.color}}
                 onClick={() => handleClick()}
             />
 

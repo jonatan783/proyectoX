@@ -26,8 +26,6 @@ function FilterOrderComponent({
   orderByPagesSelected,
 }) {
 
-  console.log(categories)
-  console.log(categorySelected)
   return (
     <div className={style.container}>
       <div className={style.fixed}>

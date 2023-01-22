@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { DropdawnComponent } from '../components'
 
-function DropdawnContainer({ options, optionClick }) {
+function DropdawnContainer({ options, optionClick, styles }) {
     const [collapsed, setCollapsed] = useState(false)
 
     useEffect(() => {
@@ -14,7 +14,6 @@ function DropdawnContainer({ options, optionClick }) {
         }, 100);
     }
     const handleClick = () => setCollapsed(true)
-
     return (
         <DropdawnComponent
             collapsed={collapsed}
@@ -22,6 +21,7 @@ function DropdawnContainer({ options, optionClick }) {
             handleClick={handleClick}
             handleBlur={handleBlur}
             optionClick={optionClick}
+            styles={styles}
         />
     )
 }

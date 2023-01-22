@@ -16,6 +16,7 @@
             background-color: white;
             border-radius: 8px;
             margin-bottom: 5px;
+            position: relative;
             cursor: pointer;
             /* modifica el tamaño de la foto */
             .containerImg {
@@ -48,6 +49,10 @@
                     text-transform: capitalize;
                 }
 
+                .title:hover {
+                    color: black
+                }
+
                 .discount {
                     color: white;
                     background-color: rgb(20, 147, 41);
@@ -66,12 +71,14 @@
                 }
 
                 .price {
-                    color: #063312e9;
+                    /* color: #063312e9; */
+                    color: #2968c8;
                     font-family: Rubik;
                     /* modifica el tamaño del precio */
                     font-size: 23px;
                     font-weight: 100;
                 }
+             
             }
         }
     }
@@ -109,6 +116,27 @@
         margin: 20px auto 25px;
     }
 
+    .product {
+        text-decoration: none;
+    }
+
+}
+
+
+.buttonDelete {
+    /* display: none; */
+    border: '1px solid red'; 
+    border: 0;
+    background-color: transparent; 
+    padding: 0;
+    transition: transform 0.2s;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.buttonDelete:hover {
+    transform: scale(1.3);
 }
 
 @media (max-width: 1480px) {
@@ -117,3 +145,5 @@
         width: 800px;
     }
 }
+
+
