@@ -108,3 +108,10 @@ export interface reqShipmentCreationType extends reqCotizarType {
   vendedorId: number
   compradorId: string
 }
+
+export interface pedidosTokenType {
+  access_token: string
+}
+export interface tokenResponseType {
+  data: pedidosTokenType
+}
