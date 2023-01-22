@@ -5,7 +5,7 @@ import {} from 'dotenv/config'
 import newTokenTreggo from '../middleware/newTokenTreggo'
 import Secret from '../db/Secret'
 import OrdenDeEnvio from '../db/OrdenDeEnvio'
-import { getSecretType, reqCotizarType, reqShipmentCreationType } from '../types'
+import { getSecretType, reqCotizarType, reqShipmentCreationType, testEnvioType } from '../types'
 
 class TreggoController {
   static async saveToken (_req: any, res: any) {
@@ -220,6 +220,102 @@ class TreggoController {
       } else {
         return res.status(500).json(err.message)
       }
+    }
+  }
+
+  static async setWebHook (req: { body: { url: string } }, res: any) {
+    const { url } = req.body
+    try {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      await axios.post('http://api.ar.treggo.co/1/webhooks', url, {
+        headers: {
+          Authorization
+        }
+      })
+      return res.status(200).json({ message: 'registrado' })
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newTokenTreggo()
+        await TreggoController.setWebHook(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  static async getWebHook (req: any, res: any) {
+    try {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const listado: any = await axios.get('http://api.ar.treggo.co/1/webhooks', {
+        headers: {
+          Authorization
+        }
+      })
+      return res.status(200).json(listado)
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newTokenTreggo()
+        await TreggoController.setWebHook(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  static async testWebHook (req: any, res: any) {
+    try {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const test: any = await axios.get('http://api.ar.treggo.co/1/webhooks/try', {
+        headers: {
+          Authorization
+        }
+      })
+      return res.status(200).json(test)
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newTokenTreggo()
+        await TreggoController.testWebHook(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  static async testEnvio (req: { body: testEnvioType }, res: any) {
+    const { id, status } = req.body
+    try {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const test: any = await axios.post('http://api.ar.treggo.co/1/webhooks/test', { id, status }, {
+        headers: {
+          Authorization
+        }
+      })
+      return res.status(200).json(test)
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newTokenTreggo()
+        await TreggoController.testEnvio(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
+
+  // ruta para recibir los cambios de estados desde la api de trego. falta definir que vamos a hacer con los avisos
+  static async webHookReciver (req: any, res: any) {
+    try {
+      console.log(req) // ver que hacemos
+      return res.status(200).end()
+    } catch (err: any) {
+      return res.status(500).end()
     }
   }
 }
