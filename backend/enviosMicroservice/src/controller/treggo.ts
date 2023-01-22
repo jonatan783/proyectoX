@@ -201,5 +201,26 @@ class TreggoController {
       }
     }
   }
+
+  static async getNuevosEnvios (req: any, res: any) {
+    try {
+      const secret: getSecretType | null = await Secret.findOne({ service: 'treggo' })
+      const Authorization: string = (secret != null) ? secret.token : ''
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      const { data }: any = await axios.get('http://api.ar.treggo.co/1/orders', {
+        headers: {
+          Authorization
+        }
+      })
+      return res.status(200).json(data)
+    } catch (err: any) {
+      if (err.message === 'Request failed with status code 403') {
+        await newTokenTreggo()
+        await TreggoController.getNuevosEnvios(req, res)
+      } else {
+        return res.status(500).json(err.message)
+      }
+    }
+  }
 }
 export default TreggoController

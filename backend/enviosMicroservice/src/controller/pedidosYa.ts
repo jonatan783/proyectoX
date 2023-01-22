@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 import newToken from '../middleware/newToken'
 import Secret from '../db/Secret'
 import OrdenDeEnvio from '../db/OrdenDeEnvio'
-import { bodyReqType, sendInfoType, reqNuevaOrden, getOrdenesEnvio, getSecretType } from '../types'
+import { bodyReqType, sendInfoType, reqNuevaOrden, getOrdenesEnvio, getSecretType, tokenResponseType } from '../types'
 import calcularDistancia from '../utils/utils'
 import timeConverter from '../utils/timeConverter'
 dotenv.config()
@@ -276,9 +276,9 @@ class PedidosYaController {
     }
   }
 
-  static async saveToken (_req: any, res: any) {
+  static async saveToken (_req: null, res: any): Promise<void> {
     try {
-      const { data }: any = await axios.post('https://auth-api.pedidosya.com/v1/token', {
+      const { data }: tokenResponseType = await axios.post('https://auth-api.pedidosya.com/v1/token', {
         client_id: process.env.CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET,
         grant_type: 'password',
@@ -293,7 +293,7 @@ class PedidosYaController {
         secret = new Secret({ service: 'pedidosya', token: data.access_token })
       }
       await secret.save()
-      return res.status(200).json('Token generado y guardado con éxito')
+      return res.status(200).send({ message: 'Token generado y guardado con éxito', status: 200 })
     } catch (err: any) {
       console.log(err)
       return res.status(500).json(err)
