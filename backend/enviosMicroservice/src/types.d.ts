@@ -115,3 +115,8 @@ export interface pedidosTokenType {
 export interface tokenResponseType {
   data: pedidosTokenType
 }
+
+export interface testEnvioType {
+  id: string
+  status: string
+}
