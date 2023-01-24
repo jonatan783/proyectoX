@@ -99,6 +99,16 @@ const CartComponent = () => {
       color: 'white'
     }
   }
+ /*  .buttonDelete {
+    display: flex; 
+    border: 0;
+    background-color: transparent; 
+    padding: 0;
+    transition: transform 0.2s;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+} */
 
   function saludo(n) {
     return n
@@ -109,7 +119,7 @@ const CartComponent = () => {
       <div className='containerSidebar row'>
         <div className='col-8 containerOrder title1'>Productos
           <div>
-            { searchOrder.data.map((order, i) => <div key={i} ><ListOrdersContainer order={order} styles={styles} visableDelete={true}/></div> )}
+            { searchOrder?.data.map((order, i) => <div key={i}><ListOrdersContainer order={order} styles={styles} visableDelete={true}/></div> )}
           </div>
         </div>
 
@@ -130,10 +140,15 @@ const CartComponent = () => {
         <div className='col-2' style={{padding: 0,}}>
           <div className='container1 title1'>Subtotal</div>
           {searchOrder?.data?.map((order, i) => 
-            <div className="containerDropdawn" key={i}>
-              <div className="containerDropdawn1" style={{ borderTopRightRadius: 8, borderBottomRightRadius: 8}}>
-                <div className='container2 title3'>{`ARG ${order.price},00`}
-                </div>
+            <div className="containerDropdawn" key={i} style={{/* position: 'relative', */ border: '1px solid red'}}>
+              <div className="containerDropdawn1" style={{ borderTopRightRadius: 8, borderBottomRightRadius: 8, position: 'relative', border: '1px solid red'}}>
+                <div className='container2 title3' style={{border: '1px solid red'}}>{`ARS ${order.price},00`}</div>
+              <button className='buttonDelete' onClick={() => console.log('boorar este elemento')}>
+                  <svg xmlns="http://www.w3.org/2000/svg" color="gray" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                </button>
               </div>
             </div>
           )} 
@@ -142,7 +157,7 @@ const CartComponent = () => {
       <div className='row containerPay'>
           <div className='col-10 title2 container3'>Total a pagar</div>
           <div className='col-2 title2 container3'>
-            {`$ ${'12123123'}`}
+            {`ARS ${'12123123'}`}
           </div>
           <div className='col-12 container1'>
             <button className='buttonPay' onClick={handleOnCheckout}>Comprar</button>

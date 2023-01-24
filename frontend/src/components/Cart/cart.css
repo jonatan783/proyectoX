@@ -1,6 +1,6 @@
 .containerSidebar {
     height: 80%; 
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .containerOrder {
@@ -73,6 +73,18 @@
     height: 100px;
 }
 
+.containerDropdawn1:hover .buttonDelete {
+    display: flex; 
+    justify-content: flex-end;
+    border: 0px; 
+    background-color: transparent; 
+    padding: 0px; 
+    transition: transform 0.2s;
+    position: absolute; 
+    top: 8px; 
+    right: 0px
+}
+
 .titleDropdawn {
     color: #040404d6;
     font-family: "CircularXX Medium";
@@ -125,4 +137,19 @@
     border-radius: 8px; 
     border: 0px; 
     margin-bottom: 5px
+}
+
+.buttonDelete {
+    display: none; 
+    border: 0px; 
+    background-color: transparent; 
+    padding: 0px; 
+    transition: transform 0.2s;
+    position: absolute;
+    top: 8px; 
+    left: 135px
+}
+
+.buttonDelete:hover {
+    transform: scale(1.3);
 }
