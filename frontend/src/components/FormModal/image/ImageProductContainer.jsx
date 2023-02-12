@@ -20,8 +20,7 @@ function ImageProductContainer() {
         const index = image.indexOf(url)
         setImages([...image.slice(0, index), ...image.slice(index + 1)])
     }
-
-    console.log("url  : ", image)
+    
     return (
         <ImageProductComponent
             image={image}

@@ -24,6 +24,8 @@
         border-radius: 5px;
         //animation: goDown 3s ease;
         box-sizing: border-box;
+        max-height: 192px;
+        overflow-y: scroll;
 
         .option {
             width: 100%;

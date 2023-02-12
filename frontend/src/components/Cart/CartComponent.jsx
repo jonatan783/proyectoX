@@ -14,20 +14,11 @@ const CartComponent = () => {
 
   const cartItems = useSelector(state => state.itemCarts.data);
   const searchOrder = useSelector(state => state.searchOrder)
-  console.log(searchOrder.data)
 
   useEffect(() => {
     /* console.log(cartItems, 'background: #222; color: #bada55'); */
     setItems(cartItems)
   } , [cartItems]);
-
-  /* function convertNumToArray(number) {
-    const array = []
-    for (let i = 1; i <= number; i++) {
-        array.push(i);
-    }
-    setArrayNumber(array)
-  } */
 
   const suma = (product, quantity, ShoppingCartId) => {
     if (quantity >= product.stock) return;
@@ -99,16 +90,6 @@ const CartComponent = () => {
       color: 'white'
     }
   }
- /*  .buttonDelete {
-    display: flex; 
-    border: 0;
-    background-color: transparent; 
-    padding: 0;
-    transition: transform 0.2s;
-    position: absolute;
-    top: 5px;
-    left: 5px;
-} */
 
   function saludo(n) {
     return n
@@ -116,49 +97,47 @@ const CartComponent = () => {
   
   return (
     <>
-      <div className='containerSidebar row'>
-        <div className='col-8 containerOrder title1'>Productos
-          <div>
-            { searchOrder?.data.map((order, i) => <div key={i}><ListOrdersContainer order={order} styles={styles} visableDelete={true}/></div> )}
-          </div>
-        </div>
-
-        <div className='col-2 '  style={{padding: 0 }}>
-          <div className='container1 title1'>Unidades</div>
-          {searchOrder?.data?.map((order, i) => 
-          <div className="containerDropdawn" key={i}>
-            <div className="containerDropdawn1">
-              <div className='container2' style={{ backgroundColor: '#60c453'}}>
-                <div className='titleDropdawn title3' style={{ color: 'white', height: 25}}>1 unidad</div>
-                <div style={{height: 25}}><DropdawnContainer options={convertNumToArray(order?.stock)} optionClick={saludo()} styles={styles}/></div>
-              </div>
-            </div>
-          </div>
-          )}
-        </div>
-
-        <div className='col-2' style={{padding: 0,}}>
-          <div className='container1 title1'>Subtotal</div>
-          {searchOrder?.data?.map((order, i) => 
-            <div className="containerDropdawn" key={i} style={{/* position: 'relative', */ border: '1px solid red'}}>
-              <div className="containerDropdawn1" style={{ borderTopRightRadius: 8, borderBottomRightRadius: 8, position: 'relative', border: '1px solid red'}}>
-                <div className='container2 title3' style={{border: '1px solid red'}}>{`ARS ${order.price},00`}</div>
-              <button className='buttonDelete' onClick={() => console.log('boorar este elemento')}>
-                  <svg xmlns="http://www.w3.org/2000/svg" color="gray" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          )} 
-        </div>
+      <div className='row'>
+        <div className='col-8 title1 containerOrder'>Productos</div>
+        <div className='col-2 title1 container1' style={{padding: 0}}>Unidades</div>
+        <div className='col-2 title1 container1' style={{padding: 0}}>Subtotal</div>
       </div>
-      <div className='row containerPay'>
-          <div className='col-10 title2 container3'>Total a pagar</div>
-          <div className='col-2 title2 container3'>
-            {`ARS ${'12123123'}`}
+      <div style={{height: '80%', overflowY: 'scroll'}}>
+        {searchOrder?.data?.map((cartProduct, index) =>
+          <div className='row containerSidebar' key={index}>
+            <div className='col-8 containerOrder title1'>
+              <ListOrdersContainer order={cartProduct} styles={styles}/>
+            </div>
+
+            <div className='col-2 '  style={{padding: 0 }}>
+                <div className="containerDropdawn1">
+                  {/* startDropdown */}
+                  <div className='container2' style={{ backgroundColor: '#60c453'}}>
+                    <div className='titleDropdawn title3' style={{ color: 'white', height: 25}}>1 unidad</div>
+                    <div style={{height: 25}}><DropdawnContainer options={convertNumToArray(cartProduct?.stock)} optionClick={saludo()} styles={styles}/></div>
+                  </div>
+                  {/* endDropdown */}
+              </div>
+            </div>
+
+            <div className='col-2 containerDropdawn2' style={{padding: 0, }}>
+              <div className="containerDropdawn1" style={{ borderTopRightRadius: 8, borderBottomRightRadius: 8,}}>
+                <div className='container2 title3'>{`ARS ${cartProduct?.price},00`}</div>
+              </div>
+            </div>
+            <button className='buttonDelete' onClick={() => console.log('boorar este elemento')}>
+              <svg xmlns="http://www.w3.org/2000/svg" color="gray" width="20" height="20" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </button>
           </div>
+        )}
+      </div>
+      <div className='row containerPay'  style={{ margin: 0}}>
+          <div className='col-8 title2 container3'>Total a pagar</div>
+          <div className='col-2 title2 container3' style={{justifyContent: 'flex-end'}}>ARS</div>
+          <div className='col-2 title2 container3' style={{justifyContent: 'center'}}>{12123123}</div>
           <div className='col-12 container1'>
             <button className='buttonPay' onClick={handleOnCheckout}>Comprar</button>
           </div>

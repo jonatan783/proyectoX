@@ -58,7 +58,7 @@ const CartItemsComponent = ({ id }) => {
     <div className=''>
       <Table bordered hover>
         <tbody>
-          <div class=''>
+          <div className=''>
             {cartItems.map((item, i) => (
               <div className='orderContainer3'>
                 <div className=''>

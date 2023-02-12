@@ -10,7 +10,7 @@ import "./OrderHistorial.css";
 const OrderHistorialComponent = () => {
     const datas = FakeOrders
   return (
-    <div classname="">
+    <div className="">
             <div className="">
               <div className="order-title">Order Historial</div>
 

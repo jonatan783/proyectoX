@@ -6,7 +6,6 @@ import ImageProductContainer from './image/ImageProductContainer';
 const FormModalComponent = ({ data, subTitles }) => {
     const { register, handleSubmit, formState: {errors}} = useForm()
     const { id, title, nameButton, fn, sizeModal } = data
-    console.log(subTitles)
 
     return (
         <div className='modal fade' id={id} tabIndex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>

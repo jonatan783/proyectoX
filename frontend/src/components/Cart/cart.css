@@ -1,12 +1,18 @@
 .containerSidebar {
-    height: 80%; 
-    overflow-y: scroll;
+   /*  height: 80%; 
+    overflow-y: scroll; */
+    position: relative;
+}
+
+.containerSidebar:hover .buttonDelete {
+    display: flex; 
+    justify-content: flex-start;
 }
 
 .containerOrder {
     width: 62%; 
     margin: 0px 0px 0px 15px; 
-    height: 400; 
+    /* height: 400;  */
 }
 
 .title1 {
@@ -59,7 +65,7 @@
     height: 10%;
 }
 
-.containerDropdawn {
+.containerDropdawn2 {
     display: flex; 
     justify-content: space-around;
     height: 110px
@@ -71,18 +77,6 @@
     justify-content: space-around;
     background-color: white;
     height: 100px;
-}
-
-.containerDropdawn1:hover .buttonDelete {
-    display: flex; 
-    justify-content: flex-end;
-    border: 0px; 
-    background-color: transparent; 
-    padding: 0px; 
-    transition: transform 0.2s;
-    position: absolute; 
-    top: 8px; 
-    right: 0px
 }
 
 .titleDropdawn {
@@ -146,8 +140,11 @@
     padding: 0px; 
     transition: transform 0.2s;
     position: absolute;
-    top: 8px; 
-    left: 135px
+    top: 4%;
+    left: 94%;
+    margin: 0;
+    padding: 0;
+    width: 20px;
 }
 
 .buttonDelete:hover {

@@ -10,5 +10,11 @@
     .containerColumn{
         margin-top: 30px;
         display:flex;
+
+        .conatinerColumn1 {
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+        }
     }
 }

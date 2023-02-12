@@ -38,12 +38,12 @@ const OrderItemsComponent = () => {
     <div className=''>
       <Table bordered hover>
         <tbody>
-          <div class=''>
+          <div className=''>
             {orderItems.map((item, i) => (
               <div className='orderContainer3'>
                 <div className=''>
                   <img
-                    class='order-card-img'
+                    className='order-card-img'
                     alt=''
                     src={item.product.img[0]}
                   />
