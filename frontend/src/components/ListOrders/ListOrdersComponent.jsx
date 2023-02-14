@@ -5,18 +5,18 @@ import Placeholder from 'react-bootstrap/Placeholder';
 import style from './listOrder.module.scss'
 
 function ListOrdersComponent({ order, payload, styles, }) {
-
+  console.log('payload ---> ', payload)
   return (
     <div className={style.container} style={{...styles?.container}}>
       {order && !payload && (order.id) ?
         <div className={style.containerOrders}>
           <div className={style.orders} key={order.id} style={{...styles?.orders,}}>
-            <Link to={`searchById=${order.id}`} className={style.product}>
+            <Link to={`/product/${order.id}`} className={style.product}>
               <div className={style.containerImg} style={{width: styles?.containerImg?.width, height: styles?.containerImg?.height, }}>
                 <img src={order.img[0]} alt='image product' className={style.img} style={{width: styles?.img?.width, height: styles?.img?.height,}}/>
               </div>
             </Link>
-            <Link to={`searchById=${order.id}`} className={style.product}>
+            <Link to={`/product/${order.id}`} className={style.product}>
               <div className={style.containerData}>
                 <span className={style.title} style={{fontSize: styles?.title?.fontSize}}>{order.name}</span>
                 {order.precioPromo ?

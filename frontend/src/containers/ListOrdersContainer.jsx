@@ -4,6 +4,7 @@ import { ListOrdersComponent } from '../components'
 
 function ListOrdersContainer({order, styles, visableDelete}) {
   const searchOrder = useSelector(state => state.searchOrder)
+  console.log('order ---> ', order)
   return (
     <ListOrdersComponent
       order={order}

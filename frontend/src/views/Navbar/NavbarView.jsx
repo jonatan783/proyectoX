@@ -1,5 +1,6 @@
 import React from 'react'
 import style from './navbar.module.scss'
+import { Link } from 'react-router-dom'
 import {
   HeaderContainer,
   LoginContainer,
@@ -12,16 +13,14 @@ function Navbar() {
   return (
     <header className={style.container}>
       <div className={style.header}>
-        <span className="fs-3 title">Sativa</span>
+        <a style={{textDecoration: 'none', color: 'rgb(0, 166, 80)'}} href="/"><span className="fs-3 title">Sativa</span></a>
         <HeaderContainer />
         <div className={style.containerSearch}>
           {/* <SearchNavContainer /> */}
           <LoginContainer />
           <SidebarContainer />
         </div>
-
       </div>
-
     </header>
   )
 

@@ -41,8 +41,7 @@ const CommentsComponent = ({ lengthComment }) => {
   console.log('MIS COMMENTS ', comments);
   return (
     <div className=''>
-      <div className='titleComment'>Tu comentario nos ayuda a mejorar</div>
-      <form onSubmit={handleSubmit} className='formComments'>
+      <form onSubmit={handleSubmit} className='formComments' style={{border: '2px solid #60c453', borderRadius: 8}}>
         <input className='inputComment' {...comment} />
         {user.id ? (
           <button className='buttonComment' type='submit'>

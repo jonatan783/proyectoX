@@ -16,7 +16,6 @@ const CartComponent = () => {
   const searchOrder = useSelector(state => state.searchOrder)
 
   useEffect(() => {
-    /* console.log(cartItems, 'background: #222; color: #bada55'); */
     setItems(cartItems)
   } , [cartItems]);
 
