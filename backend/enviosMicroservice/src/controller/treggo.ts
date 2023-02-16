@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 import axios from 'axios'
-import {} from 'dotenv/config'
+import dotenv from 'dotenv'
 import newTokenTreggo from '../middleware/newTokenTreggo'
 import Secret from '../db/Secret'
 import OrdenDeEnvio from '../db/OrdenDeEnvio'
 import { getSecretType, reqCotizarType, reqShipmentCreationType, testEnvioType } from '../types'
+dotenv.config()
 
 class TreggoController {
   static async saveToken (_req: any, res: any) {

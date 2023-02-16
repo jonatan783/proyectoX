@@ -49,8 +49,17 @@ services:
     #depends_on:
     #  - db
 
-  
-      
+  envios_api:
+    build: ./backend/enviosMicroservice
+    ports:
+      - "3105:3105"
+    volumes:
+      - "./backend/enviosMicroservice/src:/app/src"
+    env_file:
+      - "./backend/enviosMicroservice/.env"
+    #depends_on:
+    #  - db
+
   client:
     build: ./frontend
     ports:
